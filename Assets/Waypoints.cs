@@ -1,10 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Waypoints : MonoBehaviour
 {
     public static Transform[] waypoints;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -14,5 +13,4 @@ public class Waypoints : MonoBehaviour
             waypoints[i] = transform.GetChild(i);
         }
     }
-
 }

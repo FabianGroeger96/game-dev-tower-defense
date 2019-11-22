@@ -26,7 +26,7 @@ public class PlacementController : MonoBehaviour
         _placeableObjects[1] = (Tower) AssetDatabase.LoadAssetAtPath("Assets/Prefabs/RocketSilo.prefab", typeof(Tower));
     }
     
-    public void placeMode(int placedObject)
+    public void PlaceMode(int placedObject)
     {
         if (currentPlaceableObject != null && _currentPlaceableObjectNumber == placedObject)
         {

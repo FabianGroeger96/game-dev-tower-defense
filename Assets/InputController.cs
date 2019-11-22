@@ -25,12 +25,12 @@ public class InputController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            _placementController.placeMode(1);
+            _placementController.PlaceMode(1);
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            _placementController.placeMode(2);
+            _placementController.PlaceMode(2);
         }
     }
 
