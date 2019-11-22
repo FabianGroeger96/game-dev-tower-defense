@@ -3,32 +3,47 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WaveSpawner : MonoBehaviour
 {
 
-    private GameObject[] _enemies = new GameObject[10];
-    private float _lastSpawn = Mathf.Infinity;
-    private float _spawnRate = 2f;
+    public Transform enemyPrefab;
+    public Transform spawnPoint;
+    public Text waveCountdownText;
+    public float timeBetweenWaves = 5f;
+    public float timeBetweenEnemies;
     
-    
-    // Start is called before the first frame update
-    void Start()
+    private float countdown = 2f;
+    private int waveIndex = 0;
+
+    void Update ()
     {
-        _enemies[0] = (GameObject) AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Enemy.prefab", typeof(GameObject));
+        if (countdown <= 0f)
+        {
+            // Call subprocess
+            StartCoroutine(SpawnWave());
+            countdown = timeBetweenWaves;
+        }
+
+        countdown -= Time.deltaTime;
+
+        waveCountdownText.text = Mathf.Round(countdown).ToString();
     }
 
-    // Update is called once per frame
-    void Update()
+    IEnumerator SpawnWave ()
     {
-        if (_lastSpawn > _spawnRate)
+        waveIndex++;
+
+        for (int i = 0; i < waveIndex; i++)
         {
-            Instantiate(_enemies[0], transform.position, Quaternion.identity);
-            _lastSpawn = 0;
+            SpawnEnemy();
+            yield return new WaitForSeconds(timeBetweenEnemies);
         }
-        else
-        {
-            _lastSpawn += Time.deltaTime;
-        }
+    }
+
+    void SpawnEnemy ()
+    {
+        Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
     }
 }

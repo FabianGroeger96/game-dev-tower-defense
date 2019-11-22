@@ -58,9 +58,6 @@ public class PlacementController : MonoBehaviour
             //RotateFromMouseWheel();
             ReleaseIfClicked();
         }
-        
-
-
     }
 
     private void ReleaseIfClicked()

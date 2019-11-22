@@ -8,12 +8,12 @@ using UnityEngine.XR;
 
 public class Tower : MonoBehaviour
 {
-    [SerializeField] 
-    public int exp;
+    [SerializeField] public int exp;
     private ProjectileSpawner _spawner;
+
     private TargetFinder _targetFinder;
     // Start is called before the first frame update
-    
+
     void Start()
     {
         _spawner = GetComponentInChildren<ProjectileSpawner>();
@@ -33,5 +33,4 @@ public class Tower : MonoBehaviour
     {
         exp += obj;
     }
-    
 }
