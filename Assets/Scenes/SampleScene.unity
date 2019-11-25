@@ -1332,7 +1332,7 @@ MonoBehaviour:
   enemyPrefab: {fileID: 7435060024368221123, guid: 2e61a0cb8ca12834a8c87b5bb36b10a0,
     type: 3}
   spawnPoint: {fileID: 1667196199}
-  waveCountdownText: {fileID: 0}
+  waveCountdownText: {fileID: 1066054415}
   timeBetweenWaves: 5
   timeBetweenEnemies: 0.5
 --- !u!1 &1706943141
