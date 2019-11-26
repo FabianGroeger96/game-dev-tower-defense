@@ -18,9 +18,9 @@ public class ProjectileSpawner : MonoBehaviour
         
     }
 
-    public void launch(Tower tower, Transform target)
+    public void launch(Tower tower, Transform target, Quaternion rotation)
     {
-        Projectile clone = Instantiate(_projectile, transform.position, Quaternion.identity);
+        Projectile clone = Instantiate(_projectile, transform.position, rotation);
         clone.Seek(target);
         clone.OnHit += tower.HandleHit;
     }
