@@ -344,6 +344,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 394962676917038374, guid: f5e966173a32f47008cec3272a4cefe7,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f5e966173a32f47008cec3272a4cefe7, type: 3}
 --- !u!4 &162868062 stripped
@@ -1115,6 +1120,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 2.695
       objectReference: {fileID: 0}
+    - target: {fileID: 394962676917038374, guid: f5e966173a32f47008cec3272a4cefe7,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f5e966173a32f47008cec3272a4cefe7, type: 3}
 --- !u!4 &1252497048 stripped
@@ -1193,6 +1203,11 @@ PrefabInstance:
     - target: {fileID: 394962676917038375, guid: f5e966173a32f47008cec3272a4cefe7,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 394962676917038374, guid: f5e966173a32f47008cec3272a4cefe7,
+        type: 3}
+      propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1275,6 +1290,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 394962676917038374, guid: f5e966173a32f47008cec3272a4cefe7,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f5e966173a32f47008cec3272a4cefe7, type: 3}
 --- !u!4 &1457770802 stripped
@@ -1306,7 +1326,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1667196199
 Transform:
   m_ObjectHideFlags: 0
@@ -1352,8 +1372,8 @@ MonoBehaviour:
     type: 3}
   spawnPoint: {fileID: 1667196199}
   waveCountdownText: {fileID: 1066054415}
-  timeBetweenWaves: 5
-  timeBetweenEnemies: 0.5
+  timeBetweenWaves: 10
+  timeBetweenEnemies: 2
 --- !u!1 &1706943141
 GameObject:
   m_ObjectHideFlags: 0
@@ -1662,6 +1682,11 @@ PrefabInstance:
     - target: {fileID: 394962676917038375, guid: f5e966173a32f47008cec3272a4cefe7,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 394962676917038374, guid: f5e966173a32f47008cec3272a4cefe7,
+        type: 3}
+      propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
