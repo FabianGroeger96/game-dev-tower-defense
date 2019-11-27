@@ -1,35 +1,73 @@
-﻿using UnityEditor;
+﻿using System;
+using JetBrains.Annotations;
 using UnityEngine;
+using UnityEngine.Experimental.Animations;
 using Quaternion = UnityEngine.Quaternion;
 using Vector3 = UnityEngine.Vector3;
 
 
 public class Tower : MonoBehaviour
 {
-    [SerializeField] 
-    public int exp;
+    [SerializeField] public int exp;
+    [SerializeField] public Material[] materials;
+    
     private ProjectileSpawner _spawner;
     private TargetFinder _targetFinder;
     private Transform _rotation;
-    private MeshRenderer _renderer;
-    private bool _placed = false;
-    // Start is called before the first frame update
+    
+    private MeshRenderer[] _renderers;
+    private Transform[] _transforms;
+    
+    private bool _placed;
+    private bool _placeable;
+    private bool _collids;
     
     void Start()
     {
         _spawner = GetComponentInChildren<ProjectileSpawner>();
         _targetFinder = GetComponentInChildren<TargetFinder>();
         _rotation = GetComponentInChildren<Transform>();
-        _renderer = GetComponentInChildren<MeshRenderer>();
+        
+        _renderers = GetComponentsInChildren<MeshRenderer>();
+        _transforms = GetComponentsInChildren<Transform>();
+        
+        _placed = false;
+        _collids = false;
+        IsUnplaceable();
+        
         transform.gameObject.layer = LayerMask.NameToLayer("PlaceMode");
-        foreach (Transform child in transform)
+        foreach (Transform child in _transforms)
         {
             child.gameObject.layer = LayerMask.NameToLayer("PlaceMode");
         }
     }
-
-    // Update is called once per frame
+    
     void Update()
+    {
+        if (_placed)
+        {
+            act();
+        }
+        else
+        {
+            if (_placeable && _collids)
+            {
+                IsUnplaceable();
+            }
+        }
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        _collids = true;
+    }
+    
+    private void OnCollisionExit(Collision other)
+    {
+        _collids = false;
+    }
+
+    private void act()
     {
         if (_targetFinder.target != null)
         {
@@ -39,8 +77,6 @@ public class Tower : MonoBehaviour
                 _spawner.launch(this, _targetFinder.target.transform, _rotation.rotation);
             }
         }
-        
-
     }
 
     private void RotateToTarget()
@@ -57,19 +93,45 @@ public class Tower : MonoBehaviour
         exp += obj;
     }
 
-    public void ChangeMaterial(Material material)
+    private void ChangeMaterial(int material)
     {
-        _renderer.material = material;
+        foreach(MeshRenderer r in _renderers)
+        {
+            r.material = materials[material];
+        }
+        
     }
 
-    public void placed()
+    public void IsPlaceable()
+    {
+        _placeable = true;
+        ChangeMaterial(1);
+    }
+
+    public void IsUnplaceable()
+    {
+        _placeable = false;
+        ChangeMaterial(2);
+    }
+    
+    public void IsPlaced()
     {
         transform.gameObject.layer = LayerMask.NameToLayer("Tower");
-        foreach (Transform child in transform)
+        foreach (Transform child in _transforms)
         {
+            ChangeMaterial(0);
             child.gameObject.layer = LayerMask.NameToLayer("Tower");
         }
         _placed = true;
     }
 
+    public bool GetPlaceableState()
+    {
+        return _placeable;
+    }
+
+    public bool GetCollisionState()
+    {
+        return _collids;
+    }
 }
