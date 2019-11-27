@@ -79,7 +79,7 @@ public class Tower : MonoBehaviour
             RotateToTarget();
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                _spawner.launch(this, _targetFinder.target.transform, _rotation.rotation);
+                _spawner.launch(this, _targetFinder.target.transform);
             }
         }
     }

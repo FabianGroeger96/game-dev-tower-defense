@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIController : MonoBehaviour
+public class InterfaceController : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -14,11 +14,5 @@ public class UIController : MonoBehaviour
     void Update()
     {
         
-    }
-
-    
-    public void PlaceTower()
-    {
-        Debug.Log("Button clicked!");
     }
 }

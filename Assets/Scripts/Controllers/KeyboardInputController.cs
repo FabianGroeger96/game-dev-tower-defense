@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InputController : MonoBehaviour
+public class KeyboardInputController : MonoBehaviour
 {
 
     private int _currentMode = 0; // 0: Non-placement, 1: Placement
