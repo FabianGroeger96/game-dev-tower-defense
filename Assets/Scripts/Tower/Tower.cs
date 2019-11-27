@@ -57,6 +57,11 @@ public class Tower : MonoBehaviour
         }
     }
 
+    private void OnCollisionStay(Collision other)
+    {
+        _collids = true;
+    }
+
     private void OnCollisionEnter(Collision other)
     {
         _collids = true;
@@ -130,8 +135,4 @@ public class Tower : MonoBehaviour
         return _placeable;
     }
 
-    public bool GetCollisionState()
-    {
-        return _collids;
-    }
 }

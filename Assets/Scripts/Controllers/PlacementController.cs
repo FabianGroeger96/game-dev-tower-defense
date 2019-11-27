@@ -80,8 +80,7 @@ public class PlacementController : MonoBehaviour
         {
             _currentPlaceableObject.transform.localPosition = hitInfo.point;
             _currentPlaceableObject.transform.rotation = Quaternion.FromToRotation(Vector3.up, hitInfo.normal);
-            if (hitInfo.transform.gameObject.layer == LayerMask.NameToLayer(_placementLayer) 
-                && _currentPlaceableObject.GetCollisionState() == false)
+            if (hitInfo.transform.gameObject.layer == LayerMask.NameToLayer(_placementLayer))
             {
                 _currentPlaceableObject.IsPlaceable();
             }
