@@ -31,7 +31,7 @@ public class Tower : MonoBehaviour
         _renderers = GetComponentsInChildren<MeshRenderer>();
         _transforms = GetComponentsInChildren<Transform>();
         
-        _placed = false;
+        _placed = true;
         _collids = false;
         IsUnplaceable();
         

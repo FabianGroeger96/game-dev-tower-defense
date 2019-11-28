@@ -1,32 +1,32 @@
 ﻿using System;
 using System.Collections;
-using System.Numerics;
 using UnityEngine;
-using UnityEngine.UI;
 using Vector3 = UnityEngine.Vector3;
 
 public class ProjectileParabolic : Projectile
 {
     
     private Transform _target;
-    public float speed;
+    private float speed;
     public event Action<int> OnHit = delegate { };
     private Rigidbody _rigidbody;
     
-    public override void Launch()
+    public override void Launch() 
     {
         _rigidbody = GetComponent<Rigidbody>();
         Vector3 direction = CalculateLaunchDirection();
-        direction.y = 15;
+        Debug.Log(direction);
+        direction.y = 0.785398f * direction.magnitude;
         speed = CalculateSpeed(direction);
         Debug.Log(speed);
-        _rigidbody.AddForce(direction * speed * 3.6f, ForceMode.Acceleration);
+        _rigidbody.AddForce(direction * speed * 4.5f, ForceMode.Acceleration);
     }
 
     private float CalculateSpeed(Vector3 direction)
     {
         direction.y = 0;
-        double v = Math.Sqrt((direction.magnitude * 9.81f) / 0.99827f);
+        Debug.Log(direction.magnitude);
+        double v = Math.Sqrt((direction.magnitude * 9.81f) / 0.894f);
         return (float) v;
     }
 
