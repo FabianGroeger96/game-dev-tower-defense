@@ -15,18 +15,21 @@ public class ProjectileParabolic : Projectile
     {
         _rigidbody = GetComponent<Rigidbody>();
         Vector3 direction = CalculateLaunchDirection();
-        Debug.Log(direction);
-        direction.y = 0.785398f * direction.magnitude;
+        direction.y = CalculateYComponent(direction.x, direction.z);
         speed = CalculateSpeed(direction);
-        Debug.Log(speed);
-        _rigidbody.AddForce(direction * speed * 4.5f, ForceMode.Acceleration);
+        _rigidbody.AddForce(direction.normalized * speed, ForceMode.Impulse);
+    }
+
+    private float CalculateYComponent(float x, float z)
+    {
+        return (float) Math.Sqrt((x * x) + (z * z) - (2 * x * z * Math.Cos(0.785398)));
     }
 
     private float CalculateSpeed(Vector3 direction)
     {
         direction.y = 0;
         Debug.Log(direction.magnitude);
-        double v = Math.Sqrt((direction.magnitude * 9.81f) / 0.894f);
+        double v = Math.Sqrt((direction.magnitude * 9.81f) / Math.Sin(1.5708));
         return (float) v;
     }
 
