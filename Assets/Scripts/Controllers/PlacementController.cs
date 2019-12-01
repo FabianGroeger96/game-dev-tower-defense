@@ -17,10 +17,11 @@ public class PlacementController : MonoBehaviour
     {
         _placeableObjects = new Tower[10];
         _placeableObjects[0] = (Tower) AssetDatabase.LoadAssetAtPath("Assets/Prefabs/RocketSilo.prefab", typeof(Tower));
-        _placeableObjects[1] = (Tower) AssetDatabase.LoadAssetAtPath("Assets/Prefabs/RocketRotation.prefab", typeof(Tower));
+        _placeableObjects[1] =
+            (Tower) AssetDatabase.LoadAssetAtPath("Assets/Prefabs/RocketRotation.prefab", typeof(Tower));
         _validPlace = false;
     }
-    
+
     public void placeMode(int placedObject)
     {
         if (_currentPlaceableObject != null && _currentPlaceableObjectNumber == placedObject)
@@ -42,9 +43,8 @@ public class PlacementController : MonoBehaviour
             _currentPlaceableObjectNumber = placedObject;
             _currentPlaceableObject.IsPlaceable();
         }
-        
     }
-    
+
     // Update is called once per frame
     void Update()
     {
@@ -56,11 +56,8 @@ public class PlacementController : MonoBehaviour
             //RotateFromMouseWheel();
             ReleaseIfClicked();
         }
-        
-
-
     }
-    
+
     private void ReleaseIfClicked()
     {
         if (Input.GetMouseButtonUp(0) && _currentPlaceableObject.GetPlaceableState())
@@ -69,7 +66,7 @@ public class PlacementController : MonoBehaviour
             _currentPlaceableObject = null;
         }
     }
-    
+
     private void MoveCurrentObjectToMouse()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -90,5 +87,4 @@ public class PlacementController : MonoBehaviour
             }
         }
     }
-    
 }
