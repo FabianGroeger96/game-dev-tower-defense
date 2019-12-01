@@ -7,42 +7,55 @@ using UnityEngine.UI;
 
 public class WaveSpawner : MonoBehaviour
 {
-
     public Transform enemyPrefab;
     public Transform spawnPoint;
     public Text waveCountdownText;
     public float timeBetweenWaves = 5f;
     public float timeBetweenEnemies;
-    
-    private float countdown = 2f;
-    private int waveIndex = 0;
 
-    void Update ()
+    private float _countdown = 2f;
+    private int _waveIndex = 0;
+    private GameController _gameController;
+
+    private void Start()
     {
-        if (countdown <= 0f)
-        {
-            // Call subprocess
-            StartCoroutine(SpawnWave());
-            countdown = timeBetweenWaves;
-        }
-
-        countdown -= Time.deltaTime;
-
-        waveCountdownText.text = Mathf.Round(countdown).ToString();
+        _gameController = GameObject.Find("GameController").GetComponent<GameController>();
     }
 
-    IEnumerator SpawnWave ()
+    void Update()
     {
-        waveIndex++;
+        if (_gameController.gameState == GameController.GameState.Running)
+        {
+            if (_countdown <= 0f)
+            {
+                // Call subprocess
+                StartCoroutine(SpawnWave());
+                _countdown = timeBetweenWaves;
+            }
 
-        for (int i = 0; i < waveIndex; i++)
+            _countdown -= Time.deltaTime;
+
+            waveCountdownText.text = Mathf.Round(_countdown).ToString();
+        }
+        else
+        {
+            waveCountdownText.enabled = false;
+            waveCountdownText.text = "";
+        }
+    }
+
+    IEnumerator SpawnWave()
+    {
+        _waveIndex++;
+
+        for (int i = 0; i < _waveIndex; i++)
         {
             SpawnEnemy();
             yield return new WaitForSeconds(timeBetweenEnemies);
         }
     }
 
-    void SpawnEnemy ()
+    void SpawnEnemy()
     {
         Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
     }

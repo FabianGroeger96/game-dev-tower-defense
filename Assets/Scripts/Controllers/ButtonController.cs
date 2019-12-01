@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class ButtonController : MonoBehaviour
 {
+    private GameController _gameController;
     private PlacementController _placementController;
-    public GameObject gameController;
 
     // Start is called before the first frame update
     void Start()
     {
-        _placementController = gameController.GetComponent<PlacementController>();
+        _gameController = GameObject.Find("GameController").GetComponent<GameController>();
+        _placementController = _gameController.GetComponent<PlacementController>();
     }
 
     // Update is called once per frame
