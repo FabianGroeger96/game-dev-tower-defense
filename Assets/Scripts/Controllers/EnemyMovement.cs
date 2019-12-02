@@ -5,28 +5,26 @@ using UnityEngine;
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
 
-public class EnemyMovement : MonoBehaviour
+public class EnemyMovement : BaseController
 {
     public float speed = 1f;
     public int damage = 10;
 
     private int _waypointIndex;
     private Transform _target;
-    private GameController _gameController;
 
     // Start is called before the first frame update
     void Start()
     {
+        Init();
         _waypointIndex = 0;
         _target = Waypoints.waypoints[_waypointIndex];
-
-        _gameController = GameObject.Find("GameController").GetComponent<GameController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (_gameController.gameState == GameController.GameState.Running)
+        if (gameController.gameState == GameController.GameState.Running)
         {
             Vector3 dir = Vector3.Scale(new Vector3(1, 0, 1), _target.position - transform.position);
             transform.Translate(dir.normalized * speed * Time.deltaTime, Space.World);
@@ -37,7 +35,7 @@ public class EnemyMovement : MonoBehaviour
                 if (_waypointIndex >= Waypoints.waypoints.Length)
                 {
                     Destroy(this.gameObject);
-                    _gameController.RemoveLifeCount(damage);
+                    gameController.RemoveLifeCount(damage);
                 }
 
                 NextWaypoint();
