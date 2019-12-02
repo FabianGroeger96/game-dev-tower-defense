@@ -46,6 +46,6 @@ public class EnemyMovement : BaseController
     private void NextWaypoint()
     {
         _waypointIndex++;
-        _target = Waypoints.waypoints[_waypointIndex];
+         _target = Waypoints.waypoints[_waypointIndex];
     }
 }

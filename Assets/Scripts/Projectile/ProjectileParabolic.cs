@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using UnityEditor;
 using UnityEngine;
 using Vector3 = UnityEngine.Vector3;
 
@@ -10,35 +11,14 @@ public class ProjectileParabolic : Projectile
     private float speed;
     public event Action<int> OnHit = delegate { };
     private Rigidbody _rigidbody;
+    private Splash particleSystem;
     
-    public override void Launch() 
-    {
-        _rigidbody = GetComponent<Rigidbody>();
-        Vector3 direction = CalculateLaunchDirection();
-        direction.y = CalculateYComponent(direction.x, direction.z);
-        speed = CalculateSpeed(direction);
-        _rigidbody.AddForce(direction.normalized * speed, ForceMode.Impulse);
-    }
-
-    private float CalculateYComponent(float x, float z)
-    {
-        return (float) Math.Sqrt((x * x) + (z * z) - (2 * x * z * Math.Cos(0.785398)));
-    }
-
-    private float CalculateSpeed(Vector3 direction)
-    {
-        direction.y = 0;
-        Debug.Log(direction.magnitude);
-        double v = Math.Sqrt((direction.magnitude * 9.81f) / Math.Sin(1.5708));
-        return (float) v;
-    }
-
+    
     void Start()
     {
-        
+        particleSystem = (Splash) AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Towers/Silo/Splash.prefab", typeof(Splash));
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
         if (_target == null)
@@ -59,6 +39,28 @@ public class ProjectileParabolic : Projectile
         //transform.Translate(direction.normalized * travelDinstanceInThisFrame, Space.World);
 
     }
+    
+    public override void Launch() 
+    {
+        _rigidbody = GetComponent<Rigidbody>();
+        Vector3 direction = CalculateLaunchDirection();
+        direction.y = CalculateYComponent(direction.x, direction.z);
+        speed = CalculateSpeed(direction);
+        _rigidbody.AddForce(direction.normalized * speed, ForceMode.Impulse);
+    }
+
+    private float CalculateYComponent(float x, float z)
+    {
+        return (float) Math.Sqrt((x * x) + (z * z) - (2 * x * z * Math.Cos(0.785398)));
+    }
+
+    private float CalculateSpeed(Vector3 direction)
+    {
+        direction.y = 0;
+        double v = Math.Sqrt((direction.magnitude * 9.81f) / Math.Sin(1.5708));
+        return (float) v;
+    }
+
 
     private Vector3 CalculateLaunchDirection()
     {
@@ -73,6 +75,8 @@ public class ProjectileParabolic : Projectile
     
     private void OnCollisionEnter(Collision other)
     {
+        particleSystem = (Splash) AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Towers/Silo/Splash.prefab", typeof(Splash));
+        Instantiate(particleSystem, transform.position, Quaternion.Euler(270f, 0f, 0f));
         if (other.gameObject.CompareTag("Enemy"))
         {
             //StartCoroutine(TestCoroutine());
