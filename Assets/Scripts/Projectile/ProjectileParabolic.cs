@@ -11,12 +11,12 @@ public class ProjectileParabolic : Projectile
     private float speed;
     public event Action<int> OnHit = delegate { };
     private Rigidbody _rigidbody;
-    private Splash particleSystem;
+    private Splash _particleSystem;
     
     
     void Start()
     {
-        particleSystem = (Splash) AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Towers/Silo/Splash.prefab", typeof(Splash));
+        _particleSystem = (Splash) AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Towers/Silo/Splash.prefab", typeof(Splash));
     }
     
     void Update()
@@ -75,8 +75,8 @@ public class ProjectileParabolic : Projectile
     
     private void OnCollisionEnter(Collision other)
     {
-        particleSystem = (Splash) AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Towers/Silo/Splash.prefab", typeof(Splash));
-        Instantiate(particleSystem, transform.position, Quaternion.Euler(270f, 0f, 0f));
+        _particleSystem = (Splash) AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Towers/Silo/Splash.prefab", typeof(Splash));
+        Instantiate(_particleSystem, transform.position, Quaternion.Euler(270f, 0f, 0f));
         if (other.gameObject.CompareTag("Enemy"))
         {
             //StartCoroutine(TestCoroutine());

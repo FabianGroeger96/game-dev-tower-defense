@@ -120,8 +120,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4439121355889868390}
   - component: {fileID: 4740521283183159788}
-  - component: {fileID: 790443880923878639}
   - component: {fileID: 6549962209744526429}
+  - component: {fileID: 58050485693951288}
   m_Layer: 13
   m_Name: RocketSilo
   m_TagString: Untagged
@@ -157,23 +157,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b7c61351de412f49a339a2a093f4169, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &790443880923878639
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6969661241077280274}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 010df9ffff681c44fa416171344192e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  exp: 0
-  materials:
-  - {fileID: 2100000, guid: 057c047e25f376b4b82a543332b80fbe, type: 2}
-  - {fileID: 2100000, guid: f9b0f2b0252d05e42b29a39291ff5bb8, type: 2}
-  - {fileID: 2100000, guid: 9cabaff90a7dd8e49a001278f8251c26, type: 2}
 --- !u!54 &6549962209744526429
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -190,6 +173,25 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &58050485693951288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6969661241077280274}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 010df9ffff681c44fa416171344192e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  exp: 0
+  materials:
+  - {fileID: 2100000, guid: 057c047e25f376b4b82a543332b80fbe, type: 2}
+  - {fileID: 2100000, guid: f9b0f2b0252d05e42b29a39291ff5bb8, type: 2}
+  - {fileID: 2100000, guid: 9cabaff90a7dd8e49a001278f8251c26, type: 2}
+  costs: 500
+  placed: 0
 --- !u!1 &8746976168720918091
 GameObject:
   m_ObjectHideFlags: 0

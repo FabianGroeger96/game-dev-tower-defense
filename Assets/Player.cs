@@ -2,22 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ButtonController : BaseController
+public class Player : MonoBehaviour
 {
+
+    public int money;
+    
+    
+    
     // Start is called before the first frame update
     void Start()
     {
-        Init();
+        money = 1000;
     }
 
     // Update is called once per frame
     void Update()
     {
-    }
-
-    public void PlaceTower(int towerId)
-    {
-        Debug.Log("Place tower: " + towerId);
-        //placementController.SetPlacementModeActive(towerId);
+        
     }
 }

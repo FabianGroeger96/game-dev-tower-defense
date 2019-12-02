@@ -1,15 +1,12 @@
-﻿using System;
-using JetBrains.Annotations;
-using UnityEngine;
-using UnityEngine.Experimental.Animations;
+﻿using UnityEngine;
 using Quaternion = UnityEngine.Quaternion;
 using Vector3 = UnityEngine.Vector3;
 
 
 public class Tower : MonoBehaviour
 {
-    [SerializeField] public int exp;
     [SerializeField] public Material[] materials;
+    [SerializeField] public int costs;
     
     private ProjectileSpawner _spawner;
     private TargetFinder _targetFinder;
@@ -24,6 +21,8 @@ public class Tower : MonoBehaviour
     
     void Start()
     {
+        _placed = false;
+        
         _spawner = GetComponentInChildren<ProjectileSpawner>();
         _targetFinder = GetComponentInChildren<TargetFinder>();
         _rotation = GetComponentInChildren<Transform>();
@@ -31,15 +30,10 @@ public class Tower : MonoBehaviour
         _renderers = GetComponentsInChildren<MeshRenderer>();
         _transforms = GetComponentsInChildren<Transform>();
         
-        _placed = false;
         _collids = false;
         IsUnplaceable();
-        
-        transform.gameObject.layer = LayerMask.NameToLayer("PlaceMode");
-        foreach (Transform child in _transforms)
-        {
-            child.gameObject.layer = LayerMask.NameToLayer("PlaceMode");
-        }
+        SetLayerToPlaceMode();
+
     }
     
     void Update()
@@ -84,20 +78,30 @@ public class Tower : MonoBehaviour
         }
     }
 
-    private void RotateToTarget()
-    {
-        Vector3 direction = _targetFinder.target.transform.position - transform.position;
-        Quaternion lookRotation = Quaternion.LookRotation(direction);
-        Vector3 rotation = Quaternion.Lerp(_rotation.rotation, lookRotation, Time.deltaTime * 10).eulerAngles;
-        _rotation.rotation = Quaternion.Euler(0f, rotation.y, 0f);
-
-    }
-
     public void HandleHit(int obj)
     {
-        exp += obj;
+        Debug.Log("Tower hitted!");
+    }
+    
+    private void SetLayerToPlaceMode()
+    {
+        transform.gameObject.layer = LayerMask.NameToLayer("PlaceMode");
+        foreach (Transform child in _transforms)
+        {
+            child.gameObject.layer = LayerMask.NameToLayer("PlaceMode");
+        }
     }
 
+    private void SetLayerToTower()
+    {
+        transform.gameObject.layer = LayerMask.NameToLayer("Tower");
+        foreach (Transform child in _transforms)
+        {
+            ChangeMaterial(0);
+            child.gameObject.layer = LayerMask.NameToLayer("Tower");
+        }
+    }
+    
     private void ChangeMaterial(int material)
     {
         foreach(MeshRenderer r in _renderers)
@@ -106,33 +110,39 @@ public class Tower : MonoBehaviour
         }
         
     }
+    
+    private void RotateToTarget()
+    {
+        Vector3 direction = _targetFinder.target.transform.position - transform.position;
+        Quaternion lookRotation = Quaternion.LookRotation(direction);
+        Vector3 rotation = Quaternion.Lerp(_rotation.rotation, lookRotation, Time.deltaTime * 10).eulerAngles;
+        _rotation.rotation = Quaternion.Euler(0f, rotation.y, 0f);
+    }
+
+    
 
     public void IsPlaceable()
     {
         _placeable = true;
         ChangeMaterial(1);
     }
-
     public void IsUnplaceable()
     {
         _placeable = false;
         ChangeMaterial(2);
     }
-    
-    public void IsPlaced()
+    public void Place()
     {
-        transform.gameObject.layer = LayerMask.NameToLayer("Tower");
-        foreach (Transform child in _transforms)
-        {
-            ChangeMaterial(0);
-            child.gameObject.layer = LayerMask.NameToLayer("Tower");
-        }
+        SetLayerToTower();
         _placed = true;
     }
-
     public bool GetPlaceableState()
     {
         return _placeable;
     }
-
+    public bool GetPlacedState()
+    {
+        return _placed;
+    }
+    
 }

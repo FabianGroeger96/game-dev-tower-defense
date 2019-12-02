@@ -6,67 +6,62 @@ using Vector3 = UnityEngine.Vector3;
 
 public class PlacementController : MonoBehaviour
 {
-    private Tower[] _placeableObjects;
-    private int _currentPlaceableObjectNumber;
-    private String _placementLayer = "Ground";
+
+    [SerializeField] private String _placementLayer;
+
+    private GameController _gc;
+
+    private bool _isActive;
     private Tower _currentPlaceableObject;
     private bool _validPlace;
-
-    // Start is called before the first frame update
+    
     void Start()
     {
-        _placeableObjects = new Tower[10];
-        _placeableObjects[0] = (Tower) AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Towers/Silo/RocketSilo.prefab", typeof(Tower));
-        _placeableObjects[1] = (Tower) AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Towers/Rocket/RocketRotation.prefab", typeof(Tower));
+        _gc = GetComponent<GameController>();
+        _isActive = false;
         _validPlace = false;
     }
-    
-    public void placeMode(int placedObject)
+
+    public void SetPlacementModeInactive()
     {
-        if (_currentPlaceableObject != null && _currentPlaceableObjectNumber == placedObject)
+        if (_currentPlaceableObject.GetPlacedState() == false)
         {
-            Destroy(_currentPlaceableObject.gameObject);
-            _currentPlaceableObject.IsUnplaceable();
-            _validPlace = false;
+            DestroyCurrentPlaceableObject();
         }
-        else if (_currentPlaceableObject != null)
-        {
-            Destroy(_currentPlaceableObject.gameObject);
-            _currentPlaceableObject = Instantiate(_placeableObjects[placedObject - 1]);
-            _currentPlaceableObjectNumber = placedObject;
-            _currentPlaceableObject.IsPlaceable();
-        }
-        else
-        {
-            _currentPlaceableObject = Instantiate(_placeableObjects[placedObject - 1]);
-            _currentPlaceableObjectNumber = placedObject;
-            _currentPlaceableObject.IsPlaceable();
-        }
-        
+        _isActive = false; 
+    }
+
+    public void DestroyCurrentPlaceableObject()
+    {
+        Destroy(_currentPlaceableObject.gameObject);
+        _currentPlaceableObject = null;
+    }
+    
+    public void SetPlacementModeActive(Tower placedTower)
+    {
+        _isActive = true;
+        _currentPlaceableObject = Instantiate(placedTower);
+        _currentPlaceableObject.IsPlaceable();
     }
     
     // Update is called once per frame
     void Update()
     {
-        //HandleNewObjectHotkey();
-
-        if (_currentPlaceableObject != null)
+        if (_isActive && _currentPlaceableObject != null)
         {
             MoveCurrentObjectToMouse();
             //RotateFromMouseWheel();
             ReleaseIfClicked();
         }
-        
-
-
     }
     
     private void ReleaseIfClicked()
     {
         if (Input.GetMouseButtonUp(0) && _currentPlaceableObject.GetPlaceableState())
         {
-            _currentPlaceableObject.IsPlaced();
-            _currentPlaceableObject = null;
+            _gc.TowerPlaced(_currentPlaceableObject.costs);
+            _currentPlaceableObject.Place();
+            SetPlacementModeInactive();
         }
     }
     

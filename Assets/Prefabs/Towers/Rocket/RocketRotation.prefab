@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 800828187868284095}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 4.011784, y: 0.24, z: 5.763004}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4399499522876558602}
@@ -52,6 +52,8 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 057c047e25f376b4b82a543332b80fbe, type: 2}
   - {fileID: 2100000, guid: f9b0f2b0252d05e42b29a39291ff5bb8, type: 2}
   - {fileID: 2100000, guid: 9cabaff90a7dd8e49a001278f8251c26, type: 2}
+  costs: 250
+  placed: 0
 --- !u!114 &6676824111078406359
 MonoBehaviour:
   m_ObjectHideFlags: 0

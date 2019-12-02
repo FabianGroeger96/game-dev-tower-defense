@@ -6,13 +6,13 @@ public class KeyboardInputController : MonoBehaviour
 {
 
     private int _currentMode = 0; // 0: Non-placement, 1: Placement
-    private PlacementController _placementController;
+    private GameController _gc;
     
     
     // Start is called before the first frame update
     void Start()
     {
-        _placementController = GetComponent<PlacementController>();
+        _gc = GetComponent<GameController>();
     }
 
     // Update is called once per frame
@@ -25,12 +25,12 @@ public class KeyboardInputController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            _placementController.placeMode(1);
+            _gc.SetToPlacementMode(1);
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            _placementController.placeMode(2);
+            _gc.SetToPlacementMode(2);
         }
     }
 
