@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -702,6 +702,7 @@ GameObject:
   - component: {fileID: 505207291}
   - component: {fileID: 505207294}
   - component: {fileID: 505207295}
+  - component: {fileID: 505207296}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -733,6 +734,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3847c6dfedbc70a4b9d8cda567ec4f99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _placementLayer: Ground
 --- !u!4 &505207293
 Transform:
   m_ObjectHideFlags: 0
@@ -771,10 +773,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 249521b28298542eb804edbd95d94449, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _towers:
+  - {fileID: 2965256440215747679, guid: 2a0fdf119aa99de4eabba67e7e2a624d, type: 3}
+  - {fileID: 58050485693951288, guid: 6900bf677fe3ad94ebcb821d4b0d36e2, type: 3}
   gameState: 0
   lifeCountText: {fileID: 1173733271}
   gameOverText: {fileID: 693322133}
   initialLifeCount: 100
+  initialMoneyCount: 1000
+--- !u!114 &505207296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 505207290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be454da89188f624d98a8b8d187b3ec2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  money: 1000
 --- !u!1 &693322130
 GameObject:
   m_ObjectHideFlags: 0
