@@ -5,11 +5,13 @@ using UnityEngine;
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
 
-public class EnemyMovement : BaseController
+public class Enemy : BaseController
 {
+    public int initialHealth;
     public float speed = 1f;
     public int damage = 10;
 
+    private int _health;
     private int _waypointIndex;
     private Transform _target;
 
@@ -17,6 +19,7 @@ public class EnemyMovement : BaseController
     void Start()
     {
         Init();
+        _health = initialHealth;
         _waypointIndex = 0;
         _target = Waypoints.waypoints[_waypointIndex];
     }
@@ -24,7 +27,7 @@ public class EnemyMovement : BaseController
     // Update is called once per frame
     void Update()
     {
-        if (gameController.gameState == GameController.GameState.Running)
+        if (_gc.gameState == GameController.GameState.Running)
         {
             Vector3 dir = Vector3.Scale(new Vector3(1, 0, 1), _target.position - transform.position);
             transform.Translate(dir.normalized * speed * Time.deltaTime, Space.World);
@@ -35,11 +38,20 @@ public class EnemyMovement : BaseController
                 if (_waypointIndex >= Waypoints.waypoints.Length)
                 {
                     Destroy(this.gameObject);
-                    gameController.RemoveLifeCount(damage);
+                    _gc.RemoveLifeCount(damage);
                 }
 
                 NextWaypoint();
             }
+        }
+    }
+
+    public void DealDamage(int damage)
+    {
+        _health -= damage;
+        if (_health <= 0)
+        {
+            Destroy(gameObject);
         }
     }
 

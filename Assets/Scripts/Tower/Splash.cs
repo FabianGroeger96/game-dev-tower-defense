@@ -3,32 +3,22 @@ using System.Collections.Generic;
 
 public class Splash : MonoBehaviour
 {
-    public ParticleSystem part;
-    public List<ParticleCollisionEvent> collisionEvents;
-
+    public int damagePerParticle;
+    public int hits;
+    
     void Start()
     {
-        part = GetComponent<ParticleSystem>();
-        collisionEvents = new List<ParticleCollisionEvent>();
+        
     }
 
     void OnParticleCollision(GameObject other)
     {
-        int numCollisionEvents = part.GetCollisionEvents(other, collisionEvents);
-        Debug.Log("collision!");
-        Rigidbody rb = other.GetComponent<Rigidbody>();
-        int i = 0;
-
-        while (i < numCollisionEvents)
+        if (other.CompareTag("Enemy"))
         {
-            if (rb)
-            {
-                Vector3 pos = collisionEvents[i].intersection;
-                Vector3 force = collisionEvents[i].velocity * 10;
-                rb.AddForce(force);
-                Debug.Log("collision with particle!");
-            }
-            i++;
+            hits++;
+            Debug.Log(hits);
+            Enemy enemy = other.GetComponentInParent<Enemy>();
+            enemy.DealDamage(damagePerParticle);
         }
     }
 }

@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class BaseController : MonoBehaviour
 {
-    public GameController gameController;
+    protected GameController _gc;
     public PlacementController placementController;
 
     public void Init()
     {
-        gameController = GameObject.Find("GameController").GetComponent<GameController>();
+        _gc = GameObject.Find("GameController").GetComponent<GameController>();
     }
 }

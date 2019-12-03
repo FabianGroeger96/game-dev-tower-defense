@@ -14,7 +14,7 @@ public class ProjectileStraight : Projectile {
     
     private Transform _target;
     public float speed;
-    public event Action<int> OnHit = delegate { };
+    public int damage;
     private Rigidbody _rigidbody;
      
     // Update is called once per frame
@@ -40,12 +40,11 @@ public class ProjectileStraight : Projectile {
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-            //StartCoroutine(TestCoroutine());
+            Debug.Log("taged enemy hit");
+            Enemy enemy = other.gameObject.GetComponentInParent<Enemy>();
+            enemy.DealDamage(damage);
             Destroy(gameObject);
-            OnHit(1);
         }
-
-
     }
     
     IEnumerator TestCoroutine()
