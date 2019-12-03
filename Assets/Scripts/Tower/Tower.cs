@@ -120,7 +120,6 @@ public class Tower : MonoBehaviour
     }
 
     
-
     public void IsPlaceable()
     {
         _placeable = true;

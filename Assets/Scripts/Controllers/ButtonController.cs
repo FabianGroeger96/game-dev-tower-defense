@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ButtonController : BaseController
 {
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +19,6 @@ public class ButtonController : BaseController
     public void PlaceTower(int towerId)
     {
         Debug.Log("Place tower: " + towerId);
-        //placementController.SetPlacementModeActive(towerId);
+        gameController.SetToPlacementMode(towerId);
     }
 }

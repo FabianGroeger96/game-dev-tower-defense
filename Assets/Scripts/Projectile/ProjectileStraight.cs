@@ -22,7 +22,7 @@ public class ProjectileStraight : Projectile {
     {
         _rigidbody = GetComponent<Rigidbody>();
         Vector3 direction = CalculateLaunchDirection();
-        _rigidbody.AddForce(direction * speed, ForceMode.VelocityChange);
+        _rigidbody.AddForce(direction.normalized * speed, ForceMode.VelocityChange);
     }
 
     private Vector3 CalculateLaunchDirection()

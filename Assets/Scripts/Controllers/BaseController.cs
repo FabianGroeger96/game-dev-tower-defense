@@ -8,6 +8,5 @@ public class BaseController : MonoBehaviour
     public void Init()
     {
         gameController = GameObject.Find("GameController").GetComponent<GameController>();
-        placementController = gameController.GetComponent<PlacementController>();
     }
 }

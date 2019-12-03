@@ -26,18 +26,6 @@ public class ProjectileParabolic : Projectile
             Destroy(gameObject);
             return;
         }
-
-        Vector3 direction = CalculateLaunchDirection();
-        float travelDinstanceInThisFrame = speed * Time.deltaTime;
-
-        if (direction.magnitude <= travelDinstanceInThisFrame)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        
-        //transform.Translate(direction.normalized * travelDinstanceInThisFrame, Space.World);
-
     }
     
     public override void Launch() 
@@ -75,6 +63,7 @@ public class ProjectileParabolic : Projectile
     
     private void OnCollisionEnter(Collision other)
     {
+        Debug.Log(other.gameObject.layer);
         _particleSystem = (Splash) AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Towers/Silo/Splash.prefab", typeof(Splash));
         Instantiate(_particleSystem, transform.position, Quaternion.Euler(270f, 0f, 0f));
         if (other.gameObject.CompareTag("Enemy"))

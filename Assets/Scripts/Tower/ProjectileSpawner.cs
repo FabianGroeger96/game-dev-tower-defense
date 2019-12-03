@@ -10,17 +10,6 @@ public class ProjectileSpawner : MonoBehaviour
     public Projectile _projectile;
     
     
-    void Start()
-    {
-        //_projectile = (Projectile) AssetDatabase.LoadAssetAtPath("Assets/Prefabs/ProjectileBullet.prefab", typeof(Projectile));
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void launch(Tower tower, Transform target)
     {
         Projectile clone = Instantiate(_projectile, transform.position, Quaternion.identity);

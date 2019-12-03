@@ -64,24 +64,26 @@ public class CameraController : MonoBehaviour
             transform.position = transform.position + (transform.right * movementSpeed * Time.deltaTime);
         }
 
-        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
+        if (Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.UpArrow))
         {
             transform.position = transform.position + (transform.forward * movementSpeed * Time.deltaTime);
         }
 
-        if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
+        if (Input.GetKey(KeyCode.E) || Input.GetKey(KeyCode.DownArrow))
         {
             transform.position = transform.position + (-transform.forward * movementSpeed * Time.deltaTime);
         }
 
-        if (Input.GetKey(KeyCode.Q))
+        if (Input.GetKey(KeyCode.W))
         {
             transform.position = transform.position + (transform.up * movementSpeed * Time.deltaTime);
+            transform.position = transform.position + (transform.forward * movementSpeed * Time.deltaTime);
         }
 
-        if (Input.GetKey(KeyCode.E))
+        if (Input.GetKey(KeyCode.S))
         {
             transform.position = transform.position + (-transform.up * movementSpeed * Time.deltaTime);
+            transform.position = transform.position + (-transform.forward * movementSpeed * Time.deltaTime);
         }
 
         if (Input.GetKey(KeyCode.R) || Input.GetKey(KeyCode.PageUp))
