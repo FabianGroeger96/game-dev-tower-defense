@@ -7,21 +7,25 @@ using UnityEngine.WSA;
 
 public abstract class Projectile : MonoBehaviour
 {
-    // Start is called before the first frame update
-    
-    public event Action<int> OnHit = delegate { };
-    
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    protected float damage;
+    protected Transform target;
+    protected Dictionary<string, float> properties;
+
+    public void SetTarget(Transform target)
     {
-        
+        this.target = target;
     }
+    public void SetProjectileProperties(Dictionary<string, float> properties)
+    {
+        this.properties = properties;
+    } 
+    
+    public void SetProjectileDamage(float damage)
+    {
+        this.damage = damage;
+    }
+    
     abstract public void Launch();
-    abstract public void Seek(Transform transform);
     
 }

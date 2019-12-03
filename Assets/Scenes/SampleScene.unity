@@ -719,6 +719,8 @@ MonoBehaviour:
   gameOverText: {fileID: 693322133}
   initialLifeCount: 100
   initialMoneyCount: 1000
+  _moneyCount: 0
+  _lifeCount: 0
 --- !u!1 &693322130
 GameObject:
   m_ObjectHideFlags: 0
@@ -1788,12 +1790,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 053ec4bad1209b447b5a32adf68c060f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 7435060024368221123, guid: 2e61a0cb8ca12834a8c87b5bb36b10a0,
+  enemyPrefab: {fileID: 4626515225214254720, guid: 4826147f3e98b4017a9a0d4b1fc8ac19,
     type: 3}
   spawnPoint: {fileID: 1667196199}
   waveCountdownText: {fileID: 1066054415}
   timeBetweenWaves: 10
-  timeBetweenEnemies: 2
+  timeBetweenEnemies: 0.2
 --- !u!1 &1706943141
 GameObject:
   m_ObjectHideFlags: 0

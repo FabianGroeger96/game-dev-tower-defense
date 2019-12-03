@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class Splash : MonoBehaviour
 {
-    public int damagePerParticle;
+    public float damagePerParticle;
     public int hits;
     
     void Start()

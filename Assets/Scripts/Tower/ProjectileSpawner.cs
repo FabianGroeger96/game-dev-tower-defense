@@ -6,16 +6,32 @@ using UnityEngine;
 
 public class ProjectileSpawner : MonoBehaviour
 {
-    // Start is called before the first frame update
-    public Projectile _projectile;
-    
-    
-    public void launch(Tower tower, Transform target)
+    private Projectile _projectile;
+    private float _damage;
+    private Dictionary<string, float> _projectileProperties;
+
+
+    public void SetProjectileProperties(Dictionary<string, float> properties)
     {
-        Projectile clone = Instantiate(_projectile, transform.position, Quaternion.identity);
-        clone.Seek(target);
-        clone.Launch();
-        clone.OnHit += tower.HandleHit;
+        _projectileProperties = properties;
     }
-    
+
+    public void SetProjectile(Projectile projectile)
+    {
+        _projectile = projectile;
+    }
+
+    public void Fire(Transform target)
+    {
+        Projectile projectile = Instantiate(_projectile, transform.position, Quaternion.identity);
+        projectile.SetTarget(target);
+        projectile.SetProjectileDamage(_damage);
+        projectile.SetProjectileProperties(_projectileProperties);
+        projectile.Launch();
+    }
+
+    public void SetProjectileDamage(float damage)
+    {
+        _damage = damage;
+    }
 }

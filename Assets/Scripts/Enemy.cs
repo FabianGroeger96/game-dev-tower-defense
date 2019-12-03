@@ -8,10 +8,12 @@ using Vector3 = UnityEngine.Vector3;
 public class Enemy : BaseController
 {
     public int initialHealth;
-    public float speed = 1f;
-    public int damage = 10;
+    public int earning;
+    public float speed;
+    public int damage;
+    
 
-    private int _health;
+    private float _health;
     private int _waypointIndex;
     private Transform _target;
 
@@ -46,11 +48,12 @@ public class Enemy : BaseController
         }
     }
 
-    public void DealDamage(int damage)
+    public void DealDamage(float damage)
     {
         _health -= damage;
         if (_health <= 0)
         {
+            _gc.RegisterKill(earning);
             Destroy(gameObject);
         }
     }
@@ -58,6 +61,6 @@ public class Enemy : BaseController
     private void NextWaypoint()
     {
         _waypointIndex++;
-         _target = Waypoints.waypoints[_waypointIndex];
+        _target = Waypoints.waypoints[_waypointIndex];
     }
 }

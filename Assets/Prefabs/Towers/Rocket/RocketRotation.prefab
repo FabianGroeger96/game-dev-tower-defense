@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2965256440215747679}
   - component: {fileID: 6676824111078406359}
   - component: {fileID: 1858925338654899115}
+  - component: {fileID: 2636250136244045398}
   m_Layer: 13
   m_Name: RocketRotation
   m_TagString: Untagged
@@ -51,6 +52,12 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 057c047e25f376b4b82a543332b80fbe, type: 2}
   - {fileID: 2100000, guid: f9b0f2b0252d05e42b29a39291ff5bb8, type: 2}
   - {fileID: 2100000, guid: 9cabaff90a7dd8e49a001278f8251c26, type: 2}
+  _projectile: {fileID: 7885087585714350708, guid: ff3fab6d9be94f140b08db0680ac98dc,
+    type: 3}
+  _projectilePropertiesKeys:
+  - speed
+  _projectilePropertiesValues:
+  - 2
   costs: 250
 --- !u!114 &6676824111078406359
 MonoBehaviour:
@@ -80,6 +87,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &2636250136244045398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 800828187868284095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c807f0d6ef8849b4a5fc7fe74011da64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  range: 15
+  enemyTag: Enemy
+  gizmoColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!1 &3454210487856772820
 GameObject:
   m_ObjectHideFlags: 0
@@ -251,7 +274,6 @@ GameObject:
   - component: {fileID: 1599793974904728507}
   - component: {fileID: 2922788449477306909}
   - component: {fileID: 9110177396779706902}
-  - component: {fileID: 1411866928991603128}
   m_Layer: 13
   m_Name: Cylinder
   m_TagString: Untagged
@@ -333,22 +355,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
---- !u!114 &1411866928991603128
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6641707440119842108}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c807f0d6ef8849b4a5fc7fe74011da64, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  range: 15
-  enemyTag: Enemy
-  gizmoColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!1 &7283236534294486815
 GameObject:
   m_ObjectHideFlags: 0
@@ -394,8 +400,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85192de10d6d07348add3f6df19ad354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _projectile: {fileID: 7885087585714350708, guid: ff3fab6d9be94f140b08db0680ac98dc,
-    type: 3}
 --- !u!1 &7452096480426679022
 GameObject:
   m_ObjectHideFlags: 0

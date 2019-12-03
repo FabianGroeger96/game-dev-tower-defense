@@ -1,11 +1,16 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using Quaternion = UnityEngine.Quaternion;
 using Vector3 = UnityEngine.Vector3;
 
 
 public class Tower : MonoBehaviour
 {
-    [SerializeField] public Material[] materials;
+    [SerializeField] private Material[] materials;
+    [SerializeField] private Projectile _projectile;
+    [SerializeField] private string[] _projectilePropertiesKeys;
+    [SerializeField] private float[] _projectilePropertiesValues;
+    [SerializeField] private float _damage;
     [SerializeField] public int costs;
     
     private ProjectileSpawner _spawner;
@@ -31,11 +36,27 @@ public class Tower : MonoBehaviour
         _transforms = GetComponentsInChildren<Transform>();
         
         _collids = false;
+
+        _spawner.SetProjectileDamage(_damage);
+        _spawner.SetProjectile(_projectile);
+        _spawner.SetProjectileProperties(CreateProjectilePropertiesDictionary());
         IsUnplaceable();
         SetLayerToPlaceMode();
 
     }
-    
+
+    private Dictionary<string, float> CreateProjectilePropertiesDictionary()
+    {
+        Dictionary<string, float> dict = new Dictionary<string, float>();
+        int i = 0;
+        foreach (float value in _projectilePropertiesValues)
+        {
+            dict.Add(_projectilePropertiesKeys[i], value);
+            i++;
+        }
+        return dict; 
+    }
+
     void Update()
     {
         if (_placed)
@@ -73,14 +94,9 @@ public class Tower : MonoBehaviour
             RotateToTarget();
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                _spawner.launch(this, _targetFinder.target.transform);
+                _spawner.Fire(_targetFinder.target.transform);
             }
         }
-    }
-
-    public void HandleHit(int obj)
-    {
-        Debug.Log("Tower hitted!");
     }
     
     private void SetLayerToPlaceMode()

@@ -32,12 +32,11 @@ public class GameController : MonoBehaviour
     private InputMode _inputMode;
     private int _currentPlacingTower;
     
-    private int _moneyCount;
-    private int _lifeCount;
+    [SerializeField] private int _moneyCount;
+    [SerializeField] private int _lifeCount;
 
     private PlacementController _placementController;
 
-    // Start is called before the first frame update
     void Start()
     {
         //Get controllers
@@ -54,7 +53,6 @@ public class GameController : MonoBehaviour
         lifeCountText.text = _lifeCount.ToString();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (gameState == GameState.GameOver)
@@ -119,6 +117,10 @@ public class GameController : MonoBehaviour
     public void TowerPlaced(int costs)
     {
         _moneyCount -= _towers[_currentPlacingTower - 1].costs;
-        Debug.Log(_moneyCount);
+    }
+
+    public void RegisterKill(int earning)
+    {
+        _moneyCount += earning;
     }
 }
