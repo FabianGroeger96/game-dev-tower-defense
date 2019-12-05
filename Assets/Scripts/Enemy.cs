@@ -53,7 +53,7 @@ public class Enemy : BaseController
 
     public void DealDamage(float damage)
     {
-        _health -= damage;
+          _health -= damage;
         healthBar.fillAmount = _health / initialHealth;
         if (_health <= 0)
         {

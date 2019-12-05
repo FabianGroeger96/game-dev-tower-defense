@@ -5,6 +5,8 @@ public class UIController : MonoBehaviour
 {
     public Text waveCountdownText;
     public Text lifeCountText;
+    public Text moneyCountText;
+    public Text timeCountText;
 
     private string _waveCount;
     private string _lifeCount;
@@ -19,13 +21,23 @@ public class UIController : MonoBehaviour
     {
     }
 
-    public void setLifeCountText(string text)
-    {
-        _lifeCount = text;
-    }
-
     public void setWaveCountText(string text)
     {
-        _waveCount = text;
+        waveCountdownText.text = text;
+    }
+
+    public void setLifeCountText(string text)
+    {
+        lifeCountText.text = "Life: " + text;
+    }
+
+    public void setMoneyCountText(string text)
+    {
+        moneyCountText.text = "$" + text;
+    }
+
+    public void setTimeCountText(string text)
+    {
+        timeCountText.text = text;
     }
 }

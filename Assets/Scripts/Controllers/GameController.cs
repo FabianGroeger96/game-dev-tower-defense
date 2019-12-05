@@ -38,6 +38,11 @@ public class GameController : MonoBehaviour
     private WaveSpawner _waveSpawner;
     private UIController _uiController;
 
+    public float timePlayed = 0f;
+
+    private float minutes;
+    private float seconds;
+
     // variables for spawning enemies
     private float _countdownWave = 2;
     private int _waveIndex = 0;
@@ -62,8 +67,9 @@ public class GameController : MonoBehaviour
         _moneyCount = initialMoneyCount;
 
         // initial UI Elements
-        _uiController.lifeCountText.text = _lifeCount.ToString();
-        _uiController.waveCountdownText.text = _countdownWave.ToString();
+        _uiController.setLifeCountText(_lifeCount.ToString());
+        _uiController.setWaveCountText(_countdownWave.ToString());
+        _uiController.setMoneyCountText(_moneyCount.ToString());
     }
 
     void Update()
@@ -75,7 +81,7 @@ public class GameController : MonoBehaviour
                 _uiController.lifeCountText.enabled = true;
 
                 // update life count
-                _uiController.lifeCountText.text = _lifeCount.ToString();
+
 
                 if (_countdownWave <= 0f)
                 {
@@ -86,7 +92,24 @@ public class GameController : MonoBehaviour
                 }
 
                 _countdownWave -= Time.deltaTime;
-                _uiController.waveCountdownText.text = Mathf.Round(_countdownWave).ToString();
+
+                // update UI elements
+                _uiController.setWaveCountText(Mathf.Round(_countdownWave).ToString());
+                _uiController.setLifeCountText(_lifeCount.ToString());
+                _uiController.setMoneyCountText(_moneyCount.ToString());
+
+                
+                timePlayed += Time.deltaTime;
+                minutes = Mathf.Floor(timePlayed / 60);
+                seconds = timePlayed % 60;
+                if (seconds > 59) seconds = 59;
+                if (minutes < 0)
+                {
+                    minutes = 0;
+                    seconds = 0;
+                }
+                
+                _uiController.setTimeCountText(string.Format("{0:0}:{1:00}", minutes, seconds));
 
                 break;
             case GameState.GameOver:
