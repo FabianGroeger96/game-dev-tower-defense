@@ -94,6 +94,7 @@ public class Tower : MonoBehaviour
             RotateToTarget();
             if (Input.GetKeyDown(KeyCode.Space))
             {
+                _spawner.SetProjectileProperties(CreateProjectilePropertiesDictionary());
                 _spawner.Fire(_targetFinder.target.transform);
             }
         }
