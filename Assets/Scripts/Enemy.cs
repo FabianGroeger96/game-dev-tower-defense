@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Numerics;
 using UnityEngine;
+using UnityEngine.UI;
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
 
@@ -11,11 +12,13 @@ public class Enemy : BaseController
     public int earning;
     public float speed;
     public int damage;
-    
 
     private float _health;
     private int _waypointIndex;
     private Transform _target;
+
+    [Header("Unity UI")] public Image healthBar;
+
 
     // Start is called before the first frame update
     void Start()
@@ -51,6 +54,7 @@ public class Enemy : BaseController
     public void DealDamage(float damage)
     {
         _health -= damage;
+        healthBar.fillAmount = _health / initialHealth;
         if (_health <= 0)
         {
             _gc.RegisterKill(earning);

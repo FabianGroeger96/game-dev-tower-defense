@@ -486,10 +486,10 @@ RectTransform:
   m_Father: {fileID: 737150531}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 1}
-  m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 402, y: -92}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -60, y: -95}
+  m_SizeDelta: {x: 100, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &340014615
 MonoBehaviour:
@@ -737,9 +737,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 053ec4bad1209b447b5a32adf68c060f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 4626515225214254720, guid: 4826147f3e98b4017a9a0d4b1fc8ac19,
-    type: 3}
   spawnPoint: {fileID: 1667196199}
+  standardEnemyPrefab: {fileID: 7435060024368221123, guid: 2e61a0cb8ca12834a8c87b5bb36b10a0,
+    type: 3}
+  tankEnemyPrefab: {fileID: 4626515225214254720, guid: 4826147f3e98b4017a9a0d4b1fc8ac19,
+    type: 3}
 --- !u!1 &693322130
 GameObject:
   m_ObjectHideFlags: 0
@@ -800,7 +802,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 693322130}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
@@ -1913,7 +1915,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1667196199}
-  - component: {fileID: 1667196201}
   - component: {fileID: 1667196200}
   m_Layer: 0
   m_Name: WaveSpawner
@@ -1951,21 +1952,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gizomoSize: 0.75
   gizmoColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
---- !u!114 &1667196201
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1667196198}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 053ec4bad1209b447b5a32adf68c060f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 4626515225214254720, guid: 4826147f3e98b4017a9a0d4b1fc8ac19,
-    type: 3}
-  spawnPoint: {fileID: 1667196199}
 --- !u!1 &1706943141
 GameObject:
   m_ObjectHideFlags: 0
@@ -2080,10 +2066,10 @@ RectTransform:
   m_Father: {fileID: 737150531}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 1}
-  m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 402, y: -40.600006}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -60, y: -35}
+  m_SizeDelta: {x: 100, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1717874473
 MonoBehaviour:
