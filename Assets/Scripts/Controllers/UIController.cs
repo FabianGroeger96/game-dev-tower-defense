@@ -1,10 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
+    public Text waveCountdownText;
+    public Text lifeCountText;
+
+    private string _waveCount;
+    private string _lifeCount;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -13,5 +17,15 @@ public class UIController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+    }
+
+    public void setLifeCountText(string text)
+    {
+        _lifeCount = text;
+    }
+
+    public void setWaveCountText(string text)
+    {
+        _waveCount = text;
     }
 }

@@ -9,46 +9,10 @@ public class WaveSpawner : MonoBehaviour
 {
     public Transform enemyPrefab;
     public Transform spawnPoint;
-    public Text waveCountdownText;
-    public float timeBetweenWaves = 5f;
-    public float timeBetweenEnemies;
 
-    private float _countdown = 2f;
-    private int _waveIndex = 0;
-    private GameController _gameController;
-
-    private void Start()
+    public IEnumerator SpawnWave(int waveIndex, float timeBetweenEnemies)
     {
-        _gameController = GameObject.Find("GameController").GetComponent<GameController>();
-    }
-
-    void Update()
-    {
-        if (_gameController.gameState == GameController.GameState.Running)
-        {
-            if (_countdown <= 0f)
-            {
-                // Call subprocess
-                StartCoroutine(SpawnWave());
-                _countdown = timeBetweenWaves;
-            }
-
-            _countdown -= Time.deltaTime;
-
-            waveCountdownText.text = Mathf.Round(_countdown).ToString();
-        }
-        else
-        {
-            waveCountdownText.enabled = false;
-            waveCountdownText.text = "";
-        }
-    }
-
-    IEnumerator SpawnWave()
-    {
-        _waveIndex++;
-
-        for (int i = 0; i < _waveIndex; i++)
+        for (int i = 0; i < waveIndex; i++)
         {
             SpawnEnemy();
             yield return new WaitForSeconds(timeBetweenEnemies);

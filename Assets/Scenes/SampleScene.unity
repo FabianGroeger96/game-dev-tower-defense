@@ -638,9 +638,10 @@ GameObject:
   m_Component:
   - component: {fileID: 505207293}
   - component: {fileID: 505207292}
-  - component: {fileID: 505207291}
   - component: {fileID: 505207294}
   - component: {fileID: 505207295}
+  - component: {fileID: 505207297}
+  - component: {fileID: 505207296}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -648,18 +649,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &505207291
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 505207290}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d13d389c55f2924096372d1ddea650c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &505207292
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -715,12 +704,42 @@ MonoBehaviour:
   - {fileID: 2965256440215747679, guid: 2a0fdf119aa99de4eabba67e7e2a624d, type: 3}
   - {fileID: 58050485693951288, guid: 6900bf677fe3ad94ebcb821d4b0d36e2, type: 3}
   gameState: 0
-  lifeCountText: {fileID: 1173733271}
   gameOverText: {fileID: 693322133}
   initialLifeCount: 100
   initialMoneyCount: 1000
   _moneyCount: 0
   _lifeCount: 0
+  timeBetweenWaves: 5
+  timeBetweenEnemies: 1
+--- !u!114 &505207296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 505207290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d13d389c55f2924096372d1ddea650c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waveCountdownText: {fileID: 1066054415}
+  lifeCountText: {fileID: 1173733271}
+--- !u!114 &505207297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 505207290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 053ec4bad1209b447b5a32adf68c060f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyPrefab: {fileID: 4626515225214254720, guid: 4826147f3e98b4017a9a0d4b1fc8ac19,
+    type: 3}
+  spawnPoint: {fileID: 1667196199}
 --- !u!1 &693322130
 GameObject:
   m_ObjectHideFlags: 0
@@ -1947,9 +1966,6 @@ MonoBehaviour:
   enemyPrefab: {fileID: 4626515225214254720, guid: 4826147f3e98b4017a9a0d4b1fc8ac19,
     type: 3}
   spawnPoint: {fileID: 1667196199}
-  waveCountdownText: {fileID: 1066054415}
-  timeBetweenWaves: 10
-  timeBetweenEnemies: 0.2
 --- !u!1 &1706943141
 GameObject:
   m_ObjectHideFlags: 0
