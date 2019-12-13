@@ -25,7 +25,6 @@ public class GameController : MonoBehaviour
     [SerializeField] private Tower[] _towers;
 
     public GameState gameState = GameState.Init;
-    public Text gameOverText;
     public int initialLifeCount = 100;
     public int initialMoneyCount = 1000;
 
@@ -40,9 +39,6 @@ public class GameController : MonoBehaviour
     private UIController _uiController;
 
     public float timePlayed = 0f;
-
-    private float minutes;
-    private float seconds;
 
     // variables for spawning enemies
     private float _countdownWave = 2;
@@ -83,7 +79,8 @@ public class GameController : MonoBehaviour
                 break;
 
             case GameState.Running:
-                gameOverText.enabled = false;
+                _uiController.gameOverText.enabled = false;
+                _uiController.towerPanel.SetActive(false);
                 _uiController.lifeCountText.enabled = true;
 
                 if (enemiesAlive == 0)
@@ -104,45 +101,24 @@ public class GameController : MonoBehaviour
                     }
 
                     _countdownWave -= Time.deltaTime;
-
-                    updateUI();
+                    _uiController.updateUI(_countdownWave, _lifeCount, _moneyCount, timePlayed);
                 }
 
                 break;
             case GameState.GameOver:
-                gameOverText.enabled = true;
+                _uiController.gameOverText.enabled = true;
                 _uiController.lifeCountText.enabled = false;
                 
                 enabled = false;
                 break;
             case GameState.Finished:
-                gameOverText.text = "Finished";
-                gameOverText.enabled = true;
+                _uiController.gameOverText.text = "Finished";
+                _uiController.gameOverText.enabled = true;
                 _uiController.lifeCountText.enabled = false;
 
                 enabled = false;
                 break;
         }
-    }
-
-    private void updateUI()
-    {
-        // update UI elements
-        _uiController.setWaveCountText(Mathf.Round(_countdownWave).ToString());
-        _uiController.setLifeCountText(_lifeCount.ToString());
-        _uiController.setMoneyCountText(_moneyCount.ToString());
-
-        timePlayed += Time.deltaTime;
-        minutes = Mathf.Floor(timePlayed / 60);
-        seconds = timePlayed % 60;
-        if (seconds > 59) seconds = 59;
-        if (minutes < 0)
-        {
-            minutes = 0;
-            seconds = 0;
-        }
-
-        _uiController.setTimeCountText(string.Format("{0:0}:{1:00}", minutes, seconds));
     }
 
     public void ExitPlacementMode()

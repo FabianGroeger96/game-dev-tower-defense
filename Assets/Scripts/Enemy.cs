@@ -15,12 +15,11 @@ public class Enemy : BaseController
     private float _health;
     private int _waypointIndex;
     private Transform _target;
-    
+
     public GameObject deathEffect;
 
     [Header("Unity UI")] public Image healthBar;
-
-
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -50,7 +49,7 @@ public class Enemy : BaseController
             }
         }
     }
-    
+
     public void DealDamage(float damage)
     {
         _health -= damage;
@@ -65,7 +64,7 @@ public class Enemy : BaseController
     {
         GameObject effect = Instantiate(deathEffect, transform.position, Quaternion.identity);
         Destroy(effect, 5f);
-        
+
         GameController.enemiesAlive--;
         _gc.RegisterKill(earning);
         Destroy(gameObject);

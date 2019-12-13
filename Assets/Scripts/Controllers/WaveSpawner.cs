@@ -4,8 +4,6 @@ using UnityEngine;
 public class WaveSpawner : MonoBehaviour
 {
     public Transform spawnPoint;
-    public Transform standardEnemyPrefab;
-    public Transform tankEnemyPrefab;
 
     public IEnumerator SpawnWave(Wave wave)
     {
