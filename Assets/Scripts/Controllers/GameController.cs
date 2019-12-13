@@ -11,7 +11,8 @@ public class GameController : MonoBehaviour
     {
         Init,
         Running,
-        GameOver
+        GameOver,
+        Finished
     };
 
     public enum InputMode
@@ -47,8 +48,10 @@ public class GameController : MonoBehaviour
     private float _countdownWave = 2;
     private int _waveIndex = 0;
 
+    public Wave[] waves;
+
     public float timeBetweenWaves = 5;
-    public float timeBetweenEnemies = 2;
+    public static int enemiesAlive = 0;
 
     void Start()
     {
@@ -76,47 +79,70 @@ public class GameController : MonoBehaviour
     {
         switch (gameState)
         {
+            case GameState.Init:
+                break;
+
             case GameState.Running:
                 gameOverText.enabled = false;
                 _uiController.lifeCountText.enabled = true;
 
-                // update life count
-
-
-                if (_countdownWave <= 0f)
+                if (enemiesAlive == 0)
                 {
-                    // Call subprocess
-                    StartCoroutine(_waveSpawner.SpawnWave(_waveIndex, timeBetweenEnemies));
-                    _waveIndex++;
-                    _countdownWave = timeBetweenWaves;
+                    if (_countdownWave <= 0f)
+                    {
+                        // Call subprocess
+                        Wave wave = waves[_waveIndex];
+                        StartCoroutine(_waveSpawner.SpawnWave(wave));
+
+                        _waveIndex++;
+                        _countdownWave = timeBetweenWaves;
+
+                        if (_waveIndex == waves.Length)
+                        {
+                            gameState = GameState.Finished;
+                        }
+                    }
+
+                    _countdownWave -= Time.deltaTime;
+
+                    updateUI();
                 }
-
-                _countdownWave -= Time.deltaTime;
-
-                // update UI elements
-                _uiController.setWaveCountText(Mathf.Round(_countdownWave).ToString());
-                _uiController.setLifeCountText(_lifeCount.ToString());
-                _uiController.setMoneyCountText(_moneyCount.ToString());
-
-                
-                timePlayed += Time.deltaTime;
-                minutes = Mathf.Floor(timePlayed / 60);
-                seconds = timePlayed % 60;
-                if (seconds > 59) seconds = 59;
-                if (minutes < 0)
-                {
-                    minutes = 0;
-                    seconds = 0;
-                }
-                
-                _uiController.setTimeCountText(string.Format("{0:0}:{1:00}", minutes, seconds));
 
                 break;
             case GameState.GameOver:
                 gameOverText.enabled = true;
                 _uiController.lifeCountText.enabled = false;
+                
+                enabled = false;
+                break;
+            case GameState.Finished:
+                gameOverText.text = "Finished";
+                gameOverText.enabled = true;
+                _uiController.lifeCountText.enabled = false;
+
+                enabled = false;
                 break;
         }
+    }
+
+    private void updateUI()
+    {
+        // update UI elements
+        _uiController.setWaveCountText(Mathf.Round(_countdownWave).ToString());
+        _uiController.setLifeCountText(_lifeCount.ToString());
+        _uiController.setMoneyCountText(_moneyCount.ToString());
+
+        timePlayed += Time.deltaTime;
+        minutes = Mathf.Floor(timePlayed / 60);
+        seconds = timePlayed % 60;
+        if (seconds > 59) seconds = 59;
+        if (minutes < 0)
+        {
+            minutes = 0;
+            seconds = 0;
+        }
+
+        _uiController.setTimeCountText(string.Format("{0:0}:{1:00}", minutes, seconds));
     }
 
     public void ExitPlacementMode()

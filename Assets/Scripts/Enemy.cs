@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Numerics;
 using UnityEngine;
 using UnityEngine.UI;
 using Vector2 = UnityEngine.Vector2;
@@ -16,6 +15,8 @@ public class Enemy : BaseController
     private float _health;
     private int _waypointIndex;
     private Transform _target;
+    
+    public GameObject deathEffect;
 
     [Header("Unity UI")] public Image healthBar;
 
@@ -42,24 +43,39 @@ public class Enemy : BaseController
             {
                 if (_waypointIndex >= Waypoints.waypoints.Length)
                 {
-                    Destroy(this.gameObject);
-                    _gc.RemoveLifeCount(damage);
+                    EndPointReached();
                 }
 
                 NextWaypoint();
             }
         }
     }
-
+    
     public void DealDamage(float damage)
     {
-          _health -= damage;
+        _health -= damage;
         healthBar.fillAmount = _health / initialHealth;
         if (_health <= 0)
         {
-            _gc.RegisterKill(earning);
-            Destroy(gameObject);
+            Die();
         }
+    }
+
+    private void Die()
+    {
+        GameObject effect = Instantiate(deathEffect, transform.position, Quaternion.identity);
+        Destroy(effect, 5f);
+        
+        GameController.enemiesAlive--;
+        _gc.RegisterKill(earning);
+        Destroy(gameObject);
+    }
+
+    private void EndPointReached()
+    {
+        GameController.enemiesAlive--;
+        _gc.RemoveLifeCount(damage);
+        Destroy(gameObject);
     }
 
     private void NextWaypoint()

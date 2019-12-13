@@ -157,7 +157,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 22f1341bc23327f42b324ece5c2343fe, type: 2}
+  - {fileID: 2100000, guid: c30a3cf3470c64283980c04d5cd00616, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -349,7 +349,7 @@ GameObject:
   - component: {fileID: 4626515225214254720}
   - component: {fileID: 4888615482072033181}
   m_Layer: 10
-  m_Name: TankEnemy
+  m_Name: EnemyTank
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -388,4 +388,6 @@ MonoBehaviour:
   earning: 200
   speed: 0.5
   damage: 50
+  deathEffect: {fileID: 1000010680075956, guid: ea366354e3b4042b7a185ed11e891460,
+    type: 3}
   healthBar: {fileID: 1358466019872254874}

@@ -111,7 +111,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0.6}
-  m_SizeDelta: {x: 50, y: 27.249}
+  m_SizeDelta: {x: 50, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &1328537389114535022
 Canvas:
@@ -257,7 +257,7 @@ GameObject:
   - component: {fileID: 7435060024368221123}
   - component: {fileID: 8981456094759191846}
   m_Layer: 10
-  m_Name: StandardEnemy
+  m_Name: EnemySimple
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -296,6 +296,8 @@ MonoBehaviour:
   earning: 100
   speed: 1
   damage: 10
+  deathEffect: {fileID: 1000010680075956, guid: 758b758ae6362473b809d0558cd7896c,
+    type: 3}
   healthBar: {fileID: 7223389581949999291}
 --- !u!1 &8968116337437538099
 GameObject:
@@ -355,7 +357,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 22f1341bc23327f42b324ece5c2343fe, type: 2}
+  - {fileID: 2100000, guid: eadd30173a1b94b19ba0fde289f6bf1f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

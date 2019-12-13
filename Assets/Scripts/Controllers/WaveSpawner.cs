@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
+﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class WaveSpawner : MonoBehaviour
 {
@@ -11,29 +7,18 @@ public class WaveSpawner : MonoBehaviour
     public Transform standardEnemyPrefab;
     public Transform tankEnemyPrefab;
 
-    public IEnumerator SpawnWave(int waveIndex, float timeBetweenEnemies)
+    public IEnumerator SpawnWave(Wave wave)
     {
-        Transform enemy;
-        // Tank wave
-        if (waveIndex % 5 == 0)
+        for (int i = 0; i < wave.count; i++)
         {
-            waveIndex = waveIndex / 2;
-            enemy = tankEnemyPrefab;
-        }
-        else
-        {
-            enemy = standardEnemyPrefab;
-        }
-
-        for (int i = 0; i < waveIndex; i++)
-        {
-            SpawnEnemy(enemy);
-            yield return new WaitForSeconds(timeBetweenEnemies);
+            SpawnEnemy(wave.enemy);
+            yield return new WaitForSeconds(1f / wave.rate);
         }
     }
 
-    void SpawnEnemy(Transform enemy)
+    void SpawnEnemy(GameObject enemy)
     {
+        GameController.enemiesAlive++;
         Instantiate(enemy, spawnPoint.position, spawnPoint.rotation);
     }
 }
