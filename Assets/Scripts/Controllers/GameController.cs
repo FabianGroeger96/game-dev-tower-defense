@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -79,9 +80,8 @@ public class GameController : MonoBehaviour
                 break;
 
             case GameState.Running:
-                _uiController.gameOverText.enabled = false;
-                _uiController.towerPanel.SetActive(false);
-                _uiController.lifeCountText.enabled = true;
+                _uiController.hideTowerPanel();
+                _uiController.hideGameOverUI();
 
                 if (enemiesAlive == 0)
                 {
@@ -106,9 +106,8 @@ public class GameController : MonoBehaviour
 
                 break;
             case GameState.GameOver:
-                _uiController.gameOverText.enabled = true;
-                _uiController.lifeCountText.enabled = false;
-                
+                _uiController.showGameOverUI(_waveIndex);
+
                 enabled = false;
                 break;
             case GameState.Finished:
@@ -119,6 +118,17 @@ public class GameController : MonoBehaviour
                 enabled = false;
                 break;
         }
+    }
+
+    public void Retry()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        gameState = GameState.Running;
+    }
+
+    public void Menu()
+    {
+        Debug.Log("MENU");
     }
 
     public void ExitPlacementMode()

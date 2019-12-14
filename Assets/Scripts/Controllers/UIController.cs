@@ -3,7 +3,10 @@ using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
+    [Header("GameOver")]
     public Text gameOverText;
+    public Text roundText;
+    public GameObject gameOverUI;
     
     [Header("Counters")]
     public Text waveCountdownText;
@@ -39,6 +42,22 @@ public class UIController : MonoBehaviour
         }
 
         setTimeCountText(string.Format("{0:0}:{1:00}", minutes, seconds));
+    }
+
+    public void showGameOverUI(int rounds)
+    {
+        gameOverUI.SetActive(true);
+        gameOverText.text = "GAME OVER";
+        roundText.text = rounds.ToString();
+        
+        lifeCountText.enabled = false;
+    }
+
+    public void hideGameOverUI()
+    {
+        gameOverUI.SetActive(false);
+        
+        lifeCountText.enabled = true;
     }
 
     public void showTowerPanel(string towerName, int towerLevel)
