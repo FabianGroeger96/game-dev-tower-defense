@@ -54,6 +54,7 @@ MonoBehaviour:
   name: Flying
   deathEffect: {fileID: 1000010680075956, guid: 4e0264971908545189cd15e61bf5c38b,
     type: 3}
+  healthCanvas: {fileID: 8474694177611196130}
   healthBar: {fileID: 5951851597843653315}
 --- !u!1 &1733706053594045823
 GameObject:

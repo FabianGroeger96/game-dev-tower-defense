@@ -300,6 +300,7 @@ MonoBehaviour:
   name: Speedy
   deathEffect: {fileID: 1000010680075956, guid: a3d12c6dd48a344b7b9ad530f0fbc288,
     type: 3}
+  healthCanvas: {fileID: 4798636537785340205}
   healthBar: {fileID: 7223389581949999291}
 --- !u!1 &8968116337437538099
 GameObject:

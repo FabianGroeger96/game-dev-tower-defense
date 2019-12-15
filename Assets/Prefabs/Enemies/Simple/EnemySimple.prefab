@@ -300,6 +300,7 @@ MonoBehaviour:
   name: Simple
   deathEffect: {fileID: 1000010680075956, guid: 758b758ae6362473b809d0558cd7896c,
     type: 3}
+  healthCanvas: {fileID: 4798636537785340205}
   healthBar: {fileID: 7223389581949999291}
 --- !u!1 &8968116337437538099
 GameObject:
