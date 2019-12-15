@@ -158,7 +158,7 @@ public class GameController : MonoBehaviour
                 }
                 else
                 {
-                    Tower tower = _currentlySelectedObject.parent.GetComponent<Tower>();
+                    Tower tower = _currentlySelectedObject.GetComponent<Tower>();
                     name = tower.name;
                     level = tower.level;
                     health = tower.health / tower.initialHealth;
@@ -241,11 +241,11 @@ public class GameController : MonoBehaviour
     {
         if (o.CompareTag("Enemy"))
         {
-            _currentlySelectedObject = o.parent;
+            _currentlySelectedObject = o.root;
         }
         else
         {
-            _currentlySelectedObject = o;
+            _currentlySelectedObject = o.root;
         }
         
     }
@@ -253,7 +253,7 @@ public class GameController : MonoBehaviour
     public void SellCurrentSelectedTower()
     {
         GameObject selectedObject = _currentlySelectedObject.gameObject;
-        Tower tower = selectedObject.GetComponent<Tower>();
+        Tower tower = selectedObject.GetComponentInChildren<Tower>();
         _moneyCount += (int) tower.sellValue;
         Destroy(_currentlySelectedObject.gameObject);
     }

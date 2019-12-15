@@ -291,12 +291,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2adc2300f018ccd4cbea14c7a5729253, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialHealth: 5
+  initialHealth: 3
   health: 0
   earning: 10
   speed: 2
   damage: 5
-  level: 0
+  level: 1
   name: Speedy
   deathEffect: {fileID: 1000010680075956, guid: a3d12c6dd48a344b7b9ad530f0fbc288,
     type: 3}

@@ -401,9 +401,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4d5bf2da6851754d8c9b56447757886, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialHealth: 100
-  health: 100
-  earning: 200
+  initialHealth: 10
+  health: 10
+  earning: 100
   speed: 0.5
   damage: 50
   level: 1
