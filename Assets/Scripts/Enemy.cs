@@ -15,7 +15,9 @@ public class Enemy : AttackableObject
     
     private int _waypointIndex;
     private Transform _target;
-    private GameController _gc; 
+    private GameController _gc;
+
+    private bool killed = false;
 
     public GameObject deathEffect;
 
@@ -84,10 +86,14 @@ public class Enemy : AttackableObject
         GameObject effect = Instantiate(deathEffect, transform.position, Quaternion.identity);
         Destroy(effect, 5f);
 
-        GameController.enemiesAlive--;
-        GameController.enemiesKilled++;
-        _gc.RegisterKill(earning);
-        Destroy(gameObject);
+        if (!killed)
+        {
+            GameController.enemiesAlive--;
+            GameController.enemiesKilled++;
+            _gc.RegisterKill(earning);
+            Destroy(gameObject);
+            killed = true;
+        }
     }
 
     private void EndPointReached()

@@ -90,7 +90,7 @@ public class GameController : MonoBehaviour
                 _uiController.hideGameOverUI();
                 _uiController.hideTowerPanel();
                 updateUI();
-                if (enemiesAlive == 0)
+                if (enemiesAlive <= 0)
                 {
                     if (_countdownWave <= 0f)
                     {
@@ -109,7 +109,7 @@ public class GameController : MonoBehaviour
                 {
                     _waveRunning = true;
                 }
-                
+
                 if (_waveIndex == waves.Length)
                 {
                     gameState = GameState.Finished;
@@ -148,8 +148,8 @@ public class GameController : MonoBehaviour
                     level = tower.level;
                     health = tower.health / tower.initialHealth;
                     _uiController.showTowerActionPanel();
-
-                } else if (selectedObject.CompareTag("Enemy"))
+                }
+                else if (selectedObject.CompareTag("Enemy"))
                 {
                     Enemy enemy = selectedObject.GetComponent<Enemy>();
                     name = enemy.name;
@@ -165,9 +165,12 @@ public class GameController : MonoBehaviour
                     _uiController.showTowerActionPanel();
                 }
             }
+
             _uiController.showTowerPanel(name, level, health);
         }
-        timePlayed = _uiController.updateUI(_countdownWave, _waveRunning, _lifeCount, enemiesKilled, _moneyCount, timePlayed);
+
+        timePlayed = _uiController.updateUI(_countdownWave, _waveRunning, _lifeCount, enemiesKilled, _moneyCount,
+            timePlayed);
     }
 
     public void Retry()
@@ -221,7 +224,6 @@ public class GameController : MonoBehaviour
         _lifeCount -= lives;
         if (_lifeCount <= 0)
         {
-            Debug.Log("Game Over");
             gameState = GameState.GameOver;
         }
     }
@@ -239,15 +241,7 @@ public class GameController : MonoBehaviour
 
     public void SetSelectedObject(Transform o)
     {
-        if (o.CompareTag("Enemy"))
-        {
-            _currentlySelectedObject = o.root;
-        }
-        else
-        {
-            _currentlySelectedObject = o.root;
-        }
-        
+        _currentlySelectedObject = o.root;
     }
 
     public void SellCurrentSelectedTower()
@@ -267,7 +261,8 @@ public class GameController : MonoBehaviour
             tower.UpgradeTower();
             _moneyCount -= (int) tower.upgradeCost;
             // play upgrade effect
-            GameObject effect = Instantiate(tower.upgradeEffect, tower.transform.position, Quaternion.Euler(270f, 0f, 0f));
+            GameObject effect = Instantiate(tower.upgradeEffect, tower.transform.position,
+                Quaternion.Euler(270f, 0f, 0f));
             Destroy(effect, 1f);
         }
     }
@@ -280,5 +275,4 @@ public class GameController : MonoBehaviour
         TargetFinder.TargetFinderMode targetFinderMode = (TargetFinder.TargetFinderMode) action;
         tower.ChangeTargetFinderMode(targetFinderMode);
     }
-    
 }

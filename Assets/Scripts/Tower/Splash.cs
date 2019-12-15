@@ -5,11 +5,6 @@ public class Splash : MonoBehaviour
 {
     public float damagePerParticle;
     public int hits;
-    
-    void Start()
-    {
-        
-    }
 
     void OnParticleCollision(GameObject other)
     {

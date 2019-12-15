@@ -18,7 +18,6 @@ public class ButtonController : BaseController
 
     public void PlaceTower(int towerId)
     {
-        Debug.Log("Place tower: " + towerId);
         _gc.SetToPlacementMode(towerId);
     }
 }

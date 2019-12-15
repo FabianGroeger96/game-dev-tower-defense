@@ -103,6 +103,7 @@ GameObject:
   - component: {fileID: 6709751229855676548}
   - component: {fileID: 9208943775097665023}
   - component: {fileID: 7885087585714350708}
+  - component: {fileID: -6744237570074373064}
   m_Layer: 8
   m_Name: ProjectileBullet
   m_TagString: Untagged
@@ -153,5 +154,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef2eb705a0fd84943877f76cc0859913, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
-  damage: 20
+--- !u!114 &-6744237570074373064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8465978394438095664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b3012cff151e457ebd9542e9fea5c66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TimeToLive: 3

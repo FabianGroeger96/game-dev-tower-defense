@@ -43,7 +43,6 @@ public class SelectionController : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0) && _currentObjectCandiate != null)
         {
-            Debug.Log(_currentObjectCandiate);
             _gc.SetSelectedObject(_currentObjectCandiate);
         }
     }
