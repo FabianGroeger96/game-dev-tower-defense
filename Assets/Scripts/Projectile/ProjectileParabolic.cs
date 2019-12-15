@@ -83,7 +83,6 @@ public class ProjectileParabolic : Projectile
     private void OnCollisionEnter(Collision other)
     {
         Instantiate(_splash, transform.position, Quaternion.Euler(270f, 0f, 0f));
-        Destroy(_splash, 5f);
         if (other.gameObject.CompareTag("Ground"))
         {
             StartCoroutine(Wait());
