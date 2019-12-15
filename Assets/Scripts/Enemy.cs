@@ -11,14 +11,16 @@ public class Enemy : AttackableObject
     public float speed;
     public int damage;
     public int level;
+    public string name;
     
     private int _waypointIndex;
     private Transform _target;
     private GameController _gc; 
 
     public GameObject deathEffect;
-    
-    [Header("Unity UI")] public Image healthBar;
+
+    [Header("Unity UI")] public GameObject healthCanvas;
+    public Image healthBar;
     
     // Start is called before the first frame update
     protected void Start()
@@ -60,6 +62,15 @@ public class Enemy : AttackableObject
                 
             }
         }
+
+        if (UIController.showHealthBars)
+        {
+            healthCanvas.SetActive(true);
+        }
+        else
+        {
+            healthCanvas.SetActive(false);
+        }
     }
 
     public void DealDamage(float damage)
@@ -74,6 +85,7 @@ public class Enemy : AttackableObject
         Destroy(effect, 5f);
 
         GameController.enemiesAlive--;
+        GameController.enemiesKilled++;
         _gc.RegisterKill(earning);
         Destroy(gameObject);
     }

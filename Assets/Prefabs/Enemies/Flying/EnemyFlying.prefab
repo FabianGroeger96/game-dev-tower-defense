@@ -45,12 +45,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2adc2300f018ccd4cbea14c7a5729253, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  placementController: {fileID: 0}
   initialHealth: 10
+  health: 0
   earning: 150
   speed: 0.8
   damage: 15
-  health: 0
+  level: 0
+  name: Flying
   deathEffect: {fileID: 1000010680075956, guid: 4e0264971908545189cd15e61bf5c38b,
     type: 3}
   healthBar: {fileID: 5951851597843653315}

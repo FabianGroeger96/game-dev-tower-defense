@@ -14,19 +14,20 @@ public class Tower : AttackableObject
     [SerializeField] private float[] _projectilePropertiesValues;
     [SerializeField] private float _damage;
     [SerializeField] private float _damageMultiplier;
-    [SerializeField] private int _level;
     [SerializeField] private float _shootPace;
     [SerializeField] private float _shootPaceMultiplier;
     
     [SerializeField] public int costs;
     [SerializeField] public float upgradeCost;
     [SerializeField] public string name;
+    [SerializeField] public int level;
     
     public float sellValue;
     
     private ProjectileSpawner _spawner;
     private TargetFinder _targetFinder;
     private Transform _rotation;
+    public GameObject upgradeEffect;
     
     private MeshRenderer[] _renderers;
     private Transform[] _transforms;
@@ -49,7 +50,7 @@ public class Tower : AttackableObject
         _renderers = GetComponentsInChildren<MeshRenderer>();
         _transforms = GetComponentsInChildren<Transform>();
 
-        _level = 1;
+        level = 1;
         _damageMultiplier = 1f;
         _shootPaceMultiplier = 1f;
         _collids = false;
@@ -177,7 +178,7 @@ public class Tower : AttackableObject
     }
     public void UpgradeTower()
     {
-        _level += 1;
+        level += 1;
         sellValue += upgradeCost / 2;
         upgradeCost += upgradeCost;
         _damageMultiplier += 0.1f;

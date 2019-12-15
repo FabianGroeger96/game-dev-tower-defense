@@ -291,11 +291,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2adc2300f018ccd4cbea14c7a5729253, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  placementController: {fileID: 0}
   initialHealth: 10
+  health: 0
   earning: 100
   speed: 1
   damage: 10
+  level: 0
+  name: Simple
   deathEffect: {fileID: 1000010680075956, guid: 758b758ae6362473b809d0558cd7896c,
     type: 3}
   healthBar: {fileID: 7223389581949999291}

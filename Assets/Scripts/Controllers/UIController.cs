@@ -14,23 +14,49 @@ public class UIController : MonoBehaviour
 
     [Header("Stats")]
     public Text lifeCountText;
+    public Text killedCountText;
     public Text moneyCountText;
 
-    [Header("Tower Panel")] 
-    public GameObject towerPanel;
+    [Header("Info Panel")] 
+    public GameObject infoPanel;
+    public GameObject actionTowerPanel;
+    public GameObject changeTowerPanel;
     public Text towerNameText;
     public Text towerLevelText;
+    public Image healthBar;
     
     private float minutes;
     private float seconds;
+
+    public GameObject healthBarToggler;
+    public static bool showHealthBars = false;
     
-    public void updateUI(float countdownWave, int lifeCount, int moneyCount, float timePlayed)
+    public float updateUI(float countdownWave, bool waveRunning, int lifeCount, int killedCount, int moneyCount, float timePlayed)
     {
         // update UI elements
-        setWaveCountText(Mathf.Round(countdownWave).ToString());
-        setLifeCountText(lifeCount.ToString());
-        setMoneyCountText(moneyCount.ToString());
+        if (waveRunning)
+        {
+            waveCountdownText.text = "THEY'RE COMMING!";
+            waveCountdownText.fontSize = 28;
+        }
+        else
+        {
+            waveCountdownText.text = Mathf.Round(countdownWave).ToString();
+            waveCountdownText.fontSize = 40;
+        }
+        // update UI stats
+        updateStats(lifeCount, killedCount, moneyCount);
 
+        if (showHealthBars)
+        {
+            healthBarToggler.GetComponentInChildren<Text>().text = "Hide Health Bars";
+        }
+        else
+        {
+            healthBarToggler.GetComponentInChildren<Text>().text = "Show Health Bars";
+        }
+        
+        // evaluate how much time is elapsed
         timePlayed += Time.deltaTime;
         minutes = Mathf.Floor(timePlayed / 60);
         seconds = timePlayed % 60;
@@ -40,8 +66,11 @@ public class UIController : MonoBehaviour
             minutes = 0;
             seconds = 0;
         }
+        
+        // update time played
+        timeCountText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
 
-        setTimeCountText(string.Format("{0:0}:{1:00}", minutes, seconds));
+        return timePlayed;
     }
 
     public void showGameOverUI(int rounds)
@@ -60,16 +89,32 @@ public class UIController : MonoBehaviour
         lifeCountText.enabled = true;
     }
 
-    public void showTowerPanel(string towerName, int towerLevel)
+    public void showTowerPanel(string towerName, int towerLevel, float health)
     {
-        towerPanel.SetActive(true);
+        infoPanel.SetActive(true);
         towerNameText.text = towerName;
         towerLevelText.text = "lvl: " + towerLevel;
+        healthBar.fillAmount = health;
     }
-
+    
     public void hideTowerPanel()
     {
-        towerPanel.SetActive(false);
+        infoPanel.SetActive(false);
+        actionTowerPanel.SetActive(false);
+        changeTowerPanel.SetActive(false);
+    }
+
+    public void showTowerActionPanel()
+    {
+        actionTowerPanel.SetActive(true);
+        changeTowerPanel.SetActive(true);
+    }
+
+    public void updateStats(int lifeCount, int killedCount, int moneyCount)
+    {
+        lifeCountText.text = "Life: " + lifeCount;
+        killedCountText.text = "Killed: " + killedCount;
+        moneyCountText.text = "$" + moneyCount;
     }
 
     public void setWaveCountText(string text)
@@ -87,8 +132,8 @@ public class UIController : MonoBehaviour
         moneyCountText.text = "$" + text;
     }
 
-    public void setTimeCountText(string text)
+    public void changeHealthBarOption()
     {
-        timeCountText.text = text;
+        showHealthBars = !showHealthBars;
     }
 }

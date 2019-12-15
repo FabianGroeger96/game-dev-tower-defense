@@ -46,11 +46,13 @@ public class GameController : MonoBehaviour
     // variables for spawning enemies
     private float _countdownWave = 2;
     private int _waveIndex = 0;
+    private bool _waveRunning = false;
 
     public Wave[] waves;
 
     public float timeBetweenWaves = 5;
     public static int enemiesAlive = 0;
+    public static int enemiesKilled = 0;
 
     void Start()
     {
@@ -98,15 +100,19 @@ public class GameController : MonoBehaviour
 
                         _waveIndex++;
                         _countdownWave = timeBetweenWaves;
-
-                        if (_waveIndex == waves.Length)
-                        {
-                            gameState = GameState.Finished;
-                        }
                     }
 
+                    _waveRunning = false;
                     _countdownWave -= Time.deltaTime;
-                    
+                }
+                else
+                {
+                    _waveRunning = true;
+                }
+                
+                if (_waveIndex == waves.Length)
+                {
+                    gameState = GameState.Finished;
                 }
 
                 break;
@@ -129,10 +135,39 @@ public class GameController : MonoBehaviour
     {
         if (_currentlySelectedObject != null)
         {
-            string name = _currentlySelectedObject.gameObject.name;
-            _uiController.showTowerPanel(name, 4);
+            GameObject selectedObject = _currentlySelectedObject.gameObject;
+            string name = "";
+            int level = -1;
+            float health = -1;
+            if (selectedObject != null)
+            {
+                if (selectedObject.CompareTag("Tower"))
+                {
+                    Tower tower = selectedObject.GetComponent<Tower>();
+                    name = tower.name;
+                    level = tower.level;
+                    health = tower.health / tower.initialHealth;
+                    _uiController.showTowerActionPanel();
+
+                } else if (selectedObject.CompareTag("Enemy"))
+                {
+                    Enemy enemy = selectedObject.GetComponent<Enemy>();
+                    name = enemy.name;
+                    level = enemy.level;
+                    health = enemy.health / enemy.initialHealth;
+                }
+                else
+                {
+                    Tower tower = _currentlySelectedObject.parent.GetComponent<Tower>();
+                    name = tower.name;
+                    level = tower.level;
+                    health = tower.health / tower.initialHealth;
+                    _uiController.showTowerActionPanel();
+                }
+            }
+            _uiController.showTowerPanel(name, level, health);
         }
-        _uiController.updateUI(_countdownWave, _lifeCount, _moneyCount, timePlayed);
+        timePlayed = _uiController.updateUI(_countdownWave, _waveRunning, _lifeCount, enemiesKilled, _moneyCount, timePlayed);
     }
 
     public void Retry()
@@ -204,13 +239,46 @@ public class GameController : MonoBehaviour
 
     public void SetSelectedObject(Transform o)
     {
-        _currentlySelectedObject = o;
+        if (o.CompareTag("Enemy"))
+        {
+            _currentlySelectedObject = o.parent;
+        }
+        else
+        {
+            _currentlySelectedObject = o;
+        }
+        
     }
 
     public void SellCurrentSelectedTower()
     {
-        _moneyCount += 200;
+        GameObject selectedObject = _currentlySelectedObject.gameObject;
+        Tower tower = selectedObject.GetComponent<Tower>();
+        _moneyCount += (int) tower.sellValue;
         Destroy(_currentlySelectedObject.gameObject);
+    }
+
+    public void UpgradeCurrentSelectedTower()
+    {
+        GameObject selectedObject = _currentlySelectedObject.gameObject;
+        Tower tower = selectedObject.GetComponent<Tower>();
+        if (0 < _moneyCount - tower.upgradeCost)
+        {
+            tower.UpgradeTower();
+            _moneyCount -= (int) tower.upgradeCost;
+            // play upgrade effect
+            GameObject effect = Instantiate(tower.upgradeEffect, tower.transform.position, Quaternion.Euler(270f, 0f, 0f));
+            Destroy(effect, 1f);
+        }
+    }
+
+    public void ChangeTowerAction(int action)
+    {
+        GameObject selectedObject = _currentlySelectedObject.gameObject;
+        Tower tower = selectedObject.GetComponent<Tower>();
+
+        TargetFinder.TargetFinderMode targetFinderMode = (TargetFinder.TargetFinderMode) action;
+        tower.ChangeTargetFinderMode(targetFinderMode);
     }
     
 }

@@ -89,6 +89,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 010df9ffff681c44fa416171344192e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  initialHealth: 0
+  health: 0
   materials:
   - {fileID: 2100000, guid: 057c047e25f376b4b82a543332b80fbe, type: 2}
   - {fileID: 2100000, guid: f9b0f2b0252d05e42b29a39291ff5bb8, type: 2}
@@ -99,13 +101,15 @@ MonoBehaviour:
   _projectilePropertiesValues: []
   _damage: 0.5
   _damageMultiplier: 0
-  _level: 0
   _shootPace: 1
   _shootPaceMultiplier: 0
   costs: 400
   upgradeCost: 0
   name: Laser
+  level: 0
   sellValue: 0
+  upgradeEffect: {fileID: 6319400460926888650, guid: ca619cbb67783444d965cbf069f784c3,
+    type: 3}
 --- !u!114 &3699173988372532346
 MonoBehaviour:
   m_ObjectHideFlags: 0
