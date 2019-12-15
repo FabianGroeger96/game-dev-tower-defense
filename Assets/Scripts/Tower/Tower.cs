@@ -50,12 +50,16 @@ public class Tower : AttackableObject
         _renderers = GetComponentsInChildren<MeshRenderer>();
         _transforms = GetComponentsInChildren<Transform>();
 
-        level = 1;
+        
         _damageMultiplier = 1f;
         _shootPaceMultiplier = 1f;
         _collids = false;
+        
+        level = 1;
         sellValue = costs / 2;
         upgradeCost = costs / 2;
+
+        health = initialHealth;
         
         _spawner.SetProjectileDamage(_damage);
         _spawner.SetProjectile(_projectile);

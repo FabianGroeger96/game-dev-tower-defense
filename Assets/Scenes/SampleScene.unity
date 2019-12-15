@@ -833,7 +833,7 @@ GameObject:
   - component: {fileID: 176312500}
   - component: {fileID: 176312499}
   m_Layer: 5
-  m_Name: ToggleHelthBar
+  m_Name: ToggleHealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

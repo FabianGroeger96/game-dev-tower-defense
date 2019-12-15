@@ -169,7 +169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 010df9ffff681c44fa416171344192e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialHealth: 0
+  initialHealth: 20
   health: 0
   materials:
   - {fileID: 2100000, guid: 057c047e25f376b4b82a543332b80fbe, type: 2}
