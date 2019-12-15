@@ -5,33 +5,41 @@ using UnityEngine.UI;
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
 
-public class Enemy : BaseController
+public class Enemy : AttackableObject
 {
-    public int initialHealth;
     public int earning;
     public float speed;
     public int damage;
-    public float health;
+    public int level;
     
     private int _waypointIndex;
     private Transform _target;
+    private GameController _gc; 
 
     public GameObject deathEffect;
-
+    
     [Header("Unity UI")] public Image healthBar;
     
     // Start is called before the first frame update
-    void Start()
+    protected void Start()
     {
-        Init();
+        _gc = GameObject.Find("GameController").GetComponent<GameController>();
+        CalculateMultipliesAccordingToLevel();
         health = initialHealth;
         _waypointIndex = 0;
         _target = Waypoints.waypoints[_waypointIndex];
         _waypointIndex++;
     }
 
+    private void CalculateMultipliesAccordingToLevel()
+    {
+        earning *= level;
+        damage *= level;
+        initialHealth *= level;
+    }
+
     // Update is called once per frame
-    void Update()
+    protected void Update()
     {
         if (_gc.gameState == GameController.GameState.Running)
         {
@@ -56,15 +64,11 @@ public class Enemy : BaseController
 
     public void DealDamage(float damage)
     {
-        health -= damage;
+        base.DealDamage(damage);
         healthBar.fillAmount = health / initialHealth;
-        if (health <= 0)
-        {
-            Die();
-        }
     }
-
-    private void Die()
+    
+    protected override void Die()
     {
         GameObject effect = Instantiate(deathEffect, transform.position, Quaternion.identity);
         Destroy(effect, 5f);
@@ -85,5 +89,11 @@ public class Enemy : BaseController
     {
         _target = Waypoints.waypoints[_waypointIndex];
         _waypointIndex++;
+    }
+
+    public void SetLevel(int newLevel)
+    {
+        level = newLevel;
+        CalculateMultipliesAccordingToLevel();
     }
 }

@@ -50,7 +50,6 @@ public class PlacementController : MonoBehaviour
         if (_isActive && _currentPlaceableObject != null)
         {
             MoveCurrentObjectToMouse();
-            //RotateFromMouseWheel();
             ReleaseIfClicked();
         }
     }

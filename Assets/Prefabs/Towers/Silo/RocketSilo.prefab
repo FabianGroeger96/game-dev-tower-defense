@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 1786890944769967062}
   m_Layer: 13
   m_Name: RocketSilo
-  m_TagString: Untagged
+  m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -180,10 +180,14 @@ MonoBehaviour:
   _projectilePropertiesValues:
   - 45
   _damage: 0
+  _damageMultiplier: 0
   _level: 0
   _shootPace: 1.5
+  _shootPaceMultiplier: 0
   costs: 500
+  upgradeCost: 0
   name: Parabolic
+  sellValue: 0
 --- !u!114 &1786890944769967062
 MonoBehaviour:
   m_ObjectHideFlags: 0

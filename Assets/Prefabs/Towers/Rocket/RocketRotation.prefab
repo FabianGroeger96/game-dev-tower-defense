@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2636250136244045398}
   m_Layer: 13
   m_Name: RocketRotation
-  m_TagString: Untagged
+  m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -59,10 +59,14 @@ MonoBehaviour:
   _projectilePropertiesValues:
   - 2
   _damage: 0.05
+  _damageMultiplier: 0
   _level: 0
   _shootPace: 0.2
+  _shootPaceMultiplier: 0
   costs: 250
+  upgradeCost: 0
   name: Roller
+  sellValue: 0
 --- !u!114 &6676824111078406359
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -56,7 +56,7 @@ GameObject:
   - component: {fileID: 3699173988372532346}
   m_Layer: 13
   m_Name: LaserTower
-  m_TagString: Untagged
+  m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -98,10 +98,14 @@ MonoBehaviour:
   _projectilePropertiesKeys: []
   _projectilePropertiesValues: []
   _damage: 0.5
+  _damageMultiplier: 0
   _level: 0
   _shootPace: 1
+  _shootPaceMultiplier: 0
   costs: 400
+  upgradeCost: 0
   name: Laser
+  sellValue: 0
 --- !u!114 &3699173988372532346
 MonoBehaviour:
   m_ObjectHideFlags: 0

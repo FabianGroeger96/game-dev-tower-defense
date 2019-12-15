@@ -91,7 +91,7 @@ public class TargetFinder : MonoBehaviour
         float _lowestHealth = -Mathf.Infinity;
         foreach (var enemy in enemies)
         {
-            Enemy enemyObject = enemy.gameObject.GetComponentInParent<Enemy>();
+            AttackableObject enemyObject = enemy.gameObject.GetComponentInParent<AttackableObject>();
             if (enemyObject.health > _lowestHealth)
             {
                 target = enemy;
@@ -107,7 +107,7 @@ public class TargetFinder : MonoBehaviour
         float _lowestHealth = Mathf.Infinity;
         foreach (var enemy in enemies)
         {
-            Enemy enemyObject = enemy.gameObject.GetComponentInParent<Enemy>();
+            AttackableObject enemyObject = enemy.gameObject.GetComponentInParent<AttackableObject>();
             if (enemyObject.health < _lowestHealth)
             {
                 target = enemy;
@@ -149,5 +149,10 @@ public class TargetFinder : MonoBehaviour
             }
         }
         return nearestEnemy;
+    }
+
+    public void ChangeMode(TargetFinderMode mode)
+    {
+        _mode = mode;
     }
 }

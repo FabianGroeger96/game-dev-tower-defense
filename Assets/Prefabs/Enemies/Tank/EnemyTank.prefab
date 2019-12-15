@@ -126,9 +126,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4715383038480927851}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.25, z: 0}
   m_LocalScale: {x: 0.4, y: 0.5, z: 0.4}
-  m_Children: []
+  m_Children:
+  - {fileID: 4277374953951267722}
   m_Father: {fileID: 4626515225214254720}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -347,7 +348,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4626515225214254720}
-  - component: {fileID: 4888615482072033181}
+  - component: {fileID: 9149405036991045736}
+  - component: {fileID: -2068090900335454429}
   m_Layer: 10
   m_Name: EnemyTank
   m_TagString: Enemy
@@ -371,7 +373,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4888615482072033181
+--- !u!114 &9149405036991045736
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -380,14 +382,79 @@ MonoBehaviour:
   m_GameObject: {fileID: 8497885154155726464}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2adc2300f018ccd4cbea14c7a5729253, type: 3}
+  m_Script: {fileID: 11500000, guid: c807f0d6ef8849b4a5fc7fe74011da64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  placementController: {fileID: 0}
+  target: {fileID: 0}
+  range: 15
+  enemyTag: Tower
+  gizmoColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+--- !u!114 &-2068090900335454429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8497885154155726464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4d5bf2da6851754d8c9b56447757886, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   initialHealth: 100
+  health: 100
   earning: 200
   speed: 0.5
   damage: 50
+  level: 1
   deathEffect: {fileID: 1000010680075956, guid: ea366354e3b4042b7a185ed11e891460,
     type: 3}
-  healthBar: {fileID: 1358466019872254874}
+  healthBar: {fileID: 1884257594708548159}
+  _projectile: {fileID: -1127460024815407357, guid: 832d74b3473a3c747a0f20560a57525d,
+    type: 3}
+  _damage: 2
+  _shootPace: 0.5
+  _shootPaceMultiplier: 1
+--- !u!1 &9021178411368822063
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4277374953951267722}
+  - component: {fileID: 6765824693174233576}
+  m_Layer: 10
+  m_Name: ProjectileSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4277374953951267722
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9021178411368822063}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4669689422457743947}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6765824693174233576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9021178411368822063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85192de10d6d07348add3f6df19ad354, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

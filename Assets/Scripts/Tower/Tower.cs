@@ -1,22 +1,28 @@
 ﻿using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.Experimental.PlayerLoop;
 using Quaternion = UnityEngine.Quaternion;
 using Vector3 = UnityEngine.Vector3;
 
 
-public class Tower : MonoBehaviour
+public class Tower : AttackableObject
 {
     [SerializeField] private Material[] materials;
     [SerializeField] private Projectile _projectile;
     [SerializeField] private string[] _projectilePropertiesKeys;
     [SerializeField] private float[] _projectilePropertiesValues;
     [SerializeField] private float _damage;
+    [SerializeField] private float _damageMultiplier;
     [SerializeField] private int _level;
     [SerializeField] private float _shootPace;
+    [SerializeField] private float _shootPaceMultiplier;
+    
     [SerializeField] public int costs;
+    [SerializeField] public float upgradeCost;
     [SerializeField] public string name;
     
+    public float sellValue;
     
     private ProjectileSpawner _spawner;
     private TargetFinder _targetFinder;
@@ -42,9 +48,14 @@ public class Tower : MonoBehaviour
         
         _renderers = GetComponentsInChildren<MeshRenderer>();
         _transforms = GetComponentsInChildren<Transform>();
-        
-        _collids = false;
 
+        _level = 1;
+        _damageMultiplier = 1f;
+        _shootPaceMultiplier = 1f;
+        _collids = false;
+        sellValue = costs / 2;
+        upgradeCost = costs / 2;
+        
         _spawner.SetProjectileDamage(_damage);
         _spawner.SetProjectile(_projectile);
         _spawner.SetProjectileProperties(CreateProjectilePropertiesDictionary());
@@ -92,21 +103,19 @@ public class Tower : MonoBehaviour
     {
         _collids = false;
     }
-
     private void act()
     {
         if (_targetFinder.target != null)
         {
             RotateToTarget();
             _timer += Time.deltaTime;
-            if(_timer > _shootPace){
+            if(_timer > (_shootPace * _shootPaceMultiplier)){
                 _spawner.SetProjectileProperties(CreateProjectilePropertiesDictionary());
                 _spawner.Fire(_targetFinder.target.transform);
                 _timer = 0f;
             }
         }
     }
-    
     private void SetLayerToPlaceMode()
     {
         transform.gameObject.layer = LayerMask.NameToLayer("PlaceMode");
@@ -115,7 +124,6 @@ public class Tower : MonoBehaviour
             child.gameObject.layer = LayerMask.NameToLayer("PlaceMode");
         }
     }
-
     private void SetLayerToTower()
     {
         transform.gameObject.layer = LayerMask.NameToLayer("Tower");
@@ -125,7 +133,6 @@ public class Tower : MonoBehaviour
             child.gameObject.layer = LayerMask.NameToLayer("Tower");
         }
     }
-    
     private void ChangeMaterial(int material)
     {
         foreach(MeshRenderer r in _renderers)
@@ -134,7 +141,6 @@ public class Tower : MonoBehaviour
         }
         
     }
-    
     private void RotateToTarget()
     {
         Vector3 direction = _targetFinder.target.transform.position - transform.position;
@@ -142,8 +148,6 @@ public class Tower : MonoBehaviour
         Vector3 rotation = Quaternion.Lerp(_rotation.rotation, lookRotation, Time.deltaTime * 10).eulerAngles;
         _rotation.rotation = Quaternion.Euler(0f, rotation.y, 0f);
     }
-
-    
     public void IsPlaceable()
     {
         _placeable = true;
@@ -167,5 +171,22 @@ public class Tower : MonoBehaviour
     {
         return _placed;
     }
+    public void ChangeTargetFinderMode(TargetFinder.TargetFinderMode mode)
+    {
+        _targetFinder.ChangeMode(mode);
+    }
+    public void UpgradeTower()
+    {
+        _level += 1;
+        sellValue += upgradeCost / 2;
+        upgradeCost += upgradeCost;
+        _damageMultiplier += 0.1f;
+        _shootPaceMultiplier -= 0.05f;
+        _spawner.SetProjectileDamage(_damage * _damageMultiplier);
+    }
     
+    protected override void Die()
+    {
+        throw new System.NotImplementedException();
+    }
 }

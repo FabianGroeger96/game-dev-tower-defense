@@ -206,4 +206,11 @@ public class GameController : MonoBehaviour
     {
         _currentlySelectedObject = o;
     }
+
+    public void SellCurrentSelectedTower()
+    {
+        _moneyCount += 200;
+        Destroy(_currentlySelectedObject.gameObject);
+    }
+    
 }

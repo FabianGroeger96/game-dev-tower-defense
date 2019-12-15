@@ -7,7 +7,6 @@ public class ProjectileLaser : Projectile
     private Enemy _enemy;
     private bool _launched;
     
-    // Update is called once per frame
     void LateUpdate()
     {
         if (_launched && target != null)
