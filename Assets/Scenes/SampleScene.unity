@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1398,6 +1398,7 @@ GameObject:
   - component: {fileID: 505207295}
   - component: {fileID: 505207297}
   - component: {fileID: 505207296}
+  - component: {fileID: 505207291}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -1405,6 +1406,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &505207291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 505207290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9fce027be705ff43b59a4170ab9a113, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &505207292
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1459,6 +1472,7 @@ MonoBehaviour:
   _towers:
   - {fileID: 2965256440215747679, guid: 2a0fdf119aa99de4eabba67e7e2a624d, type: 3}
   - {fileID: 58050485693951288, guid: 6900bf677fe3ad94ebcb821d4b0d36e2, type: 3}
+  - {fileID: 6697772683473343297, guid: 32e080bc4fc48ae44978f950b33fe20c, type: 3}
   gameState: 0
   initialLifeCount: 100
   initialMoneyCount: 1000
@@ -1655,7 +1669,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
+          m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -3282,7 +3296,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1368753190}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &1368753192
 Camera:
   m_ObjectHideFlags: 0
@@ -4154,7 +4168,7 @@ GameObject:
   - component: {fileID: 1747752539}
   m_Layer: 11
   m_Name: Map
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4354,7 +4368,7 @@ GameObject:
   - component: {fileID: 1892522859}
   m_Layer: 15
   m_Name: SeenGround
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 0

@@ -1,68 +1,69 @@
 ﻿using System;
 using System.Collections;
-using System.Numerics;
-using UnityEditor;
-using UnityEditor.IMGUI.Controls;
 using UnityEngine;
 using Matrix4x4 = UnityEngine.Matrix4x4;
 using Quaternion = UnityEngine.Quaternion;
 using Vector3 = UnityEngine.Vector3;
+using Vector4 = UnityEngine.Vector4;
 
 public class ProjectileParabolic : Projectile
 {
 
     private float _angleInRad;
     private Rigidbody _rigidbody;
-    private Splash _splash;
+    [SerializeField] Splash _splash;
     
-  void Update()
-    {
-        if (target == null)
-        {
-            Destroy(gameObject);
-        }
-    }
-
     private float DegreeToRad(float degree)
     {
         return (float) (degree * (Math.PI / 180)); 
     }
     
+    public static Matrix4x4 RotateZ(float aAngleRad)
+    {
+        Matrix4x4 m = Matrix4x4.identity;     // cos -sin 0   0
+        m.m00 = m.m11 = Mathf.Cos(aAngleRad); // sin  cos 0   0
+        m.m10 = Mathf.Sin(aAngleRad);         //  0   0   1   0
+        m.m01 = -m.m10;                       //  0   0   0   1
+        return m;
+    }
+    
+    public static Matrix4x4 RotateY(float aAngleRad)
+    {
+        Matrix4x4 m = Matrix4x4.identity;     // cos  0  sin  0
+        m.m00 = m.m22 = Mathf.Cos(aAngleRad); //  0   1   0   0
+        m.m02 = Mathf.Sin(aAngleRad);         //-sin  0  cos  0
+        m.m20 = -m.m02;                       //  0   0   0   1
+        return m;
+    }
+    
     public override void Launch() 
     {
-        _splash = (Splash) AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Towers/Silo/Splash.prefab", typeof(Splash));
         _rigidbody = GetComponent<Rigidbody>();
         _angleInRad = DegreeToRad(properties["angle"]);
         Vector3 direction = CalculateLaunchDirection();
-        Debug.Log("Launch direction: " + direction.ToString());
-        direction.y = CalculateYComponent(direction.x, direction.z);
-        Debug.Log("Calculate Y, with angle: " + direction.ToString());
+        direction = CalculateYComponent(direction.x, direction.z);
         float distance = CalculateDistance();
-        Debug.Log("magnitude " + direction.magnitude.ToString());
-        Debug.Log("distance " + distance);
-        float speed = CalculateSpeed(distance);
-        Debug.Log("Launch direction: " + direction.normalized.ToString());
-        Debug.Log(speed);
-        _rigidbody.AddForce(direction * speed, ForceMode.Impulse);
+        float speed = CalculateSpeed(Mathf.Abs(distance));
+        _rigidbody.AddForce(direction.normalized * speed, ForceMode.VelocityChange);
     }
-
-    private Vector3 CalculateVectorWithAngle(Vector3 direction)
-    {
-        return new Vector3(0f, 0f, 0f);
-    }
-
+    
     private float CalculateDistance()
     {
         return Mathf.Sqrt(
-            Mathf.Abs(
-                Mathf.Pow(target.transform.position.x - transform.position.x, 2)) +
-            Mathf.Abs(
-                Mathf.Pow(target.transform.position.z - transform.position.z, 2)));
+            Mathf.Pow(target.transform.position.x - transform.position.x, 2) + 
+            Mathf.Pow(target.transform.position.z - transform.position.z, 2));
     }
 
-    private float CalculateYComponent(float x, float z)
+    private Vector3 CalculateYComponent(float x, float z)
     {
-        return (float) Mathf.Sqrt((x * x) + (z * z) - (2 * x * z * Mathf.Cos(_angleInRad)));
+        Vector4 vec = new Vector4(x, z, 0.0f, 1);
+        float slope = Mathf.Abs(z / x);
+        Matrix4x4 m_z = RotateZ(Mathf.Atan(slope));
+        Vector4 on_axis = m_z * vec;
+        Matrix4x4 m_y = RotateY(_angleInRad);
+        on_axis = m_y * on_axis;
+        on_axis = m_z.inverse * on_axis;
+        return new Vector3(on_axis.x, Mathf.Abs(on_axis.z), on_axis.y);
     }
 
     private float CalculateSpeed(float distance)
@@ -74,21 +75,25 @@ public class ProjectileParabolic : Projectile
 
     private Vector3 CalculateLaunchDirection()
     {
+        
         Vector3 direction = target.position - transform.position;
-        direction.y = 0.25f;
         return direction;
     }
     
     private void OnCollisionEnter(Collision other)
     {
-        _splash = (Splash) AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Towers/Silo/Splash.prefab", typeof(Splash));
         Instantiate(_splash, transform.position, Quaternion.Euler(270f, 0f, 0f));
-        if (other.gameObject.CompareTag("Enemy"))
+        if (other.gameObject.CompareTag("Ground"))
         {
-            //
+            StartCoroutine(Wait());
         }
-
-
     }
+    
+    IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(1f);
+        Destroy(gameObject);
+    }
+
     
 }

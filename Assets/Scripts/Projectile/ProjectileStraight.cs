@@ -1,16 +1,8 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using System.Numerics;
-using UnityEditor;
-using UnityEngine;
-using UnityEngine.WSA;
+﻿using UnityEngine;
 using Vector3 = UnityEngine.Vector3;
 
 public class ProjectileStraight : Projectile {
     
-    public int damage;
     private Rigidbody _rigidbody;
      
     // Update is called once per frame

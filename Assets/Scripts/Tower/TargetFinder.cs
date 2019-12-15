@@ -5,11 +5,19 @@ using UnityEngine;
 
 public class TargetFinder : MonoBehaviour
 {
+    public enum TargetFinderMode
+    {
+        NearestEnemy,
+        FollowFirstEnemy,
+        LowestHealth,
+        HighestHealth
+    };
 
     public GameObject target = null;
 
     public float range = 15f;
     private float _rangeSquared;
+    private TargetFinderMode _mode;
 
     public string enemyTag = "Enemy";
 
@@ -25,6 +33,7 @@ public class TargetFinder : MonoBehaviour
 
     private void Start()
     {
+        _mode = TargetFinderMode.HighestHealth;
         _rangeSquared = range * range;
         InvokeRepeating("UpdateTarget", 0f, 0.1f);
     }
@@ -33,14 +42,32 @@ public class TargetFinder : MonoBehaviour
     {
         _rangeSquared = range * range;
         GameObject[] enemies = GameObject.FindGameObjectsWithTag(enemyTag);
-        target = FindNearestEnemyInRange(enemies);
+        if (_mode == TargetFinderMode.NearestEnemy)
+        {
+            target = FindNearestEnemyInRange(enemies);
+        }
+        if (_mode == TargetFinderMode.FollowFirstEnemy)
+        {
+            FollowFirstEnemy(enemies);
+        }
+
+        if (_mode == TargetFinderMode.LowestHealth)
+        {
+            FindEnemyWithLowestHealth(enemies);
+        }
+        
+        if (_mode == TargetFinderMode.HighestHealth)
+        {
+            FindEnemyWithHighestHealth(enemies);
+        }
+        
         if (!target)
         {
             target = null;
         }
-
+        
     }
-
+    
     private bool currentTargetStillInRange()
     {
         if (target != null)
@@ -56,6 +83,37 @@ public class TargetFinder : MonoBehaviour
             return false;
         }
         return false;
+    }
+    
+    private void FindEnemyWithHighestHealth(GameObject[] enemies)
+    {
+        target = null;
+        float _lowestHealth = -Mathf.Infinity;
+        foreach (var enemy in enemies)
+        {
+            Enemy enemyObject = enemy.gameObject.GetComponentInParent<Enemy>();
+            if (enemyObject.health > _lowestHealth)
+            {
+                target = enemy;
+                _lowestHealth = enemyObject.health;
+            }
+        }
+    }
+
+
+    private void FindEnemyWithLowestHealth(GameObject[] enemies)
+    {
+        target = null;
+        float _lowestHealth = Mathf.Infinity;
+        foreach (var enemy in enemies)
+        {
+            Enemy enemyObject = enemy.gameObject.GetComponentInParent<Enemy>();
+            if (enemyObject.health < _lowestHealth)
+            {
+                target = enemy;
+                _lowestHealth = enemyObject.health;
+            }
+        }
     }
 
     private void FollowFirstEnemy(GameObject[] enemies)

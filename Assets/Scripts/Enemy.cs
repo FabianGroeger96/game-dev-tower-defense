@@ -11,8 +11,8 @@ public class Enemy : BaseController
     public int earning;
     public float speed;
     public int damage;
-
-    private float _health;
+    public float health;
+    
     private int _waypointIndex;
     private Transform _target;
 
@@ -24,9 +24,10 @@ public class Enemy : BaseController
     void Start()
     {
         Init();
-        _health = initialHealth;
+        health = initialHealth;
         _waypointIndex = 0;
         _target = Waypoints.waypoints[_waypointIndex];
+        _waypointIndex++;
     }
 
     // Update is called once per frame
@@ -44,17 +45,20 @@ public class Enemy : BaseController
                 {
                     EndPointReached();
                 }
-
-                NextWaypoint();
+                else
+                {
+                    NextWaypoint();
+                }
+                
             }
         }
     }
 
     public void DealDamage(float damage)
     {
-        _health -= damage;
-        healthBar.fillAmount = _health / initialHealth;
-        if (_health <= 0)
+        health -= damage;
+        healthBar.fillAmount = health / initialHealth;
+        if (health <= 0)
         {
             Die();
         }
@@ -79,7 +83,7 @@ public class Enemy : BaseController
 
     private void NextWaypoint()
     {
-        _waypointIndex++;
         _target = Waypoints.waypoints[_waypointIndex];
+        _waypointIndex++;
     }
 }

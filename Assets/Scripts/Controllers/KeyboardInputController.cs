@@ -32,6 +32,13 @@ public class KeyboardInputController : MonoBehaviour
         {
             _gc.SetToPlacementMode(2);
         }
+        
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            _gc.SetToPlacementMode(3);
+        }
+        
+        
     }
 
     

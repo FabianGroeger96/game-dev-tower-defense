@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using Quaternion = UnityEngine.Quaternion;
 using Vector3 = UnityEngine.Vector3;
@@ -11,7 +12,11 @@ public class Tower : MonoBehaviour
     [SerializeField] private string[] _projectilePropertiesKeys;
     [SerializeField] private float[] _projectilePropertiesValues;
     [SerializeField] private float _damage;
+    [SerializeField] private int _level;
+    [SerializeField] private float _shootPace;
     [SerializeField] public int costs;
+    [SerializeField] public string name;
+    
     
     private ProjectileSpawner _spawner;
     private TargetFinder _targetFinder;
@@ -20,12 +25,15 @@ public class Tower : MonoBehaviour
     private MeshRenderer[] _renderers;
     private Transform[] _transforms;
     
+    private float _timer;
+    
     private bool _placed;
     private bool _placeable;
     private bool _collids;
     
     void Start()
     {
+        _timer = 0f;
         _placed = false;
         
         _spawner = GetComponentInChildren<ProjectileSpawner>();
@@ -40,9 +48,7 @@ public class Tower : MonoBehaviour
         _spawner.SetProjectileDamage(_damage);
         _spawner.SetProjectile(_projectile);
         _spawner.SetProjectileProperties(CreateProjectilePropertiesDictionary());
-        IsUnplaceable();
         SetLayerToPlaceMode();
-
     }
 
     private Dictionary<string, float> CreateProjectilePropertiesDictionary()
@@ -92,10 +98,11 @@ public class Tower : MonoBehaviour
         if (_targetFinder.target != null)
         {
             RotateToTarget();
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
+            _timer += Time.deltaTime;
+            if(_timer > _shootPace){
                 _spawner.SetProjectileProperties(CreateProjectilePropertiesDictionary());
                 _spawner.Fire(_targetFinder.target.transform);
+                _timer = 0f;
             }
         }
     }

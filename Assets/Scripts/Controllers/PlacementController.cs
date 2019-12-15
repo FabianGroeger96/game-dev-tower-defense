@@ -59,9 +59,8 @@ public class PlacementController : MonoBehaviour
     {
         if (Input.GetMouseButtonUp(0) && _currentPlaceableObject.GetPlaceableState())
         {
-            _gc.TowerPlaced(_currentPlaceableObject.costs);
             _currentPlaceableObject.Place();
-            SetPlacementModeInactive();
+            _gc.TowerPlaced(_currentPlaceableObject.costs);
         }
     }
     

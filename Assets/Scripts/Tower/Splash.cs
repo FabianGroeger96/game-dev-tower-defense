@@ -16,7 +16,6 @@ public class Splash : MonoBehaviour
         if (other.CompareTag("Enemy"))
         {
             hits++;
-            Debug.Log(hits);
             Enemy enemy = other.GetComponentInParent<Enemy>();
             enemy.DealDamage(damagePerParticle);
         }

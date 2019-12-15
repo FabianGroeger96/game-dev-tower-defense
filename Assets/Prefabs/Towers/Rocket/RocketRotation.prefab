@@ -58,7 +58,11 @@ MonoBehaviour:
   - speed
   _projectilePropertiesValues:
   - 2
+  _damage: 0.05
+  _level: 0
+  _shootPace: 0.2
   costs: 250
+  name: Roller
 --- !u!114 &6676824111078406359
 MonoBehaviour:
   m_ObjectHideFlags: 0

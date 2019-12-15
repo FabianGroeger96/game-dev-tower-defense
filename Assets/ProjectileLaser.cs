@@ -1,0 +1,42 @@
+﻿using System.Collections;
+using UnityEngine;
+
+public class ProjectileLaser : Projectile
+{
+    private LineRenderer _lr;
+    private Enemy _enemy;
+    private bool _launched;
+    
+    // Update is called once per frame
+    void LateUpdate()
+    {
+        if (_launched && target != null)
+        {
+            _lr.SetPosition(1, target.position);
+        }
+       
+    }
+
+    public override void Launch()
+    {
+        _lr = GetComponent<LineRenderer>();
+        _lr.SetPosition(0, transform.position);
+        _lr.SetPosition(1, target.position);
+        _enemy = target.gameObject.GetComponentInParent<Enemy>();
+        _launched = true;
+        StartCoroutine(Wait());
+    }
+    
+    IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(0.5f);
+        if (_enemy != null)
+        {
+            _enemy.DealDamage(damage);
+        }
+        _launched = false;
+        Destroy(gameObject);
+    }
+    
+    
+}

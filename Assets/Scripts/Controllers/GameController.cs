@@ -31,6 +31,7 @@ public class GameController : MonoBehaviour
 
     private InputMode _inputMode;
     private int _currentPlacingTower;
+    private Transform _currentlySelectedObject;
 
     [SerializeField] private int _moneyCount;
     [SerializeField] private int _lifeCount;
@@ -38,6 +39,7 @@ public class GameController : MonoBehaviour
     private PlacementController _placementController;
     private WaveSpawner _waveSpawner;
     private UIController _uiController;
+    private SelectionController _selectionController;
 
     public float timePlayed = 0f;
 
@@ -54,6 +56,7 @@ public class GameController : MonoBehaviour
     {
         //Get controllers
         _placementController = GetComponent<PlacementController>();
+        _selectionController = GetComponent<SelectionController>();
         _waveSpawner = GetComponent<WaveSpawner>();
         _uiController = GetComponent<UIController>();
 
@@ -61,6 +64,7 @@ public class GameController : MonoBehaviour
         gameState = GameState.Running;
         _inputMode = InputMode.Play;
         _currentPlacingTower = -1;
+        _currentlySelectedObject = null;
 
         // initial life count
         _lifeCount = initialLifeCount;
@@ -82,7 +86,8 @@ public class GameController : MonoBehaviour
             case GameState.Running:
                 _uiController.hideTowerPanel();
                 _uiController.hideGameOverUI();
-
+                _uiController.hideTowerPanel();
+                updateUI();
                 if (enemiesAlive == 0)
                 {
                     if (_countdownWave <= 0f)
@@ -101,7 +106,7 @@ public class GameController : MonoBehaviour
                     }
 
                     _countdownWave -= Time.deltaTime;
-                    _uiController.updateUI(_countdownWave, _lifeCount, _moneyCount, timePlayed);
+                    
                 }
 
                 break;
@@ -120,6 +125,16 @@ public class GameController : MonoBehaviour
         }
     }
 
+    private void updateUI()
+    {
+        if (_currentlySelectedObject != null)
+        {
+            string name = _currentlySelectedObject.gameObject.name;
+            _uiController.showTowerPanel(name, 4);
+        }
+        _uiController.updateUI(_countdownWave, _lifeCount, _moneyCount, timePlayed);
+    }
+
     public void Retry()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -136,12 +151,14 @@ public class GameController : MonoBehaviour
         _inputMode = InputMode.Play;
         _currentPlacingTower = -1;
         _placementController.SetPlacementModeInactive();
+        _selectionController.SetSelectionModeActive();
     }
 
     public void SetToPlacementMode(int towerNumber)
     {
         if (_inputMode == InputMode.Play)
         {
+            _selectionController.SetSelectionModeInactive();
             _inputMode = InputMode.Place;
             _currentPlacingTower = towerNumber;
             Tower _tower = _towers[towerNumber - 1];
@@ -177,10 +194,16 @@ public class GameController : MonoBehaviour
     public void TowerPlaced(int costs)
     {
         _moneyCount -= _towers[_currentPlacingTower - 1].costs;
+        ExitPlacementMode();
     }
 
     public void RegisterKill(int earning)
     {
         _moneyCount += earning;
+    }
+
+    public void SetSelectedObject(Transform o)
+    {
+        _currentlySelectedObject = o;
     }
 }
