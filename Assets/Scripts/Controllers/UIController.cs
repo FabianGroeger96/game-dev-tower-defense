@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
@@ -33,6 +34,23 @@ public class UIController : MonoBehaviour
 
     public GameObject healthBarToggler;
     public static bool showHealthBars = false;
+
+    public GameObject pausePanel;
+
+    private void Update()
+    {
+        if (Input.GetKey(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P))
+        {
+            togglePauseMenu();
+        }
+    }
+
+    public void togglePauseMenu()
+    {
+        pausePanel.SetActive(!pausePanel.activeSelf);
+
+        Time.timeScale = pausePanel.activeSelf ? 0f : 1f;
+    }
 
     public float updateUI(float countdownWave, int waveCount, int waveMaxCount, bool waveRunning, int lifeCount,
         int killedCount,

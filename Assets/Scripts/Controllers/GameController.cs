@@ -179,13 +179,24 @@ public class GameController : MonoBehaviour
 
     public void Retry()
     {
+        _uiController.togglePauseMenu();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        gameState = GameState.Running;
     }
 
     public void Menu()
     {
+        Time.timeScale = 1f;
         Debug.Log("MENU");
+    }
+
+    public void Play()
+    {
+        SceneManager.LoadScene("MainLevel");
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
     }
 
     public void ExitPlacementMode()
