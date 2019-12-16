@@ -90,6 +90,7 @@ public class GameController : MonoBehaviour
                 _uiController.hideGameOverUI();
                 _uiController.hideTowerPanel();
                 updateUI();
+
                 if (enemiesAlive <= 0)
                 {
                     if (_countdownWave <= 0f)
@@ -101,6 +102,11 @@ public class GameController : MonoBehaviour
                         _waveIndex++;
                         _countdownWave = timeBetweenWaves;
                     }
+                    else if (_waveIndex > waves.Length)
+                    {
+                        gameState = GameState.Finished;
+                        break;
+                    }
 
                     _waveRunning = false;
                     _countdownWave -= Time.deltaTime;
@@ -109,12 +115,6 @@ public class GameController : MonoBehaviour
                 {
                     _waveRunning = true;
                 }
-
-                if (_waveIndex == waves.Length)
-                {
-                    gameState = GameState.Finished;
-                }
-
                 break;
             case GameState.GameOver:
                 _uiController.showGameOverUI(_waveIndex);
@@ -122,6 +122,8 @@ public class GameController : MonoBehaviour
                 enabled = false;
                 break;
             case GameState.Finished:
+                _uiController.showGameOverUI(_waveIndex);
+                
                 _uiController.gameOverText.text = "Finished";
                 _uiController.gameOverText.enabled = true;
                 _uiController.lifeCountText.enabled = false;

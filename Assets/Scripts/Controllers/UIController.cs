@@ -7,8 +7,8 @@ public class UIController : MonoBehaviour
     public Text gameOverText;
     public Text roundText;
     public GameObject gameOverUI;
-    
-    [Header("Counters")]
+
+    [Header("Counters")] public GameObject counterPanel;
     public Text waveCountdownText;
     public Text timeCountText;
 
@@ -79,13 +79,14 @@ public class UIController : MonoBehaviour
         gameOverText.text = "GAME OVER";
         roundText.text = rounds.ToString();
         
+        counterPanel.SetActive(false);
         lifeCountText.enabled = false;
     }
 
     public void hideGameOverUI()
     {
         gameOverUI.SetActive(false);
-        
+        counterPanel.SetActive(true);
         lifeCountText.enabled = true;
     }
 
