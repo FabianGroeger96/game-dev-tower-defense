@@ -33,7 +33,7 @@ public class GameController : MonoBehaviour
     private int _currentPlacingTower;
     private Transform _currentlySelectedObject;
 
-    [SerializeField] private int _moneyCount;
+    [SerializeField] public int moneyCount;
     [SerializeField] private int _lifeCount;
 
     private PlacementController _placementController;
@@ -70,12 +70,12 @@ public class GameController : MonoBehaviour
 
         // initial life count
         _lifeCount = initialLifeCount;
-        _moneyCount = initialMoneyCount;
+        moneyCount = initialMoneyCount;
 
         // initial UI Elements
         _uiController.setLifeCountText(_lifeCount.ToString());
         _uiController.setWaveCountText(_countdownWave.ToString());
-        _uiController.setMoneyCountText(_moneyCount.ToString());
+        _uiController.setMoneyCountText(moneyCount.ToString());
     }
 
     void Update()
@@ -115,6 +115,7 @@ public class GameController : MonoBehaviour
                 {
                     _waveRunning = true;
                 }
+
                 break;
             case GameState.GameOver:
                 _uiController.showGameOverUI(_waveIndex);
@@ -123,7 +124,7 @@ public class GameController : MonoBehaviour
                 break;
             case GameState.Finished:
                 _uiController.showGameOverUI(_waveIndex);
-                
+
                 _uiController.gameOverText.text = "Finished";
                 _uiController.gameOverText.enabled = true;
                 _uiController.lifeCountText.enabled = false;
@@ -149,7 +150,7 @@ public class GameController : MonoBehaviour
                     name = tower.name;
                     level = tower.level;
                     health = tower.health / tower.initialHealth;
-                    _uiController.showTowerActionPanel();
+                    _uiController.showTowerActionPanel((int) tower.getTargetFinderMode());
                 }
                 else if (selectedObject.CompareTag("Enemy"))
                 {
@@ -164,14 +165,15 @@ public class GameController : MonoBehaviour
                     name = tower.name;
                     level = tower.level;
                     health = tower.health / tower.initialHealth;
-                    _uiController.showTowerActionPanel();
+                    _uiController.showTowerActionPanel((int) tower.getTargetFinderMode());
                 }
             }
 
             _uiController.showTowerPanel(name, level, health);
         }
 
-        timePlayed = _uiController.updateUI(_countdownWave, _waveRunning, _lifeCount, enemiesKilled, _moneyCount,
+        timePlayed = _uiController.updateUI(_countdownWave, _waveIndex, waves.Length, _waveRunning, _lifeCount,
+            enemiesKilled, moneyCount,
             timePlayed);
     }
 
@@ -202,7 +204,7 @@ public class GameController : MonoBehaviour
             _inputMode = InputMode.Place;
             _currentPlacingTower = towerNumber;
             Tower _tower = _towers[towerNumber - 1];
-            if (_tower.costs <= _moneyCount)
+            if (_tower.costs <= moneyCount)
             {
                 _placementController.SetPlacementModeActive(_tower);
             }
@@ -232,13 +234,13 @@ public class GameController : MonoBehaviour
 
     public void TowerPlaced(int costs)
     {
-        _moneyCount -= _towers[_currentPlacingTower - 1].costs;
+        moneyCount -= _towers[_currentPlacingTower - 1].costs;
         ExitPlacementMode();
     }
 
     public void RegisterKill(int earning)
     {
-        _moneyCount += earning;
+        moneyCount += earning;
     }
 
     public void SetSelectedObject(Transform o)
@@ -250,7 +252,7 @@ public class GameController : MonoBehaviour
     {
         GameObject selectedObject = _currentlySelectedObject.gameObject;
         Tower tower = selectedObject.GetComponentInChildren<Tower>();
-        _moneyCount += (int) tower.sellValue;
+        moneyCount += (int) tower.sellValue;
         Destroy(_currentlySelectedObject.gameObject);
     }
 
@@ -258,10 +260,10 @@ public class GameController : MonoBehaviour
     {
         GameObject selectedObject = _currentlySelectedObject.gameObject;
         Tower tower = selectedObject.GetComponent<Tower>();
-        if (0 < _moneyCount - tower.upgradeCost)
+        if (0 < moneyCount - tower.upgradeCost)
         {
             tower.UpgradeTower();
-            _moneyCount -= (int) tower.upgradeCost;
+            moneyCount -= (int) tower.upgradeCost;
             // play upgrade effect
             GameObject effect = Instantiate(tower.upgradeEffect, tower.transform.position,
                 Quaternion.Euler(270f, 0f, 0f));

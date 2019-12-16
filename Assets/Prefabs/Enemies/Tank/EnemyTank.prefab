@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7844545316596538054
 RectTransform:
   m_ObjectHideFlags: 0
@@ -411,7 +411,7 @@ MonoBehaviour:
   deathEffect: {fileID: 1000010680075956, guid: ea366354e3b4042b7a185ed11e891460,
     type: 3}
   healthCanvas: {fileID: 4112409240683095865}
-  healthBar: {fileID: 1884257594708548159}
+  healthBar: {fileID: 1358466019872254874}
   _projectile: {fileID: 8997409728057712029, guid: 68e1c45f30a9cf94580e7e75ff3ff9d5,
     type: 3}
   _damage: 2

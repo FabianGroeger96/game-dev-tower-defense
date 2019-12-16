@@ -183,6 +183,11 @@ public class Tower : AttackableObject
     {
         _targetFinder.ChangeMode(mode);
     }
+
+    public TargetFinder.TargetFinderMode getTargetFinderMode()
+    {
+        return _targetFinder.GetMode();
+    }
     public void UpgradeTower()
     {
         level += 1;

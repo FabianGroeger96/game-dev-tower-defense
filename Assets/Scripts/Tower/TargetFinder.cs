@@ -155,4 +155,9 @@ public class TargetFinder : MonoBehaviour
     {
         _mode = mode;
     }
+
+    public TargetFinderMode GetMode()
+    {
+        return _mode;
+    }
 }
