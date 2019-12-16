@@ -59,16 +59,11 @@ MonoBehaviour:
   _projectilePropertiesKeys:
   - speed
   _projectilePropertiesValues:
-  - 2
-  _damage: 0.05
-  _damageMultiplier: 0
+  - 3
+  _damage: 0.1
   _shootPace: 0.2
-  _shootPaceMultiplier: 0
   costs: 250
-  upgradeCost: 0
   name: Roller
-  level: 0
-  sellValue: 0
   upgradeEffect: {fileID: 6319400460926888650, guid: ca619cbb67783444d965cbf069f784c3,
     type: 3}
 --- !u!114 &6676824111078406359
@@ -112,7 +107,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  range: 15
+  range: 1
   enemyTag: Enemy
   gizmoColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!1 &3454210487856772820

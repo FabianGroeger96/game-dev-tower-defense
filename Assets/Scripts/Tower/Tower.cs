@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.Experimental.PlayerLoop;
@@ -13,16 +14,17 @@ public class Tower : AttackableObject
     [SerializeField] private string[] _projectilePropertiesKeys;
     [SerializeField] private float[] _projectilePropertiesValues;
     [SerializeField] private float _damage;
-    [SerializeField] private float _damageMultiplier;
+    
     [SerializeField] private float _shootPace;
-    [SerializeField] private float _shootPaceMultiplier;
+    
+    private float _shootPaceMultiplier;
+    private float _damageMultiplier;
     
     [SerializeField] public int costs;
-    [SerializeField] public float upgradeCost;
     [SerializeField] public string name;
-    [SerializeField] public int level;
-    
-    public float sellValue;
+    [NonSerialized] public float upgradeCost;
+    [NonSerialized] public int level;
+    [NonSerialized] public float sellValue;
     
     private ProjectileSpawner _spawner;
     private TargetFinder _targetFinder;
@@ -101,6 +103,7 @@ public class Tower : AttackableObject
 
     private void OnCollisionEnter(Collision other)
     {
+        Debug.Log("colliding");
         _collids = true;
     }
     

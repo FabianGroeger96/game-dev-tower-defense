@@ -54,6 +54,7 @@ GameObject:
   - component: {fileID: 8964802375493770822}
   - component: {fileID: 6697772683473343297}
   - component: {fileID: 3699173988372532346}
+  - component: {fileID: 9106790210275053329}
   m_Layer: 13
   m_Name: LaserTower
   m_TagString: Tower
@@ -100,14 +101,9 @@ MonoBehaviour:
   _projectilePropertiesKeys: []
   _projectilePropertiesValues: []
   _damage: 0.5
-  _damageMultiplier: 0
   _shootPace: 1
-  _shootPaceMultiplier: 0
   costs: 400
-  upgradeCost: 0
   name: Laser
-  level: 0
-  sellValue: 0
   upgradeEffect: {fileID: 6319400460926888650, guid: ca619cbb67783444d965cbf069f784c3,
     type: 3}
 --- !u!114 &3699173988372532346
@@ -126,6 +122,22 @@ MonoBehaviour:
   range: 15
   enemyTag: Enemy
   gizmoColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+--- !u!54 &9106790210275053329
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2857516385113793450}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &8492922155505977874
 GameObject:
   m_ObjectHideFlags: 0

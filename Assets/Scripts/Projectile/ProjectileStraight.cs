@@ -25,7 +25,6 @@ public class ProjectileStraight : Projectile {
         {
             Enemy enemy = other.gameObject.GetComponentInParent<Enemy>();
             enemy.DealDamage(damage);
-            Destroy(gameObject);
         }
     }
     
