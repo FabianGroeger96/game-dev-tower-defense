@@ -85,6 +85,7 @@ public class Tower : AttackableObject
 
     void Update()
     {
+        base.Update();
         if (_placed)
         {
             act();
@@ -199,6 +200,9 @@ public class Tower : AttackableObject
     }
     protected override void Die()
     {
-        throw new System.NotImplementedException();
+        GameObject effect = Instantiate(deathEffect, transform.position, Quaternion.identity);
+        Destroy(effect, 5f);
+        
+        Destroy(gameObject);
     }
 }

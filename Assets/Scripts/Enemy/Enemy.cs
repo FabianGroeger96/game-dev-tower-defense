@@ -22,11 +22,6 @@ public class Enemy : AttackableObject
     
     private bool killed = false;
 
-    public GameObject deathEffect;
-
-    [Header("Unity UI")] public GameObject healthCanvas;
-    public Image healthBar;
-    
     // Start is called before the first frame update
     protected void Awake()
     {
@@ -50,6 +45,7 @@ public class Enemy : AttackableObject
     // Update is called once per frame
     protected void Update()
     {
+        base.Update();
         if (_gc.gameState == GameController.GameState.Running)
         {
             Vector3 dir = Vector3.Scale(new Vector3(1, 0, 1), _target.position - transform.position);
@@ -69,21 +65,11 @@ public class Enemy : AttackableObject
                 
             }
         }
-
-        if (UIController.showHealthBars)
-        {
-            healthCanvas.SetActive(true);
-        }
-        else
-        {
-            healthCanvas.SetActive(false);
-        }
     }
 
     public void DealDamage(float damage)
     {
         base.DealDamage(damage);
-        healthBar.fillAmount = health / initialHealth;
     }
     
     protected override void Die()
