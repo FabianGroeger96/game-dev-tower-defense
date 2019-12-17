@@ -22,7 +22,6 @@ public class GameController : MonoBehaviour
         Place
     }
 
-
     [SerializeField] private Tower[] _towers;
 
     public GameState gameState = GameState.Init;
@@ -138,38 +137,7 @@ public class GameController : MonoBehaviour
     {
         if (_currentlySelectedObject != null)
         {
-            GameObject selectedObject = _currentlySelectedObject.gameObject;
-            string name = "";
-            int level = -1;
-            float health = -1;
-            if (selectedObject != null)
-            {
-                if (selectedObject.CompareTag("Tower"))
-                {
-                    Tower tower = selectedObject.GetComponent<Tower>();
-                    name = tower.name;
-                    level = tower.level;
-                    health = tower.health / tower.initialHealth;
-                    _uiController.showTowerActionPanel((int) tower.getTargetFinderMode());
-                }
-                else if (selectedObject.CompareTag("Enemy"))
-                {
-                    Enemy enemy = selectedObject.GetComponent<Enemy>();
-                    name = enemy.name;
-                    level = enemy.level;
-                    health = enemy.health / enemy.initialHealth;
-                }
-                else
-                {
-                    Tower tower = _currentlySelectedObject.GetComponent<Tower>();
-                    name = tower.name;
-                    level = tower.level;
-                    health = tower.health / tower.initialHealth;
-                    _uiController.showTowerActionPanel((int) tower.getTargetFinderMode());
-                }
-            }
-
-            _uiController.showTowerPanel(name, level, health);
+            _uiController.showTowerPanel(_currentlySelectedObject.gameObject);
         }
 
         timePlayed = _uiController.updateUI(_countdownWave, _waveIndex, waves.Length, _waveRunning, _lifeCount,
@@ -197,6 +165,22 @@ public class GameController : MonoBehaviour
     public void Quit()
     {
         Application.Quit();
+    }
+
+    public void MakeGameFaster()
+    {
+        if (Time.timeScale < 5)
+        {
+            Time.timeScale += 0.5f;
+        }
+    }
+
+    public void MakeGameSlower()
+    {
+        if (Time.timeScale > 0.5)
+        {
+            Time.timeScale -= 0.5f;
+        }
     }
 
     public void ExitPlacementMode()
@@ -273,8 +257,8 @@ public class GameController : MonoBehaviour
         Tower tower = selectedObject.GetComponent<Tower>();
         if (0 < moneyCount - tower.upgradeCost)
         {
-            tower.UpgradeTower();
             moneyCount -= (int) tower.upgradeCost;
+            tower.UpgradeTower();
             // play upgrade effect
             GameObject effect = Instantiate(tower.upgradeEffect, tower.transform.position,
                 Quaternion.Euler(270f, 0f, 0f));

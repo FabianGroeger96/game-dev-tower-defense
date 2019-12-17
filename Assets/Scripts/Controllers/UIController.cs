@@ -24,18 +24,22 @@ public class UIController : MonoBehaviour
     public Text towerLevelText;
     public Image healthBar;
 
+    public Button buttonUpgrade;
+    public Button buttonSell;
+
     public Button buttonNearestEnemy;
     public Button buttonFirstEnemy;
     public Button buttonLowestEnemy;
     public Button buttonHighestEnemy;
+    
+    [Header("GameUtils")]
+    public GameObject pausePanel;
+    public GameObject healthBarToggler;
+    public static bool showHealthBars = false;
+    public Text gameSpeedText;
 
     private float minutes;
     private float seconds;
-
-    public GameObject healthBarToggler;
-    public static bool showHealthBars = false;
-
-    public GameObject pausePanel;
 
     private void Update()
     {
@@ -48,7 +52,6 @@ public class UIController : MonoBehaviour
     public void togglePauseMenu()
     {
         pausePanel.SetActive(!pausePanel.activeSelf);
-
         Time.timeScale = pausePanel.activeSelf ? 0f : 1f;
     }
 
@@ -95,6 +98,9 @@ public class UIController : MonoBehaviour
 
         // update time played
         timeCountText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+        
+        // update game speed
+        gameSpeedText.text = Math.Round(Time.timeScale, 2) + "x";
 
         return timePlayed;
     }
@@ -116,12 +122,28 @@ public class UIController : MonoBehaviour
         lifeCountText.enabled = true;
     }
 
-    public void showTowerPanel(string towerName, int towerLevel, float health)
+    public void showTowerPanel(GameObject gameObject)
     {
         infoPanel.SetActive(true);
-        towerNameText.text = towerName;
-        towerLevelText.text = "lvl: " + towerLevel;
-        healthBar.fillAmount = health;
+        if (gameObject.GetComponent<Tower>())
+        {
+            Tower tower = gameObject.GetComponent<Tower>();
+            towerNameText.text = tower.name;
+            towerLevelText.text = "lvl: " + tower.level;
+            healthBar.fillAmount = tower.health;
+            
+            buttonUpgrade.gameObject.GetComponentInChildren<Text>().text = "Upgrade \n" + "($" + tower.upgradeCost + ")";
+            buttonSell.gameObject.GetComponentInChildren<Text>().text = "Sell \n" + "($" + tower.sellValue + ")";
+            
+            showTowerActionPanel((int) tower.getTargetFinderMode());
+        }
+        else if (gameObject.GetComponent<Enemy>())
+        {
+            Enemy enemy = gameObject.GetComponent<Enemy>();
+            towerNameText.text = enemy.name;
+            towerLevelText.text = "lvl: " + enemy.level;
+            healthBar.fillAmount = enemy.health;
+        }
     }
 
     public void hideTowerPanel()
@@ -129,7 +151,7 @@ public class UIController : MonoBehaviour
         infoPanel.SetActive(false);
         actionTowerPanel.SetActive(false);
         changeTowerPanel.SetActive(false);
-        
+
         buttonNearestEnemy.gameObject.SetActive(false);
         buttonFirstEnemy.gameObject.SetActive(false);
         buttonLowestEnemy.gameObject.SetActive(false);
@@ -140,12 +162,12 @@ public class UIController : MonoBehaviour
     {
         actionTowerPanel.SetActive(true);
         changeTowerPanel.SetActive(true);
-        
+
         buttonNearestEnemy.gameObject.SetActive(true);
         buttonFirstEnemy.gameObject.SetActive(true);
         buttonLowestEnemy.gameObject.SetActive(true);
         buttonHighestEnemy.gameObject.SetActive(true);
-        
+
         buttonNearestEnemy.interactable = true;
         buttonFirstEnemy.interactable = true;
         buttonLowestEnemy.interactable = true;
@@ -156,52 +178,52 @@ public class UIController : MonoBehaviour
             case 0:
                 buttonNearestEnemy.GetComponent<Image>().color = Color.blue;
                 buttonNearestEnemy.gameObject.GetComponentInChildren<Text>().color = Color.white;
-                
+
                 buttonFirstEnemy.GetComponent<Image>().color = Color.gray;
                 buttonFirstEnemy.gameObject.GetComponentInChildren<Text>().color = Color.black;
-                
+
                 buttonLowestEnemy.GetComponent<Image>().color = Color.gray;
                 buttonLowestEnemy.gameObject.GetComponentInChildren<Text>().color = Color.black;
-                
+
                 buttonHighestEnemy.GetComponent<Image>().color = Color.gray;
                 buttonHighestEnemy.gameObject.GetComponentInChildren<Text>().color = Color.black;
                 break;
             case 1:
                 buttonNearestEnemy.GetComponent<Image>().color = Color.gray;
                 buttonNearestEnemy.gameObject.GetComponentInChildren<Text>().color = Color.black;
-                
+
                 buttonFirstEnemy.GetComponent<Image>().color = Color.blue;
                 buttonFirstEnemy.gameObject.GetComponentInChildren<Text>().color = Color.white;
-                
+
                 buttonLowestEnemy.GetComponent<Image>().color = Color.gray;
                 buttonLowestEnemy.gameObject.GetComponentInChildren<Text>().color = Color.black;
-                
+
                 buttonHighestEnemy.GetComponent<Image>().color = Color.gray;
                 buttonHighestEnemy.gameObject.GetComponentInChildren<Text>().color = Color.black;
                 break;
             case 2:
                 buttonNearestEnemy.GetComponent<Image>().color = Color.gray;
                 buttonNearestEnemy.gameObject.GetComponentInChildren<Text>().color = Color.black;
-                
+
                 buttonFirstEnemy.GetComponent<Image>().color = Color.gray;
                 buttonFirstEnemy.gameObject.GetComponentInChildren<Text>().color = Color.black;
-                
+
                 buttonLowestEnemy.GetComponent<Image>().color = Color.blue;
                 buttonLowestEnemy.gameObject.GetComponentInChildren<Text>().color = Color.white;
-                
+
                 buttonHighestEnemy.GetComponent<Image>().color = Color.gray;
                 buttonHighestEnemy.gameObject.GetComponentInChildren<Text>().color = Color.black;
                 break;
             case 3:
                 buttonNearestEnemy.GetComponent<Image>().color = Color.gray;
                 buttonNearestEnemy.gameObject.GetComponentInChildren<Text>().color = Color.black;
-                
+
                 buttonFirstEnemy.GetComponent<Image>().color = Color.gray;
                 buttonFirstEnemy.gameObject.GetComponentInChildren<Text>().color = Color.black;
-                
+
                 buttonLowestEnemy.GetComponent<Image>().color = Color.gray;
                 buttonLowestEnemy.gameObject.GetComponentInChildren<Text>().color = Color.black;
-                
+
                 buttonHighestEnemy.GetComponent<Image>().color = Color.blue;
                 buttonHighestEnemy.gameObject.GetComponentInChildren<Text>().color = Color.white;
                 break;
