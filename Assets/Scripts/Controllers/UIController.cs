@@ -40,6 +40,8 @@ public class UIController : MonoBehaviour
 
     private float minutes;
     private float seconds;
+    
+    private float timeScaleBefore = 0f;
 
     private void Update()
     {
@@ -52,7 +54,15 @@ public class UIController : MonoBehaviour
     public void togglePauseMenu()
     {
         pausePanel.SetActive(!pausePanel.activeSelf);
-        Time.timeScale = pausePanel.activeSelf ? 0f : 1f;
+        if (pausePanel.activeSelf)
+        {
+            timeScaleBefore = Time.timeScale;
+            Time.timeScale = 0;
+        }
+        else
+        {
+            Time.timeScale = timeScaleBefore;
+        }
     }
 
     public float updateUI(float countdownWave, int waveCount, int waveMaxCount, bool waveRunning, int lifeCount,

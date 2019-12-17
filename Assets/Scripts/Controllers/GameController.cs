@@ -47,6 +47,8 @@ public class GameController : MonoBehaviour
     private int _waveIndex = 0;
     private bool _waveRunning = false;
 
+    private float timeScaleBefore = 0f;
+
     public Wave[] waves;
 
     public float timeBetweenWaves = 5;
@@ -149,6 +151,11 @@ public class GameController : MonoBehaviour
     {
         _uiController.togglePauseMenu();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        _waveIndex = 0;
+        _waveRunning = false;
+        enemiesAlive = 0;
+        enemiesKilled = 0;
+        gameState = GameState.Running;
     }
 
     public void Menu()
@@ -167,6 +174,19 @@ public class GameController : MonoBehaviour
         Application.Quit();
     }
 
+    public void MakeGamePause()
+    {
+        if (Time.timeScale == 0)
+        {
+            Time.timeScale = timeScaleBefore;
+        }
+        else
+        {
+            timeScaleBefore = Time.timeScale;
+            Time.timeScale = 0;
+        }
+    }
+
     public void MakeGameFaster()
     {
         if (Time.timeScale < 5)
@@ -177,9 +197,9 @@ public class GameController : MonoBehaviour
 
     public void MakeGameSlower()
     {
-        if (Time.timeScale > 0.5)
+        if (Time.timeScale > 0.25)
         {
-            Time.timeScale -= 0.5f;
+            Time.timeScale -= 0.25f;
         }
     }
 
