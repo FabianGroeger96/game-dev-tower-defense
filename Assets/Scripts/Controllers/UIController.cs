@@ -43,7 +43,7 @@ public class UIController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyUp(KeyCode.Escape) || Input.GetKeyUp(KeyCode.P))
         {
             togglePauseMenu();
         }

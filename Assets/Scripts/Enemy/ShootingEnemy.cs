@@ -1,18 +1,17 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Experimental.PlayerLoop;
 
 public class ShootingEnemy : Enemy
 {
-    
-    [SerializeField] private Projectile _projectile;
     [SerializeField] private float _damage;
     [SerializeField] private float _shootPace;
     [SerializeField] private float _shootPaceMultiplier;
-
-    private ProjectileSpawner _spawner;
+    
     private TargetFinder _targetFinder;
+    private LineRenderer _lr;
+    private Tower _tower;
+    private bool _launched;
     
     private float _timer;
     
@@ -20,12 +19,9 @@ public class ShootingEnemy : Enemy
     {
         base.Start();
         _timer = 0f;
-
-        _spawner = GetComponentInChildren<ProjectileSpawner>();
-        _targetFinder = GetComponentInChildren<TargetFinder>();
         
-        _spawner.SetProjectileDamage(_damage);
-        _spawner.SetProjectile(_projectile);
+        _targetFinder = GetComponentInChildren<TargetFinder>();
+        _lr = GetComponentInChildren<LineRenderer>();
     }
     
     private void act()
@@ -33,18 +29,44 @@ public class ShootingEnemy : Enemy
         if (_targetFinder.target != null)
         {
             _timer += Time.deltaTime;
-            if(_timer > (_shootPace * _shootPaceMultiplier)){
-                _spawner.Fire(_targetFinder.target.transform);
+            if(_timer > (_shootPace * _shootPaceMultiplier))
+            {
+                Shoot();
                 _timer = 0f;
             }
         }
     }
-    
 
-    // Update is called once per frame
+    private void Shoot()
+    {
+        _lr = GetComponent<LineRenderer>();
+        _lr.SetPosition(0, transform.position);
+        _lr.SetPosition(1, _targetFinder.target.transform.position);
+        _tower = _targetFinder.target.GetComponentInParent<Tower>();
+        _launched = true;
+        StartCoroutine(Wait());
+    }
+    
+    IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(0.5f);
+        if (_tower != null)
+        {
+            _tower.DealDamage(_damage);
+        }
+        _launched = false;
+        _lr.SetPosition(1, transform.position);
+    }
+    
     protected void Update()
     {
         base.Update();
         act();
+        if (_launched)
+        {
+            _lr.SetPosition(0, transform.position);
+        }
+        
+        
     }
 }

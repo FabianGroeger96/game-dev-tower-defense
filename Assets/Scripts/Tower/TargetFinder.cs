@@ -13,13 +13,13 @@ public class TargetFinder : MonoBehaviour
         HighestHealth
     };
 
-    public GameObject target = null;
+    public GameObject target;
 
     public float range = 15f;
     private float _rangeSquared;
     private TargetFinderMode _mode;
 
-    public string enemyTag = "Enemy";
+    public string enemyTag;
 
     // Start is called before the first frame update
     public Color gizmoColor = Color.yellow;

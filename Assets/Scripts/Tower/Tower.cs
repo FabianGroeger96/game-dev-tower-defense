@@ -103,7 +103,6 @@ public class Tower : AttackableObject
 
     private void OnCollisionEnter(Collision other)
     {
-        Debug.Log("colliding");
         _collids = true;
     }
     
@@ -166,6 +165,8 @@ public class Tower : AttackableObject
         _placeable = false;
         ChangeMaterial(2);
     }
+    
+    
     public void Place()
     {
         SetLayerToTower();
@@ -190,11 +191,13 @@ public class Tower : AttackableObject
     }
     public void UpgradeTower()
     {
+        initialHealth += initialHealth / 2;
+        health = initialHealth;
         level += 1;
         sellValue += upgradeCost / 2;
         upgradeCost += upgradeCost;
-        _damageMultiplier += 0.1f;
-        _shootPaceMultiplier -= 0.05f;
+        _damageMultiplier += 0.25f;
+        _shootPaceMultiplier -= 0.15f;
         _spawner.SetProjectileDamage(_damage * _damageMultiplier);
     }
     

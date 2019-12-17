@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class ProjectileLaser : Projectile
@@ -16,6 +18,7 @@ public class ProjectileLaser : Projectile
        
     }
 
+    
     public override void Launch()
     {
         _lr = GetComponent<LineRenderer>();
