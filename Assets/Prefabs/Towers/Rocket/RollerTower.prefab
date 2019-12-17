@@ -71,7 +71,7 @@ MonoBehaviour:
   _shootPace: 0.2
   costs: 250
   name: Roller
-  upgradeEffect: {fileID: 6319400460926888650, guid: ca619cbb67783444d965cbf069f784c3,
+  upgradeEffect: {fileID: 1000010680075956, guid: 936f4d229a9214eb39def0a4bb9bf5d9,
     type: 3}
 --- !u!114 &6676824111078406359
 MonoBehaviour:
@@ -559,7 +559,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8690134696032793808}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: -5.675004}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.015, y: 0.015000007, z: 0.015000007}
   m_Children:
   - {fileID: 2361681290048933471}
@@ -568,7 +568,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 1.06}
+  m_AnchoredPosition: {x: 0, y: 0.25}
   m_SizeDelta: {x: 50, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &6825260134866533533
