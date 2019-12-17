@@ -55,7 +55,7 @@ public class PlacementController : MonoBehaviour
     
     private void ReleaseIfClicked()
     {
-        if (Input.GetMouseButtonUp(0) && _currentPlacedTower.GetPlaceableState())
+        if (Input.GetMouseButtonDown(0) && _currentPlacedTower.GetPlaceableState())
         {
             _currentPlacedTower.Place();
             _gc.TowerPlaced(_currentPlacedTower.costs);
@@ -66,7 +66,7 @@ public class PlacementController : MonoBehaviour
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hitInfo;
-        var layerMask = LayerMask.GetMask("Ground", "Path", "Tower", "SeenGround");
+        var layerMask = LayerMask.GetMask("Ground", "Path", "Tower", "SeenGround", "Base", "Obstacle");
         Physics.Raycast(ray, out hitInfo, Mathf.Infinity, layerMask);
         if (hitInfo.transform != null)
         {

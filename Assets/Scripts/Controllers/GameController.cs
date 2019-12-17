@@ -149,7 +149,7 @@ public class GameController : MonoBehaviour
 
     public void hideInfoPanel()
     {
-        _currentlySelectedObject = null;
+        SetSelectedObject(null);
         _uiController.hideTowerPanel();
     }
 
@@ -274,12 +274,21 @@ public class GameController : MonoBehaviour
                 soc.IsUnselected();
             }
         }
-        _currentlySelectedObject = o.root;
-        SelectableObject soc_new = _currentlySelectedObject.GetComponent<SelectableObject>();
-        if(soc_new)
+
+        if (o != null)
         {
-            soc_new.IsSelected();
+            _currentlySelectedObject = o.root;
+            SelectableObject soc_new = _currentlySelectedObject.GetComponent<SelectableObject>();
+            if(soc_new)
+            {
+                soc_new.IsSelected();
+            }
         }
+        else
+        {
+            _currentlySelectedObject = null;
+        }
+
     }
 
     public void SellCurrentSelectedTower()

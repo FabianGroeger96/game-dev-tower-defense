@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - GroundEnemy
   - FlyingEnemy
+  - Tower
   layers:
   - Default
   - TransparentFX
@@ -27,7 +28,7 @@ TagManager:
   - SeenGround
   - Minimap
   - Base
-  - 
+  - Obstacle
   - 
   - 
   - 
