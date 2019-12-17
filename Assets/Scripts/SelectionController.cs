@@ -10,6 +10,7 @@ public class SelectionController : MonoBehaviour
 
     private bool _isActive;
     private Transform _currentObjectCandiate;
+    private Transform _currentGroundObject;
     
     void Start()
     {
@@ -44,15 +45,25 @@ public class SelectionController : MonoBehaviour
         {
             _gc.SetSelectedObject(_currentObjectCandiate);
         }
+        else if (Input.GetMouseButtonDown(0) && _currentGroundObject != null)
+        {
+            _gc.hideInfoPanel();
+        }
     }
     
     private void CurrentObjectUnderMouse()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hitInfo;
+        
         var layerMask = LayerMask.GetMask("Tower", "Enemy");
         Physics.Raycast(ray, out hitInfo, Mathf.Infinity, layerMask);
         _currentObjectCandiate = hitInfo.transform;
+        
+        var groundLayerMask = LayerMask.GetMask("Ground");
+        Physics.Raycast(ray, out hitInfo, Mathf.Infinity, groundLayerMask);
+        _currentGroundObject = hitInfo.transform;
+        
     }
     
 }

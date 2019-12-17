@@ -52,7 +52,7 @@ MonoBehaviour:
   earning: 150
   speed: 0.8
   damage: 15
-  level: 0
+  level: 1
   name: Flying
   startingWaypoint: 1
   enemyMaterial: {fileID: 2100000, guid: be3d2a85d4af36a43a506704dd196630, type: 2}

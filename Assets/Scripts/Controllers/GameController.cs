@@ -147,6 +147,12 @@ public class GameController : MonoBehaviour
             timePlayed);
     }
 
+    public void hideInfoPanel()
+    {
+        _currentlySelectedObject = null;
+        _uiController.hideTowerPanel();
+    }
+
     public void Retry()
     {
         _uiController.togglePauseMenu();
