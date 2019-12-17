@@ -9,11 +9,13 @@ using Vector3 = UnityEngine.Vector3;
 
 public class Tower : AttackableObject
 {
-    [SerializeField] private Material[] materials;
     [SerializeField] private Projectile _projectile;
     [SerializeField] private string[] _projectilePropertiesKeys;
     [SerializeField] private float[] _projectilePropertiesValues;
     [SerializeField] private float _damage;
+    [SerializeField] private Material _placeableMaterial;
+    [SerializeField] private Material _unplaceableMaterial;
+    [SerializeField] private Material _placedMaterial;
     
     [SerializeField] private float _shootPace;
     
@@ -28,10 +30,10 @@ public class Tower : AttackableObject
     
     private ProjectileSpawner _spawner;
     private TargetFinder _targetFinder;
+    private ObjectMaterialController _omc;
     private Transform _rotation;
     public GameObject upgradeEffect;
     
-    private MeshRenderer[] _renderers;
     private Transform[] _transforms;
     
     private float _timer;
@@ -40,18 +42,16 @@ public class Tower : AttackableObject
     private bool _placeable;
     private bool _collids;
     
-    void Start()
+    void Awake()
     {
         _timer = 0f;
         _placed = false;
         
         _spawner = GetComponentInChildren<ProjectileSpawner>();
         _targetFinder = GetComponentInChildren<TargetFinder>();
+        _omc = GetComponent<ObjectMaterialController>();
         _rotation = GetComponentInChildren<Transform>();
-        
-        _renderers = GetComponentsInChildren<MeshRenderer>();
         _transforms = GetComponentsInChildren<Transform>();
-
         
         _damageMultiplier = 1f;
         _shootPaceMultiplier = 1f;
@@ -62,6 +62,8 @@ public class Tower : AttackableObject
         upgradeCost = costs / 2;
 
         health = initialHealth;
+        
+        _omc.SetBaseMaterial(_placedMaterial);
         
         _spawner.SetProjectileDamage(_damage);
         _spawner.SetProjectile(_projectile);
@@ -100,12 +102,10 @@ public class Tower : AttackableObject
     {
         _collids = true;
     }
-
     private void OnCollisionEnter(Collision other)
     {
         _collids = true;
     }
-    
     private void OnCollisionExit(Collision other)
     {
         _collids = false;
@@ -136,18 +136,10 @@ public class Tower : AttackableObject
         transform.gameObject.layer = LayerMask.NameToLayer("Tower");
         foreach (Transform child in _transforms)
         {
-            ChangeMaterial(0);
             child.gameObject.layer = LayerMask.NameToLayer("Tower");
         }
     }
-    private void ChangeMaterial(int material)
-    {
-        foreach(MeshRenderer r in _renderers)
-        {
-            r.material = materials[material];
-        }
-        
-    }
+
     private void RotateToTarget()
     {
         Vector3 direction = _targetFinder.target.transform.position - transform.position;
@@ -157,19 +149,25 @@ public class Tower : AttackableObject
     }
     public void IsPlaceable()
     {
-        _placeable = true;
-        ChangeMaterial(1);
+        if (!_placeable)
+        {
+            _placeable = true;
+            _omc.ChangeMaterial(_placeableMaterial);
+        }
     }
     public void IsUnplaceable()
     {
-        _placeable = false;
-        ChangeMaterial(2);
+        if (_placeable)
+        {
+            _placeable = false;
+            _omc.ChangeMaterial(_unplaceableMaterial);
+        }
     }
-    
     
     public void Place()
     {
         SetLayerToTower();
+        _omc.ChangeMaterial(_placedMaterial);
         _placed = true;
     }
     public bool GetPlaceableState()
@@ -184,7 +182,6 @@ public class Tower : AttackableObject
     {
         _targetFinder.ChangeMode(mode);
     }
-
     public TargetFinder.TargetFinderMode getTargetFinderMode()
     {
         return _targetFinder.GetMode();
@@ -200,7 +197,6 @@ public class Tower : AttackableObject
         _shootPaceMultiplier -= 0.15f;
         _spawner.SetProjectileDamage(_damage * _damageMultiplier);
     }
-    
     protected override void Die()
     {
         throw new System.NotImplementedException();

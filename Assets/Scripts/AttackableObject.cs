@@ -15,7 +15,7 @@ public abstract class AttackableObject : MonoBehaviour
             Die();
         }
     }
-
+    
     abstract protected void Die();
     
 }

@@ -55,6 +55,8 @@ GameObject:
   - component: {fileID: 6697772683473343297}
   - component: {fileID: 3699173988372532346}
   - component: {fileID: 9106790210275053329}
+  - component: {fileID: 6723579377853998685}
+  - component: {fileID: 5219952935258949193}
   m_Layer: 13
   m_Name: LaserTower
   m_TagString: Tower
@@ -92,15 +94,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialHealth: 20
   health: 0
-  materials:
-  - {fileID: 2100000, guid: 057c047e25f376b4b82a543332b80fbe, type: 2}
-  - {fileID: 2100000, guid: f9b0f2b0252d05e42b29a39291ff5bb8, type: 2}
-  - {fileID: 2100000, guid: 9cabaff90a7dd8e49a001278f8251c26, type: 2}
   _projectile: {fileID: -1127460024815407357, guid: 832d74b3473a3c747a0f20560a57525d,
     type: 3}
   _projectilePropertiesKeys: []
   _projectilePropertiesValues: []
   _damage: 0.5
+  _placeableMaterial: {fileID: 2100000, guid: f9b0f2b0252d05e42b29a39291ff5bb8, type: 2}
+  _unplaceableMaterial: {fileID: 2100000, guid: 9cabaff90a7dd8e49a001278f8251c26,
+    type: 2}
+  _placedMaterial: {fileID: 2100000, guid: 057c047e25f376b4b82a543332b80fbe, type: 2}
   _shootPace: 1
   costs: 400
   name: Laser
@@ -120,7 +122,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   range: 15
-  enemyTag: Enemy
+  eligableTargetTags:
+  - GroundEnemy
+  - FlyingEnemy
   gizmoColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!54 &9106790210275053329
 Rigidbody:
@@ -138,6 +142,31 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &6723579377853998685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2857516385113793450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd8aac1a73bee434f8c8e62c943b5b69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5219952935258949193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2857516385113793450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 589e0fe847435084f8e136f3681222b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedMaterial: {fileID: 2100000, guid: 8e42c8e933e4491498a587e49981c1f6, type: 2}
 --- !u!1 &8492922155505977874
 GameObject:
   m_ObjectHideFlags: 0

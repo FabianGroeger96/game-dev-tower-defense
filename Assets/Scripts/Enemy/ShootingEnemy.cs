@@ -15,9 +15,9 @@ public class ShootingEnemy : Enemy
     
     private float _timer;
     
-    void Start()
+    void Awake()
     {
-        base.Start();
+        base.Awake();
         _timer = 0f;
         
         _targetFinder = GetComponentInChildren<TargetFinder>();
@@ -29,7 +29,8 @@ public class ShootingEnemy : Enemy
         if (_targetFinder.target != null)
         {
             _timer += Time.deltaTime;
-            if(_timer > (_shootPace * _shootPaceMultiplier))
+            if(_timer > (_shootPace * _shootPaceMultiplier) &&
+               _targetFinder.target.layer == LayerMask.NameToLayer("Tower"))
             {
                 Shoot();
                 _timer = 0f;

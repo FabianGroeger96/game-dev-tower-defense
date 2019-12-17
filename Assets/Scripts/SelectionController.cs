@@ -9,7 +9,6 @@ public class SelectionController : MonoBehaviour
     private GameController _gc;
 
     private bool _isActive;
-    private Tower _currentSelectedObject;
     private Transform _currentObjectCandiate;
     
     void Start()

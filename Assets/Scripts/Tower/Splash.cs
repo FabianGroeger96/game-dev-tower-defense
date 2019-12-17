@@ -8,7 +8,7 @@ public class Splash : MonoBehaviour
 
     void OnParticleCollision(GameObject other)
     {
-        if (other.CompareTag("Enemy"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
             hits++;
             Enemy enemy = other.GetComponentInParent<Enemy>();

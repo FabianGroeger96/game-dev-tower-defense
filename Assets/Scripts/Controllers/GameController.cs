@@ -260,7 +260,20 @@ public class GameController : MonoBehaviour
 
     public void SetSelectedObject(Transform o)
     {
+        if (_currentlySelectedObject != null)
+        {
+            SelectableObject soc = _currentlySelectedObject.GetComponent<SelectableObject>();
+            if(soc)
+            {
+                soc.IsUnselected();
+            }
+        }
         _currentlySelectedObject = o.root;
+        SelectableObject soc_new = _currentlySelectedObject.GetComponent<SelectableObject>();
+        if(soc_new)
+        {
+            soc_new.IsSelected();
+        }
     }
 
     public void SellCurrentSelectedTower()

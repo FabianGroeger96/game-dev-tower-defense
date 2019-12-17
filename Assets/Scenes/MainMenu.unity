@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1093,7 +1093,7 @@ MonoBehaviour:
   _lifeCount: 0
   timePlayed: 0
   waves:
-  - enemy: {fileID: 8497885154155726464, guid: 4826147f3e98b4017a9a0d4b1fc8ac19, type: 3}
+  - enemy: {fileID: 1008028774708164976, guid: 810181d5e8fb70c4eadbd8c42ca9ac61, type: 3}
     count: 2
     rate: 1
     level: 1
@@ -2572,6 +2572,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Base
       objectReference: {fileID: 0}
+    - target: {fileID: 7362652018738124304, guid: 046c5c49b642e4238b54540849f0f18e,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7362652018738124304, guid: 046c5c49b642e4238b54540849f0f18e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 17
+      objectReference: {fileID: 0}
     - target: {fileID: 5705014447062930904, guid: 046c5c49b642e4238b54540849f0f18e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2878,8 +2888,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1892522858}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 0.5, z: 10}
+  m_LocalPosition: {x: 0, y: -0.01, z: 0}
+  m_LocalScale: {x: 10, y: 1, z: 10}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 7

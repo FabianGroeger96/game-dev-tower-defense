@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class TargetFinder : MonoBehaviour
@@ -19,7 +20,7 @@ public class TargetFinder : MonoBehaviour
     private float _rangeSquared;
     private TargetFinderMode _mode;
 
-    public string enemyTag;
+    public string[] eligableTargetTags;
 
     // Start is called before the first frame update
     public Color gizmoColor = Color.yellow;
@@ -30,21 +31,36 @@ public class TargetFinder : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, range);
     }
 
-
-    private void Start()
+    private GameObject[] FindEligableTargets()
     {
-        _mode = TargetFinderMode.HighestHealth;
-        _rangeSquared = range * range;
-        InvokeRepeating("UpdateTarget", 0f, 0.1f);
-    }
 
+        ArrayList eligableTargets = new ArrayList();
+        
+        foreach (string s in eligableTargetTags)
+        {
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag(s);
+            foreach (GameObject enemy in enemies)
+            {
+                eligableTargets.Add(enemy);
+            }
+        }
+        return (GameObject[]) eligableTargets.ToArray(typeof(GameObject));
+    }
+    
+    private void Awake()
+    {
+        _mode = TargetFinderMode.NearestEnemy;
+        _rangeSquared = range * range;
+        InvokeRepeating("UpdateTarget", 0f, 0.25f);
+    }
+    
     void UpdateTarget()
     {
         _rangeSquared = range * range;
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag(enemyTag);
+        GameObject[] enemies = FindEligableTargets();
         if (_mode == TargetFinderMode.NearestEnemy)
         {
-            target = FindNearestEnemyInRange(enemies);
+            SetTarget(FindNearestEnemyInRange(enemies));
         }
         if (_mode == TargetFinderMode.FollowFirstEnemy)
         {
@@ -94,13 +110,12 @@ public class TargetFinder : MonoBehaviour
             AttackableObject enemyObject = enemy.gameObject.GetComponentInParent<AttackableObject>();
             if (enemyObject.health > _lowestHealth)
             {
-                target = enemy;
+                SetTarget(enemy);
                 _lowestHealth = enemyObject.health;
             }
         }
     }
-
-
+    
     private void FindEnemyWithLowestHealth(GameObject[] enemies)
     {
         target = null;
@@ -110,7 +125,7 @@ public class TargetFinder : MonoBehaviour
             AttackableObject enemyObject = enemy.gameObject.GetComponentInParent<AttackableObject>();
             if (enemyObject.health < _lowestHealth)
             {
-                target = enemy;
+                SetTarget(enemy);
                 _lowestHealth = enemyObject.health;
             }
         }
@@ -125,7 +140,7 @@ public class TargetFinder : MonoBehaviour
 
         target = null;
         GameObject nearestEnemy = FindNearestEnemyInRange(enemies);
-        target = nearestEnemy;
+        SetTarget(nearestEnemy);
     }
 
     private GameObject FindNearestEnemyInRange(GameObject[] enemies)
@@ -160,4 +175,14 @@ public class TargetFinder : MonoBehaviour
     {
         return _mode;
     }
+
+    private void SetTarget(GameObject setTarget)
+    {
+        if (setTarget != null)
+        {
+            MeshRenderer r = setTarget.GetComponentInChildren<MeshRenderer>();
+            target = r.gameObject;
+        }
+    }
+    
 }

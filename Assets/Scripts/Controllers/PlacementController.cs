@@ -6,13 +6,12 @@ using Vector3 = UnityEngine.Vector3;
 
 public class PlacementController : MonoBehaviour
 {
-
     [SerializeField] private String _placementLayer;
 
     private GameController _gc;
 
     private bool _isActive;
-    private Tower _currentPlaceableObject;
+    private Tower _currentPlacedTower;
     private bool _validPlace;
     
     void Start()
@@ -24,7 +23,7 @@ public class PlacementController : MonoBehaviour
 
     public void SetPlacementModeInactive()
     {
-        if (_currentPlaceableObject.GetPlacedState() == false)
+        if (_currentPlacedTower.GetPlacedState() == false)
         {
             DestroyCurrentPlaceableObject();
         }
@@ -33,21 +32,21 @@ public class PlacementController : MonoBehaviour
 
     public void DestroyCurrentPlaceableObject()
     {
-        Destroy(_currentPlaceableObject.gameObject);
-        _currentPlaceableObject = null;
+        Destroy(_currentPlacedTower.gameObject);
+        _currentPlacedTower = null;
     }
     
     public void SetPlacementModeActive(Tower placedTower)
     {
         _isActive = true;
-        _currentPlaceableObject = Instantiate(placedTower);
-        _currentPlaceableObject.IsPlaceable();
+        _currentPlacedTower = Instantiate(placedTower);
+        _currentPlacedTower.IsPlaceable();
     }
     
     // Update is called once per frame
     void Update()
     {
-        if (_isActive && _currentPlaceableObject != null)
+        if (_isActive && _currentPlacedTower != null)
         {
             MoveCurrentObjectToMouse();
             ReleaseIfClicked();
@@ -56,10 +55,10 @@ public class PlacementController : MonoBehaviour
     
     private void ReleaseIfClicked()
     {
-        if (Input.GetMouseButtonUp(0) && _currentPlaceableObject.GetPlaceableState())
+        if (Input.GetMouseButtonUp(0) && _currentPlacedTower.GetPlaceableState())
         {
-            _currentPlaceableObject.Place();
-            _gc.TowerPlaced(_currentPlaceableObject.costs);
+            _currentPlacedTower.Place();
+            _gc.TowerPlaced(_currentPlacedTower.costs);
         }
     }
     
@@ -71,15 +70,15 @@ public class PlacementController : MonoBehaviour
         Physics.Raycast(ray, out hitInfo, Mathf.Infinity, layerMask);
         if (hitInfo.transform != null)
         {
-            _currentPlaceableObject.transform.localPosition = hitInfo.point;
-            _currentPlaceableObject.transform.rotation = Quaternion.FromToRotation(Vector3.up, hitInfo.normal);
+            _currentPlacedTower.transform.localPosition = hitInfo.point;
+            _currentPlacedTower.transform.rotation = Quaternion.FromToRotation(Vector3.up, hitInfo.normal);
             if (hitInfo.transform.gameObject.layer == LayerMask.NameToLayer(_placementLayer))
             {
-                _currentPlaceableObject.IsPlaceable();
+                _currentPlacedTower.IsPlaceable();
             }
             else
             {
-                _currentPlaceableObject.IsUnplaceable();
+                _currentPlacedTower.IsUnplaceable();
             }
         }
     }

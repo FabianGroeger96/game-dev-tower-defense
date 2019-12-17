@@ -6,7 +6,8 @@ TagManager:
   tags:
   - Ground
   - Enemy
-  - Tower
+  - GroundEnemy
+  - FlyingEnemy
   layers:
   - Default
   - TransparentFX
@@ -25,7 +26,7 @@ TagManager:
   - PlaceMode
   - SeenGround
   - Minimap
-  - 
+  - Base
   - 
   - 
   - 

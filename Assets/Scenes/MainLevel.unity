@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2417,7 +2417,7 @@ MonoBehaviour:
   _lifeCount: 0
   timePlayed: 0
   waves:
-  - enemy: {fileID: 8497885154155726464, guid: 4826147f3e98b4017a9a0d4b1fc8ac19, type: 3}
+  - enemy: {fileID: 1008028774708164976, guid: 810181d5e8fb70c4eadbd8c42ca9ac61, type: 3}
     count: 2
     rate: 1
     level: 1
@@ -4255,7 +4255,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Follow nearest enemy
+  m_Text: Attack nearest enemy
 --- !u!222 &959973011
 CanvasRenderer:
   m_ObjectHideFlags: 0

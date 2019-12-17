@@ -113,7 +113,7 @@ GameObject:
   - component: {fileID: 2860400292542994005}
   m_Layer: 10
   m_Name: Cube
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -350,9 +350,11 @@ GameObject:
   - component: {fileID: 9149405036991045736}
   - component: {fileID: -2068090900335454429}
   - component: {fileID: 5059450776007911083}
+  - component: {fileID: 8103843566895951445}
+  - component: {fileID: 6629216190333973672}
   m_Layer: 10
   m_Name: EnemyTank
-  m_TagString: Enemy
+  m_TagString: GroundEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -387,7 +389,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   range: 15
-  enemyTag: Tower
+  eligableTargetTags:
+  - Tower
   gizmoColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &-2068090900335454429
 MonoBehaviour:
@@ -408,6 +411,8 @@ MonoBehaviour:
   damage: 2
   level: 1
   name: Tank
+  startingWaypoint: 1
+  enemyMaterial: {fileID: 2100000, guid: c30a3cf3470c64283980c04d5cd00616, type: 2}
   deathEffect: {fileID: 1000010680075956, guid: ea366354e3b4042b7a185ed11e891460,
     type: 3}
   healthCanvas: {fileID: 4112409240683095865}
@@ -511,3 +516,28 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
+--- !u!114 &8103843566895951445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8497885154155726464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 589e0fe847435084f8e136f3681222b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedMaterial: {fileID: 2100000, guid: 8e42c8e933e4491498a587e49981c1f6, type: 2}
+--- !u!114 &6629216190333973672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8497885154155726464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd8aac1a73bee434f8c8e62c943b5b69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

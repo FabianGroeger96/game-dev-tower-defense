@@ -10,9 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 3905697225207903327}
   - component: {fileID: 5902221779005017939}
+  - component: {fileID: 137002427157136290}
+  - component: {fileID: 7238837439552095620}
   m_Layer: 10
   m_Name: EnemyFlying
-  m_TagString: Untagged
+  m_TagString: FlyingEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -52,10 +54,37 @@ MonoBehaviour:
   damage: 15
   level: 0
   name: Flying
+  startingWaypoint: 1
+  enemyMaterial: {fileID: 2100000, guid: be3d2a85d4af36a43a506704dd196630, type: 2}
   deathEffect: {fileID: 1000010680075956, guid: 4e0264971908545189cd15e61bf5c38b,
     type: 3}
   healthCanvas: {fileID: 8474694177611196130}
   healthBar: {fileID: 5951851597843653315}
+--- !u!114 &137002427157136290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1008028774708164976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 589e0fe847435084f8e136f3681222b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedMaterial: {fileID: 2100000, guid: 8e42c8e933e4491498a587e49981c1f6, type: 2}
+--- !u!114 &7238837439552095620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1008028774708164976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd8aac1a73bee434f8c8e62c943b5b69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1733706053594045823
 GameObject:
   m_ObjectHideFlags: 0
@@ -144,7 +173,7 @@ GameObject:
   - component: {fileID: 5003697564416715993}
   m_Layer: 10
   m_Name: Cube
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

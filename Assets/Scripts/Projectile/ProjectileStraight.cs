@@ -21,7 +21,7 @@ public class ProjectileStraight : Projectile {
    
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.CompareTag("Enemy"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
             Enemy enemy = other.gameObject.GetComponentInParent<Enemy>();
             enemy.DealDamage(damage);

@@ -12,11 +12,14 @@ public class Enemy : AttackableObject
     public int damage;
     public int level;
     public string name;
+    public int startingWaypoint = 1;
     
     private int _waypointIndex;
     private Transform _target;
     private GameController _gc;
-
+    private ObjectMaterialController _omc;
+    public Material enemyMaterial;
+    
     private bool killed = false;
 
     public GameObject deathEffect;
@@ -25,12 +28,14 @@ public class Enemy : AttackableObject
     public Image healthBar;
     
     // Start is called before the first frame update
-    protected void Start()
+    protected void Awake()
     {
+        _omc = gameObject.GetComponent<ObjectMaterialController>();
         _gc = GameObject.Find("GameController").GetComponent<GameController>();
         CalculateMultipliesAccordingToLevel();
+        _omc.SetBaseMaterial(enemyMaterial);
         health = initialHealth;
-        _waypointIndex = 0;
+        _waypointIndex = startingWaypoint - 1;
         _target = Waypoints.waypoints[_waypointIndex];
         _waypointIndex++;
     }
