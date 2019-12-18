@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641234, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1528,11 +1528,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PathWithWaypoints (6)
       objectReference: {fileID: 0}
-    - target: {fileID: 335746052387603286, guid: 3c203afb2f946394387525dd2697a434,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.099
-      objectReference: {fileID: 0}
     - target: {fileID: 1800171875163501196, guid: 3c203afb2f946394387525dd2697a434,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1593,6 +1588,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.94687504
       objectReference: {fileID: 0}
+    - target: {fileID: 335746052387603286, guid: 3c203afb2f946394387525dd2697a434,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.099
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3c203afb2f946394387525dd2697a434, type: 3}
 --- !u!1001 &258101079
@@ -1606,11 +1606,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PathWithWaypoints (4)
-      objectReference: {fileID: 0}
-    - target: {fileID: 335746052387603286, guid: 3c203afb2f946394387525dd2697a434,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.099
       objectReference: {fileID: 0}
     - target: {fileID: 1800171875163501196, guid: 3c203afb2f946394387525dd2697a434,
         type: 3}
@@ -1667,6 +1662,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 335746052387603286, guid: 3c203afb2f946394387525dd2697a434,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.099
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3c203afb2f946394387525dd2697a434, type: 3}
 --- !u!1001 &268960010
@@ -1680,16 +1680,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PathWithWaypoints (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 335746052387603286, guid: 3c203afb2f946394387525dd2697a434,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 335746052387603286, guid: 3c203afb2f946394387525dd2697a434,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.004
       objectReference: {fileID: 0}
     - target: {fileID: 1800171875163501196, guid: 3c203afb2f946394387525dd2697a434,
         type: 3}
@@ -1750,6 +1740,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.7875
+      objectReference: {fileID: 0}
+    - target: {fileID: 335746052387603286, guid: 3c203afb2f946394387525dd2697a434,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 335746052387603286, guid: 3c203afb2f946394387525dd2697a434,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.004
       objectReference: {fileID: 0}
     - target: {fileID: 3666759873579843865, guid: 3c203afb2f946394387525dd2697a434,
         type: 3}
@@ -3736,11 +3736,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PathWithWaypoints (5)
       objectReference: {fileID: 0}
-    - target: {fileID: 335746052387603286, guid: 3c203afb2f946394387525dd2697a434,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.095
-      objectReference: {fileID: 0}
     - target: {fileID: 1800171875163501196, guid: 3c203afb2f946394387525dd2697a434,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3800,6 +3795,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1.42725
+      objectReference: {fileID: 0}
+    - target: {fileID: 335746052387603286, guid: 3c203afb2f946394387525dd2697a434,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.095
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3c203afb2f946394387525dd2697a434, type: 3}
@@ -6516,11 +6516,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PathWithWaypoints (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 335746052387603286, guid: 3c203afb2f946394387525dd2697a434,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.095
-      objectReference: {fileID: 0}
     - target: {fileID: 1800171875163501196, guid: 3c203afb2f946394387525dd2697a434,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6581,6 +6576,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.8123792
       objectReference: {fileID: 0}
+    - target: {fileID: 335746052387603286, guid: 3c203afb2f946394387525dd2697a434,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.095
+      objectReference: {fileID: 0}
     - target: {fileID: 3425130865151917083, guid: 3c203afb2f946394387525dd2697a434,
         type: 3}
       propertyPath: m_IsActive
@@ -6599,11 +6599,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PathWithWaypoints (3)
-      objectReference: {fileID: 0}
-    - target: {fileID: 335746052387603286, guid: 3c203afb2f946394387525dd2697a434,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.095
       objectReference: {fileID: 0}
     - target: {fileID: 1800171875163501196, guid: 3c203afb2f946394387525dd2697a434,
         type: 3}
@@ -6664,6 +6659,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1.8123809
+      objectReference: {fileID: 0}
+    - target: {fileID: 335746052387603286, guid: 3c203afb2f946394387525dd2697a434,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.095
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3c203afb2f946394387525dd2697a434, type: 3}
@@ -7124,11 +7124,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 188574204}
     m_Modifications:
-    - target: {fileID: 264419236152057916, guid: 046c5c49b642e4238b54540849f0f18e,
-        type: 3}
-      propertyPath: initialHealth
-      value: 100
-      objectReference: {fileID: 0}
     - target: {fileID: 7362652018738124304, guid: 046c5c49b642e4238b54540849f0f18e,
         type: 3}
       propertyPath: m_Name
@@ -7193,6 +7188,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 264419236152057916, guid: 046c5c49b642e4238b54540849f0f18e,
+        type: 3}
+      propertyPath: initialHealth
+      value: 1000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 046c5c49b642e4238b54540849f0f18e, type: 3}
@@ -7566,11 +7566,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PathWithWaypoints
       objectReference: {fileID: 0}
-    - target: {fileID: 335746052387603286, guid: 3c203afb2f946394387525dd2697a434,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.099
-      objectReference: {fileID: 0}
     - target: {fileID: 1800171875163501196, guid: 3c203afb2f946394387525dd2697a434,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7625,6 +7620,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 335746052387603286, guid: 3c203afb2f946394387525dd2697a434,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.099
       objectReference: {fileID: 0}
     - target: {fileID: 3666759873579843865, guid: 3c203afb2f946394387525dd2697a434,
         type: 3}

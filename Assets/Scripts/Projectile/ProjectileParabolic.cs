@@ -39,46 +39,33 @@ public class ProjectileParabolic : Projectile
     public override void Launch() 
     {
         _rigidbody = GetComponent<Rigidbody>();
-        _angleInRad = DegreeToRad(properties["angle"]);
         Vector3 direction = CalculateLaunchDirection();
-        direction = CalculateYComponent(direction.x, direction.z);
-        float distance = CalculateDistance();
-        float speed = CalculateSpeed(Mathf.Abs(distance));
-        _rigidbody.AddForce(direction.normalized * speed, ForceMode.VelocityChange);
-    }
-    
-    private float CalculateDistance()
-    {
-        return Mathf.Sqrt(
-            Mathf.Pow(target.transform.position.x - transform.position.x, 2) + 
-            Mathf.Pow(target.transform.position.z - transform.position.z, 2));
+        direction.y = CalculateYComponent(direction.x, direction.z);
+        float speed = CalculateSpeed(direction);
+        _rigidbody.AddForce(direction.normalized * speed, ForceMode.Impulse);
     }
 
-    private Vector3 CalculateYComponent(float x, float z)
+    private float CalculateYComponent(float x, float z)
     {
-        Vector4 vec = new Vector4(x, z, 0.0f, 1);
-        float slope = Mathf.Abs(z / x);
-        Matrix4x4 m_z = RotateZ(Mathf.Atan(slope));
-        Vector4 on_axis = m_z * vec;
-        Matrix4x4 m_y = RotateY(_angleInRad);
-        on_axis = m_y * on_axis;
-        on_axis = m_z.inverse * on_axis;
-        return new Vector3(on_axis.x, Mathf.Abs(on_axis.z), on_axis.y);
+        return (float) Math.Sqrt((x * x) + (z * z) - (2 * x * z * Math.Cos(0.785398)));
     }
 
-    private float CalculateSpeed(float distance)
+    private float CalculateSpeed(Vector3 direction)
     {
-        double v = Mathf.Sqrt((distance * 9.81f) / Mathf.Sin(2 * _angleInRad));
+        direction.y = 0;
+        Debug.Log(direction.magnitude);
+        double v = Math.Sqrt((direction.magnitude * 9.81f) / Math.Sin(1.5708));
         return (float) v;
     }
 
 
+
     private Vector3 CalculateLaunchDirection()
     {
-        
         Vector3 direction = target.position - transform.position;
         return direction;
     }
+
     
     private void OnCollisionEnter(Collision other)
     {
