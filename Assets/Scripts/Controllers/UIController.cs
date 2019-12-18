@@ -68,7 +68,7 @@ public class UIController : MonoBehaviour
         }
     }
 
-    public float updateUI(float countdownWave, int waveCount, int waveMaxCount, bool waveRunning, int lifeCount,
+    public float UpdateUi(float countdownWave, int waveCount, int waveMaxCount, bool waveRunning, int lifeCount,
         int killedCount,
         int moneyCount, float timePlayed)
     {
@@ -129,7 +129,7 @@ public class UIController : MonoBehaviour
         lifeCountText.enabled = true;
     }
 
-    public void ShowTowerPanel(GameObject gameObject)
+    public void ShowTowerPanel(int money, GameObject gameObject)
     {
         infoPanel.SetActive(true);
         if (gameObject.GetComponent<Tower>())
@@ -141,6 +141,8 @@ public class UIController : MonoBehaviour
             
             _buttonUpgradeText.text = "Upgrade \n" + "($" + tower.upgradeCost + ")";
             _buttonSellText.text = "Sell \n" + "($" + tower.sellValue + ")";
+
+            buttonUpgrade.interactable = !(money <= tower.upgradeCost);
             
             ShowTowerActionPanel((int) tower.getTargetFinderMode());
         }

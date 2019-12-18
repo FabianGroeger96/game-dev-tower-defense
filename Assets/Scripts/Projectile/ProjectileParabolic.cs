@@ -94,6 +94,4 @@ public class ProjectileParabolic : Projectile
         yield return new WaitForSeconds(1f);
         Destroy(gameObject);
     }
-
-    
 }

@@ -20,7 +20,7 @@ public class Enemy : AttackableObject
     private ObjectMaterialController _omc;
     public Material enemyMaterial;
     
-    private bool killed = false;
+    private bool _killed = false;
 
     // Start is called before the first frame update
     protected void Awake()
@@ -43,15 +43,15 @@ public class Enemy : AttackableObject
     }
 
     // Update is called once per frame
-    protected void Update()
+    protected new void Update()
     {
         base.Update();
         if (_gc.gameState == GameController.GameState.Running)
         {
-            Vector3 dir = Vector3.Scale(new Vector3(1, 0, 1), _target.position - transform.position);
+            var dir = Vector3.Scale(new Vector3(1, 0, 1), _target.position - transform.position);
             transform.Translate(dir.normalized * speed * Time.deltaTime, Space.World);
-            Vector2 position2d = new Vector2(transform.position.x, transform.position.z);
-            Vector2 target2d = new Vector2(_target.transform.position.x, _target.transform.position.z);
+            var position2d = new Vector2(transform.position.x, transform.position.z);
+            var target2d = new Vector2(_target.transform.position.x, _target.transform.position.z);
             if (Vector2.Distance(position2d, target2d) <= 0.1f)
             {
                 if (_waypointIndex >= Waypoints.waypoints.Length)
@@ -62,35 +62,29 @@ public class Enemy : AttackableObject
                 {
                     NextWaypoint();
                 }
-                
             }
         }
     }
 
-    public void DealDamage(float damage)
-    {
-        base.DealDamage(damage);
-    }
-    
     protected override void Die()
     {
-        GameObject effect = Instantiate(deathEffect, transform.position, Quaternion.identity);
+        var effect = Instantiate(deathEffect, transform.position, Quaternion.identity);
         Destroy(effect, 5f);
 
-        if (!killed)
+        if (!_killed)
         {
             GameController.enemiesAlive--;
             GameController.enemiesKilled++;
             _gc.RegisterKill(earning);
             Destroy(gameObject);
-            killed = true;
+            _killed = true;
         }
     }
 
     private void EndPointReached()
     {
         GameController.enemiesAlive--;
-        _gc.RemoveLifeCount(damage);
+        _gc.ownBase.DealDamage(damage);
         Destroy(gameObject);
     }
 

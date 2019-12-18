@@ -88,7 +88,7 @@ public class Tower : AttackableObject
         base.Update();
         if (_placed)
         {
-            act();
+            Act();
         }
         else
         {
@@ -111,7 +111,7 @@ public class Tower : AttackableObject
     {
         _collids = false;
     }
-    private void act()
+    private void Act()
     {
         if (_targetFinder.target != null)
         {

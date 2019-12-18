@@ -28,16 +28,8 @@ public abstract class AttackableObject : MonoBehaviour
 
     public void Update()
     {
-        if (UIController.showHealthBars)
-        {
-            healthCanvas.SetActive(true);
-        }
-        else
-        {
-            healthCanvas.SetActive(false);
-        }
+        healthCanvas.SetActive(UIController.showHealthBars);
     }
 
-    abstract protected void Die();
-    
+    protected abstract void Die();
 }

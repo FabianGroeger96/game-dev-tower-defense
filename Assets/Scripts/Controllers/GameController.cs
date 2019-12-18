@@ -16,24 +16,24 @@ public class GameController : MonoBehaviour
         Finished
     };
 
-    public enum InputMode
+    private enum InputMode
     {
         Play,
         Place
     }
 
-    [SerializeField] private Tower[] _towers;
+    [SerializeField] private Tower[] towers;
 
     public GameState gameState = GameState.Init;
-    public int initialLifeCount = 100;
+
     public int initialMoneyCount = 1000;
+    [SerializeField] public int moneyCount;
+
+    public Base ownBase;
 
     private InputMode _inputMode;
     private int _currentPlacingTower;
     private Transform _currentlySelectedObject;
-
-    [SerializeField] public int moneyCount;
-    [SerializeField] private int _lifeCount;
 
     private PlacementController _placementController;
     private WaveSpawner _waveSpawner;
@@ -47,7 +47,7 @@ public class GameController : MonoBehaviour
     private int _waveIndex = 0;
     private bool _waveRunning = false;
 
-    private float timeScaleBefore = 0f;
+    private float _timeScaleBefore = 0f;
 
     public Wave[] waves;
 
@@ -55,7 +55,7 @@ public class GameController : MonoBehaviour
     public static int enemiesAlive = 0;
     public static int enemiesKilled = 0;
 
-    void Start()
+    private void Start()
     {
         //Get controllers
         _placementController = GetComponent<PlacementController>();
@@ -69,17 +69,15 @@ public class GameController : MonoBehaviour
         _currentPlacingTower = -1;
         _currentlySelectedObject = null;
 
-        // initial life count
-        _lifeCount = initialLifeCount;
         moneyCount = initialMoneyCount;
 
         // initial UI Elements
-        _uiController.SetLifeCountText(_lifeCount.ToString());
+        _uiController.SetLifeCountText(ownBase.health.ToString());
         _uiController.SetWaveCountText(_countdownWave.ToString());
         _uiController.SetMoneyCountText(moneyCount.ToString());
     }
 
-    void Update()
+    private void Update()
     {
         switch (gameState)
         {
@@ -90,7 +88,7 @@ public class GameController : MonoBehaviour
                 _uiController.HideTowerPanel();
                 _uiController.HideGameOverUi();
                 _uiController.HideTowerPanel();
-                updateUI();
+                UpdateUi();
 
                 if (enemiesAlive <= 0)
                 {
@@ -122,6 +120,7 @@ public class GameController : MonoBehaviour
                 _uiController.ShowGameOverUi(_waveIndex);
 
                 enabled = false;
+                Time.timeScale = 0;
                 break;
             case GameState.Finished:
                 _uiController.ShowGameOverUi(_waveIndex);
@@ -131,26 +130,24 @@ public class GameController : MonoBehaviour
                 _uiController.lifeCountText.enabled = false;
 
                 enabled = false;
+                Time.timeScale = 0;
                 break;
+            default:
+                throw new ArgumentOutOfRangeException();
         }
     }
 
-    private void updateUI()
+    private void UpdateUi()
     {
         if (_currentlySelectedObject != null)
         {
-            _uiController.ShowTowerPanel(_currentlySelectedObject.gameObject);
+            _uiController.ShowTowerPanel(moneyCount, _currentlySelectedObject.gameObject);
         }
 
-        timePlayed = _uiController.updateUI(_countdownWave, _waveIndex, waves.Length, _waveRunning, _lifeCount,
+        var lifeCount = (int) ownBase.health;
+        timePlayed = _uiController.UpdateUi(_countdownWave, _waveIndex, waves.Length, _waveRunning, lifeCount,
             enemiesKilled, moneyCount,
             timePlayed);
-    }
-
-    public void hideInfoPanel()
-    {
-        SetSelectedObject(null);
-        _uiController.HideTowerPanel();
     }
 
     public void Retry()
@@ -172,6 +169,7 @@ public class GameController : MonoBehaviour
 
     public void Play()
     {
+        Time.timeScale = 1f;
         SceneManager.LoadScene("MainLevel");
     }
 
@@ -184,11 +182,11 @@ public class GameController : MonoBehaviour
     {
         if (Time.timeScale == 0)
         {
-            Time.timeScale = timeScaleBefore;
+            Time.timeScale = _timeScaleBefore;
         }
         else
         {
-            timeScaleBefore = Time.timeScale;
+            _timeScaleBefore = Time.timeScale;
             Time.timeScale = 0;
         }
     }
@@ -221,7 +219,7 @@ public class GameController : MonoBehaviour
         }
     }
 
-    public void ExitPlacementMode()
+    private void ExitPlacementMode()
     {
         _inputMode = InputMode.Play;
         _currentPlacingTower = -1;
@@ -231,43 +229,39 @@ public class GameController : MonoBehaviour
 
     public void SetToPlacementMode(int towerNumber)
     {
-        if (_inputMode == InputMode.Play)
+        while (true)
         {
-            _selectionController.SetSelectionModeInactive();
-            _inputMode = InputMode.Place;
-            _currentPlacingTower = towerNumber;
-            Tower _tower = _towers[towerNumber - 1];
-            if (_tower.costs <= moneyCount)
+            if (_inputMode == InputMode.Play)
             {
-                _placementController.SetPlacementModeActive(_tower);
-            }
-        }
-        else
-        {
-            if (_currentPlacingTower != towerNumber)
-            {
-                ExitPlacementMode();
-                SetToPlacementMode(towerNumber);
+                _selectionController.SetSelectionModeInactive();
+                _inputMode = InputMode.Place;
+                _currentPlacingTower = towerNumber;
+                Tower _tower = towers[towerNumber - 1];
+                if (_tower.costs <= moneyCount)
+                {
+                    _placementController.SetPlacementModeActive(_tower);
+                }
             }
             else
             {
-                ExitPlacementMode();
+                if (_currentPlacingTower != towerNumber)
+                {
+                    ExitPlacementMode();
+                    continue;
+                }
+                else
+                {
+                    ExitPlacementMode();
+                }
             }
-        }
-    }
 
-    public void RemoveLifeCount(int lives)
-    {
-        _lifeCount -= lives;
-        if (_lifeCount <= 0)
-        {
-            gameState = GameState.GameOver;
+            break;
         }
     }
 
     public void TowerPlaced(int costs)
     {
-        moneyCount -= _towers[_currentPlacingTower - 1].costs;
+        moneyCount -= towers[_currentPlacingTower - 1].costs;
         ExitPlacementMode();
     }
 
@@ -280,8 +274,8 @@ public class GameController : MonoBehaviour
     {
         if (_currentlySelectedObject != null)
         {
-            SelectableObject soc = _currentlySelectedObject.GetComponent<SelectableObject>();
-            if(soc)
+            var soc = _currentlySelectedObject.GetComponent<SelectableObject>();
+            if (soc)
             {
                 soc.IsUnselected();
             }
@@ -290,8 +284,8 @@ public class GameController : MonoBehaviour
         if (o != null)
         {
             _currentlySelectedObject = o.root;
-            SelectableObject soc_new = _currentlySelectedObject.GetComponent<SelectableObject>();
-            if(soc_new)
+            var soc_new = _currentlySelectedObject.GetComponent<SelectableObject>();
+            if (soc_new)
             {
                 soc_new.IsSelected();
             }
@@ -300,27 +294,26 @@ public class GameController : MonoBehaviour
         {
             _currentlySelectedObject = null;
         }
-
     }
 
     public void SellCurrentSelectedTower()
     {
-        GameObject selectedObject = _currentlySelectedObject.gameObject;
-        Tower tower = selectedObject.GetComponentInChildren<Tower>();
+        var selectedObject = _currentlySelectedObject.gameObject;
+        var tower = selectedObject.GetComponentInChildren<Tower>();
         moneyCount += (int) tower.sellValue;
         Destroy(_currentlySelectedObject.gameObject);
     }
 
     public void UpgradeCurrentSelectedTower()
     {
-        GameObject selectedObject = _currentlySelectedObject.gameObject;
-        Tower tower = selectedObject.GetComponent<Tower>();
+        var selectedObject = _currentlySelectedObject.gameObject;
+        var tower = selectedObject.GetComponent<Tower>();
         if (0 < moneyCount - tower.upgradeCost)
         {
             moneyCount -= (int) tower.upgradeCost;
             tower.UpgradeTower();
             // play upgrade effect
-            GameObject effect = Instantiate(tower.upgradeEffect, tower.transform.position,
+            var effect = Instantiate(tower.upgradeEffect, tower.transform.position,
                 Quaternion.Euler(270f, 0f, 0f));
             Destroy(effect, 1f);
         }
@@ -328,10 +321,10 @@ public class GameController : MonoBehaviour
 
     public void ChangeTowerAction(int action)
     {
-        GameObject selectedObject = _currentlySelectedObject.gameObject;
-        Tower tower = selectedObject.GetComponent<Tower>();
+        var selectedObject = _currentlySelectedObject.gameObject;
+        var tower = selectedObject.GetComponent<Tower>();
 
-        TargetFinder.TargetFinderMode targetFinderMode = (TargetFinder.TargetFinderMode) action;
+        var targetFinderMode = (TargetFinder.TargetFinderMode) action;
         tower.ChangeTargetFinderMode(targetFinderMode);
     }
 }

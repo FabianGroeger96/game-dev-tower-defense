@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641234, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748172, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1523,6 +1523,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1032128690}
     m_Modifications:
+    - target: {fileID: 4007000136557230101, guid: 3c203afb2f946394387525dd2697a434,
+        type: 3}
+      propertyPath: m_Name
+      value: PathWithWaypoints (6)
+      objectReference: {fileID: 0}
     - target: {fileID: 335746052387603286, guid: 3c203afb2f946394387525dd2697a434,
         type: 3}
       propertyPath: m_LocalPosition.z
@@ -1588,11 +1593,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.94687504
       objectReference: {fileID: 0}
-    - target: {fileID: 4007000136557230101, guid: 3c203afb2f946394387525dd2697a434,
-        type: 3}
-      propertyPath: m_Name
-      value: PathWithWaypoints (6)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3c203afb2f946394387525dd2697a434, type: 3}
 --- !u!1001 &258101079
@@ -1602,6 +1602,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1032128690}
     m_Modifications:
+    - target: {fileID: 4007000136557230101, guid: 3c203afb2f946394387525dd2697a434,
+        type: 3}
+      propertyPath: m_Name
+      value: PathWithWaypoints (4)
+      objectReference: {fileID: 0}
     - target: {fileID: 335746052387603286, guid: 3c203afb2f946394387525dd2697a434,
         type: 3}
       propertyPath: m_LocalPosition.z
@@ -1662,11 +1667,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4007000136557230101, guid: 3c203afb2f946394387525dd2697a434,
-        type: 3}
-      propertyPath: m_Name
-      value: PathWithWaypoints (4)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3c203afb2f946394387525dd2697a434, type: 3}
 --- !u!1001 &268960010
@@ -1676,6 +1676,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1032128690}
     m_Modifications:
+    - target: {fileID: 4007000136557230101, guid: 3c203afb2f946394387525dd2697a434,
+        type: 3}
+      propertyPath: m_Name
+      value: PathWithWaypoints (2)
+      objectReference: {fileID: 0}
     - target: {fileID: 335746052387603286, guid: 3c203afb2f946394387525dd2697a434,
         type: 3}
       propertyPath: m_LocalPosition.z
@@ -1745,11 +1750,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.7875
-      objectReference: {fileID: 0}
-    - target: {fileID: 4007000136557230101, guid: 3c203afb2f946394387525dd2697a434,
-        type: 3}
-      propertyPath: m_Name
-      value: PathWithWaypoints (2)
       objectReference: {fileID: 0}
     - target: {fileID: 3666759873579843865, guid: 3c203afb2f946394387525dd2697a434,
         type: 3}
@@ -2522,15 +2522,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 249521b28298542eb804edbd95d94449, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _towers:
+  towers:
   - {fileID: 2965256440215747679, guid: 2a0fdf119aa99de4eabba67e7e2a624d, type: 3}
   - {fileID: 58050485693951288, guid: 6900bf677fe3ad94ebcb821d4b0d36e2, type: 3}
   - {fileID: 6697772683473343297, guid: 32e080bc4fc48ae44978f950b33fe20c, type: 3}
   gameState: 0
-  initialLifeCount: 10000
   initialMoneyCount: 1000
   moneyCount: 0
-  _lifeCount: 0
+  ownBase: {fileID: 1615011820}
   timePlayed: 0
   waves:
   - enemy: {fileID: 1008028774708164976, guid: 810181d5e8fb70c4eadbd8c42ca9ac61, type: 3}
@@ -3440,7 +3439,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 1e-45, y: 492.57837, z: 1e-45, w: 4.19e-43}
+  m_BoundingSphereOverride: {x: 1, y: 1, z: 1, w: 0}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -3732,6 +3731,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1032128690}
     m_Modifications:
+    - target: {fileID: 4007000136557230101, guid: 3c203afb2f946394387525dd2697a434,
+        type: 3}
+      propertyPath: m_Name
+      value: PathWithWaypoints (5)
+      objectReference: {fileID: 0}
     - target: {fileID: 335746052387603286, guid: 3c203afb2f946394387525dd2697a434,
         type: 3}
       propertyPath: m_LocalPosition.z
@@ -3796,11 +3800,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1.42725
-      objectReference: {fileID: 0}
-    - target: {fileID: 4007000136557230101, guid: 3c203afb2f946394387525dd2697a434,
-        type: 3}
-      propertyPath: m_Name
-      value: PathWithWaypoints (5)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3c203afb2f946394387525dd2697a434, type: 3}
@@ -6512,6 +6511,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1032128690}
     m_Modifications:
+    - target: {fileID: 4007000136557230101, guid: 3c203afb2f946394387525dd2697a434,
+        type: 3}
+      propertyPath: m_Name
+      value: PathWithWaypoints (1)
+      objectReference: {fileID: 0}
     - target: {fileID: 335746052387603286, guid: 3c203afb2f946394387525dd2697a434,
         type: 3}
       propertyPath: m_LocalPosition.z
@@ -6577,11 +6581,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.8123792
       objectReference: {fileID: 0}
-    - target: {fileID: 4007000136557230101, guid: 3c203afb2f946394387525dd2697a434,
-        type: 3}
-      propertyPath: m_Name
-      value: PathWithWaypoints (1)
-      objectReference: {fileID: 0}
     - target: {fileID: 3425130865151917083, guid: 3c203afb2f946394387525dd2697a434,
         type: 3}
       propertyPath: m_IsActive
@@ -6596,6 +6595,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1032128690}
     m_Modifications:
+    - target: {fileID: 4007000136557230101, guid: 3c203afb2f946394387525dd2697a434,
+        type: 3}
+      propertyPath: m_Name
+      value: PathWithWaypoints (3)
+      objectReference: {fileID: 0}
     - target: {fileID: 335746052387603286, guid: 3c203afb2f946394387525dd2697a434,
         type: 3}
       propertyPath: m_LocalPosition.z
@@ -6660,11 +6664,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1.8123809
-      objectReference: {fileID: 0}
-    - target: {fileID: 4007000136557230101, guid: 3c203afb2f946394387525dd2697a434,
-        type: 3}
-      propertyPath: m_Name
-      value: PathWithWaypoints (3)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3c203afb2f946394387525dd2697a434, type: 3}
@@ -7125,10 +7124,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 188574204}
     m_Modifications:
+    - target: {fileID: 264419236152057916, guid: 046c5c49b642e4238b54540849f0f18e,
+        type: 3}
+      propertyPath: initialHealth
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 7362652018738124304, guid: 046c5c49b642e4238b54540849f0f18e,
         type: 3}
       propertyPath: m_Name
       value: Base
+      objectReference: {fileID: 0}
+    - target: {fileID: 7362652018738124304, guid: 046c5c49b642e4238b54540849f0f18e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5705014447062930904, guid: 046c5c49b642e4238b54540849f0f18e,
         type: 3}
@@ -7187,6 +7196,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 046c5c49b642e4238b54540849f0f18e, type: 3}
+--- !u!114 &1615011820 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 264419236152057916, guid: 046c5c49b642e4238b54540849f0f18e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1615011819}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2706f09af9df146848fb46bc96d8031b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1634044502
 GameObject:
   m_ObjectHideFlags: 0
@@ -7540,6 +7561,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1032128690}
     m_Modifications:
+    - target: {fileID: 4007000136557230101, guid: 3c203afb2f946394387525dd2697a434,
+        type: 3}
+      propertyPath: m_Name
+      value: PathWithWaypoints
+      objectReference: {fileID: 0}
     - target: {fileID: 335746052387603286, guid: 3c203afb2f946394387525dd2697a434,
         type: 3}
       propertyPath: m_LocalPosition.z
@@ -7599,11 +7625,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4007000136557230101, guid: 3c203afb2f946394387525dd2697a434,
-        type: 3}
-      propertyPath: m_Name
-      value: PathWithWaypoints
       objectReference: {fileID: 0}
     - target: {fileID: 3666759873579843865, guid: 3c203afb2f946394387525dd2697a434,
         type: 3}

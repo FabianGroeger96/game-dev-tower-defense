@@ -4,18 +4,19 @@ using Vector3 = UnityEngine.Vector3;
 public class ProjectileStraight : Projectile {
     
     private Rigidbody _rigidbody;
+    public GameObject damageEffect;
      
     // Update is called once per frame
     public override void Launch()
     {
         _rigidbody = GetComponent<Rigidbody>();
-        Vector3 direction = CalculateLaunchDirection();
+        var direction = CalculateLaunchDirection();
         _rigidbody.AddForce(direction * properties["speed"], ForceMode.VelocityChange);
     }
 
     private Vector3 CalculateLaunchDirection()
     {
-        Vector3 direction = target.position - transform.position;
+        var direction = target.position - transform.position;
         return direction;
     }
    
@@ -23,10 +24,16 @@ public class ProjectileStraight : Projectile {
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
-            Enemy enemy = other.gameObject.GetComponentInParent<Enemy>();
+            // play the damage effect of the bullet
+            var effect = Instantiate(damageEffect, transform.position, Quaternion.identity);
+            Destroy(effect, 3f);
+            
+            var enemy = other.gameObject.GetComponentInParent<Enemy>();
             enemy.DealDamage(damage);
-            Destroy(this.gameObject);
+            Destroy(gameObject);
+        } else if (other.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
+        {
+            Destroy(gameObject);
         }
     }
-    
 }
