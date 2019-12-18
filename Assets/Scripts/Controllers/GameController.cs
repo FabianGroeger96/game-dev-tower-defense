@@ -74,9 +74,9 @@ public class GameController : MonoBehaviour
         moneyCount = initialMoneyCount;
 
         // initial UI Elements
-        _uiController.setLifeCountText(_lifeCount.ToString());
-        _uiController.setWaveCountText(_countdownWave.ToString());
-        _uiController.setMoneyCountText(moneyCount.ToString());
+        _uiController.SetLifeCountText(_lifeCount.ToString());
+        _uiController.SetWaveCountText(_countdownWave.ToString());
+        _uiController.SetMoneyCountText(moneyCount.ToString());
     }
 
     void Update()
@@ -87,9 +87,9 @@ public class GameController : MonoBehaviour
                 break;
 
             case GameState.Running:
-                _uiController.hideTowerPanel();
-                _uiController.hideGameOverUI();
-                _uiController.hideTowerPanel();
+                _uiController.HideTowerPanel();
+                _uiController.HideGameOverUi();
+                _uiController.HideTowerPanel();
                 updateUI();
 
                 if (enemiesAlive <= 0)
@@ -119,12 +119,12 @@ public class GameController : MonoBehaviour
 
                 break;
             case GameState.GameOver:
-                _uiController.showGameOverUI(_waveIndex);
+                _uiController.ShowGameOverUi(_waveIndex);
 
                 enabled = false;
                 break;
             case GameState.Finished:
-                _uiController.showGameOverUI(_waveIndex);
+                _uiController.ShowGameOverUi(_waveIndex);
 
                 _uiController.gameOverText.text = "Finished";
                 _uiController.gameOverText.enabled = true;
@@ -139,7 +139,7 @@ public class GameController : MonoBehaviour
     {
         if (_currentlySelectedObject != null)
         {
-            _uiController.showTowerPanel(_currentlySelectedObject.gameObject);
+            _uiController.ShowTowerPanel(_currentlySelectedObject.gameObject);
         }
 
         timePlayed = _uiController.updateUI(_countdownWave, _waveIndex, waves.Length, _waveRunning, _lifeCount,
@@ -150,12 +150,12 @@ public class GameController : MonoBehaviour
     public void hideInfoPanel()
     {
         SetSelectedObject(null);
-        _uiController.hideTowerPanel();
+        _uiController.HideTowerPanel();
     }
 
     public void Retry()
     {
-        _uiController.togglePauseMenu();
+        _uiController.TogglePauseMenu();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         _waveIndex = 0;
         _waveRunning = false;
@@ -167,7 +167,7 @@ public class GameController : MonoBehaviour
     public void Menu()
     {
         Time.timeScale = 1f;
-        Debug.Log("MENU");
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void Play()
@@ -206,6 +206,18 @@ public class GameController : MonoBehaviour
         if (Time.timeScale > 0.25)
         {
             Time.timeScale -= 0.25f;
+        }
+    }
+
+    public void TogglePauseMenu()
+    {
+        if (_inputMode == InputMode.Place)
+        {
+            ExitPlacementMode();
+        }
+        else
+        {
+            _uiController.TogglePauseMenu();
         }
     }
 

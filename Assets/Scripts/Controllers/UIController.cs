@@ -37,31 +37,34 @@ public class UIController : MonoBehaviour
     public GameObject healthBarToggler;
     public static bool showHealthBars = false;
     public Text gameSpeedText;
-
-    private float minutes;
-    private float seconds;
     
-    private float timeScaleBefore = 0f;
+    private Text _healthBarTogglerText;
+    private Text _buttonUpgradeText;
+    private Text _buttonSellText;
 
-    private void Update()
+    private float _minutes;
+    private float _seconds;
+    
+    private float _timeScaleBefore = 0f;
+
+    public void Awake()
     {
-        if (Input.GetKeyUp(KeyCode.Escape) || Input.GetKeyUp(KeyCode.P))
-        {
-            togglePauseMenu();
-        }
+        _healthBarTogglerText = healthBarToggler.GetComponentInChildren<Text>();
+        _buttonUpgradeText = buttonUpgrade.GetComponentInChildren<Text>();
+        _buttonSellText = buttonSell.GetComponentInChildren<Text>();
     }
 
-    public void togglePauseMenu()
+    public void TogglePauseMenu()
     {
         pausePanel.SetActive(!pausePanel.activeSelf);
         if (pausePanel.activeSelf)
         {
-            timeScaleBefore = Time.timeScale;
+            _timeScaleBefore = Time.timeScale;
             Time.timeScale = 0;
         }
         else
         {
-            Time.timeScale = timeScaleBefore;
+            Time.timeScale = _timeScaleBefore;
         }
     }
 
@@ -84,30 +87,24 @@ public class UIController : MonoBehaviour
         }
 
         // update UI stats
-        updateStats(lifeCount, killedCount, moneyCount);
-
-        if (showHealthBars)
-        {
-            healthBarToggler.GetComponentInChildren<Text>().text = "Hide Health Bars";
-        }
-        else
-        {
-            healthBarToggler.GetComponentInChildren<Text>().text = "Show Health Bars";
-        }
+        UpdateStats(lifeCount, killedCount, moneyCount);
+        
+        // update health bar toggler text
+        _healthBarTogglerText.text = showHealthBars ? "Hide Health Bars" : "Show Health Bars";
 
         // evaluate how much time is elapsed
         timePlayed += Time.deltaTime;
-        minutes = Mathf.Floor(timePlayed / 60);
-        seconds = timePlayed % 60;
-        if (seconds > 59) seconds = 59;
-        if (minutes < 0)
+        _minutes = Mathf.Floor(timePlayed / 60);
+        _seconds = timePlayed % 60;
+        if (_seconds > 59) _seconds = 59;
+        if (_minutes < 0)
         {
-            minutes = 0;
-            seconds = 0;
+            _minutes = 0;
+            _seconds = 0;
         }
 
         // update time played
-        timeCountText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+        timeCountText.text = $"{_minutes:00}:{_seconds:00}";
         
         // update game speed
         gameSpeedText.text = Math.Round(Time.timeScale, 2) + "x";
@@ -115,7 +112,7 @@ public class UIController : MonoBehaviour
         return timePlayed;
     }
 
-    public void showGameOverUI(int rounds)
+    public void ShowGameOverUi(int rounds)
     {
         gameOverUI.SetActive(true);
         gameOverText.text = "GAME OVER";
@@ -125,14 +122,14 @@ public class UIController : MonoBehaviour
         lifeCountText.enabled = false;
     }
 
-    public void hideGameOverUI()
+    public void HideGameOverUi()
     {
         gameOverUI.SetActive(false);
         counterPanel.SetActive(true);
         lifeCountText.enabled = true;
     }
 
-    public void showTowerPanel(GameObject gameObject)
+    public void ShowTowerPanel(GameObject gameObject)
     {
         infoPanel.SetActive(true);
         if (gameObject.GetComponent<Tower>())
@@ -142,10 +139,10 @@ public class UIController : MonoBehaviour
             towerLevelText.text = "lvl: " + tower.level;
             healthBar.fillAmount = tower.health;
             
-            buttonUpgrade.gameObject.GetComponentInChildren<Text>().text = "Upgrade \n" + "($" + tower.upgradeCost + ")";
-            buttonSell.gameObject.GetComponentInChildren<Text>().text = "Sell \n" + "($" + tower.sellValue + ")";
+            _buttonUpgradeText.text = "Upgrade \n" + "($" + tower.upgradeCost + ")";
+            _buttonSellText.text = "Sell \n" + "($" + tower.sellValue + ")";
             
-            showTowerActionPanel((int) tower.getTargetFinderMode());
+            ShowTowerActionPanel((int) tower.getTargetFinderMode());
         }
         else if (gameObject.GetComponent<Enemy>())
         {
@@ -156,7 +153,7 @@ public class UIController : MonoBehaviour
         }
     }
 
-    public void hideTowerPanel()
+    public void HideTowerPanel()
     {
         infoPanel.SetActive(false);
         actionTowerPanel.SetActive(false);
@@ -168,7 +165,7 @@ public class UIController : MonoBehaviour
         buttonHighestEnemy.gameObject.SetActive(false);
     }
 
-    public void showTowerActionPanel(int towerAction)
+    private void ShowTowerActionPanel(int towerAction)
     {
         actionTowerPanel.SetActive(true);
         changeTowerPanel.SetActive(true);
@@ -240,29 +237,29 @@ public class UIController : MonoBehaviour
         }
     }
 
-    public void updateStats(int lifeCount, int killedCount, int moneyCount)
+    private void UpdateStats(int lifeCount, int killedCount, int moneyCount)
     {
         lifeCountText.text = "Life: " + lifeCount;
         killedCountText.text = "Killed: " + killedCount;
         moneyCountText.text = "$" + moneyCount;
     }
 
-    public void setWaveCountText(string text)
+    public void SetWaveCountText(string text)
     {
         waveCountdownText.text = text;
     }
 
-    public void setLifeCountText(string text)
+    public void SetLifeCountText(string text)
     {
         lifeCountText.text = "Life: " + text;
     }
 
-    public void setMoneyCountText(string text)
+    public void SetMoneyCountText(string text)
     {
         moneyCountText.text = "$" + text;
     }
 
-    public void changeHealthBarOption()
+    public void ChangeHealthBarOption()
     {
         showHealthBars = !showHealthBars;
     }

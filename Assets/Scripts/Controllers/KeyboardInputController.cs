@@ -38,7 +38,10 @@ public class KeyboardInputController : MonoBehaviour
             _gc.SetToPlacementMode(3);
         }
         
-        
+        if (Input.GetKeyUp(KeyCode.Escape) || Input.GetKeyUp(KeyCode.P))
+        {
+            _gc.TogglePauseMenu();
+        }
     }
 
     
