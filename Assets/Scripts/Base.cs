@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Base : AttackableObject
 {
-    private GameController _gc;
+    private GameManager _gc;
     private bool _killed = false;
 
     public GameObject damageEffect;
@@ -13,7 +13,7 @@ public class Base : AttackableObject
     private void Awake()
     {
         health = initialHealth;
-        _gc = GameObject.Find("GameController").GetComponent<GameController>();
+        _gc = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     public new void DealDamage(float damage)
@@ -37,7 +37,7 @@ public class Base : AttackableObject
             // destroy base
             Destroy(gameObject);
             // set game state to game over
-            _gc.gameState = GameController.GameState.GameOver;
+            _gc.gameState = GameManager.GameState.GameOver;
         }
     }
 }

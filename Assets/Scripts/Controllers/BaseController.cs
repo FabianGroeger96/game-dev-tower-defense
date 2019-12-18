@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class BaseController : MonoBehaviour
 {
-    protected GameController _gc;
+    protected GameManager _gc;
 
-    public void Init()
+    protected void Init()
     {
-        _gc = GameObject.Find("GameController").GetComponent<GameController>();
+        _gc = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 }

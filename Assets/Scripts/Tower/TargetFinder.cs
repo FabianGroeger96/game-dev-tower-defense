@@ -33,9 +33,8 @@ public class TargetFinder : MonoBehaviour
 
     private GameObject[] FindEligableTargets()
     {
-
         ArrayList eligableTargets = new ArrayList();
-        
+
         foreach (string s in eligableTargetTags)
         {
             GameObject[] enemies = GameObject.FindGameObjectsWithTag(s);
@@ -44,16 +43,17 @@ public class TargetFinder : MonoBehaviour
                 eligableTargets.Add(enemy);
             }
         }
+
         return (GameObject[]) eligableTargets.ToArray(typeof(GameObject));
     }
-    
+
     private void Awake()
     {
         _mode = TargetFinderMode.NearestEnemy;
         _rangeSquared = range * range;
         InvokeRepeating("UpdateTarget", 0f, 0.25f);
     }
-    
+
     void UpdateTarget()
     {
         _rangeSquared = range * range;
@@ -62,6 +62,7 @@ public class TargetFinder : MonoBehaviour
         {
             SetTarget(FindNearestEnemyInRange(enemies));
         }
+
         if (_mode == TargetFinderMode.FollowFirstEnemy)
         {
             FollowFirstEnemy(enemies);
@@ -71,36 +72,37 @@ public class TargetFinder : MonoBehaviour
         {
             FindEnemyWithLowestHealth(enemies);
         }
-        
+
         if (_mode == TargetFinderMode.HighestHealth)
         {
             FindEnemyWithHighestHealth(enemies);
         }
-        
+
         if (!target)
         {
             target = null;
         }
-        
     }
-    
-    private bool currentTargetStillInRange()
+
+    private bool CurrentTargetStillInRange()
     {
         if (target != null)
         {
-            Vector3 offset_to_current_target = target.transform.position - transform.position;
-            offset_to_current_target.y = 0;
-            float sqrLen_to_current_target = offset_to_current_target.sqrMagnitude;
+            Vector3 offsetToCurrentTarget = target.transform.position - transform.position;
+            offsetToCurrentTarget.y = 0;
+            var sqrLenToCurrentTarget = offsetToCurrentTarget.sqrMagnitude;
 
-            if (sqrLen_to_current_target < _rangeSquared)
+            if (sqrLenToCurrentTarget < _rangeSquared)
             {
                 return true;
             }
+
             return false;
         }
+
         return false;
     }
-    
+
     private void FindEnemyWithHighestHealth(GameObject[] enemies)
     {
         target = null;
@@ -115,7 +117,7 @@ public class TargetFinder : MonoBehaviour
             }
         }
     }
-    
+
     private void FindEnemyWithLowestHealth(GameObject[] enemies)
     {
         target = null;
@@ -133,7 +135,7 @@ public class TargetFinder : MonoBehaviour
 
     private void FollowFirstEnemy(GameObject[] enemies)
     {
-        if (currentTargetStillInRange())
+        if (CurrentTargetStillInRange())
         {
             return;
         }
@@ -163,6 +165,7 @@ public class TargetFinder : MonoBehaviour
                 _shortestDistance = Mathf.Sqrt(sqrLen);
             }
         }
+
         return nearestEnemy;
     }
 
@@ -184,5 +187,4 @@ public class TargetFinder : MonoBehaviour
             target = r.gameObject;
         }
     }
-    
 }

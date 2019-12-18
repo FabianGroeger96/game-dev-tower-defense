@@ -28,9 +28,20 @@ public class UIController : MonoBehaviour
     public Button buttonSell;
 
     public Button buttonNearestEnemy;
+    private Text _buttonNearestEnemyText;
+    private Image _buttonNearestEnemyImage;
+    
     public Button buttonFirstEnemy;
+    private Image _buttonFirstEnemyImage;
+    private Text _buttonFirstEnemyText;
+    
     public Button buttonLowestEnemy;
+    private Image _buttonLowestEnemyImage;
+    private Text _buttonLowestEnemyText;
+    
     public Button buttonHighestEnemy;
+    private Image _buttonHighestEnemyImage;
+    private Text _buttonHighestEnemyText;
     
     [Header("GameUtils")]
     public GameObject pausePanel;
@@ -49,6 +60,14 @@ public class UIController : MonoBehaviour
 
     public void Awake()
     {
+        _buttonHighestEnemyText = buttonHighestEnemy.gameObject.GetComponentInChildren<Text>();
+        _buttonHighestEnemyImage = buttonHighestEnemy.GetComponent<Image>();
+        _buttonLowestEnemyText = buttonLowestEnemy.gameObject.GetComponentInChildren<Text>();
+        _buttonLowestEnemyImage = buttonLowestEnemy.GetComponent<Image>();
+        _buttonFirstEnemyText = buttonFirstEnemy.gameObject.GetComponentInChildren<Text>();
+        _buttonFirstEnemyImage = buttonFirstEnemy.GetComponent<Image>();
+        _buttonNearestEnemyImage = buttonNearestEnemy.GetComponent<Image>();
+        _buttonNearestEnemyText = buttonNearestEnemy.gameObject.GetComponentInChildren<Text>();
         _healthBarTogglerText = healthBarToggler.GetComponentInChildren<Text>();
         _buttonUpgradeText = buttonUpgrade.GetComponentInChildren<Text>();
         _buttonSellText = buttonSell.GetComponentInChildren<Text>();
@@ -185,56 +204,56 @@ public class UIController : MonoBehaviour
         switch (towerAction)
         {
             case 0:
-                buttonNearestEnemy.GetComponent<Image>().color = Color.blue;
-                buttonNearestEnemy.gameObject.GetComponentInChildren<Text>().color = Color.white;
+                _buttonNearestEnemyImage.color = Color.blue;
+                _buttonNearestEnemyText.color = Color.white;
 
-                buttonFirstEnemy.GetComponent<Image>().color = Color.gray;
-                buttonFirstEnemy.gameObject.GetComponentInChildren<Text>().color = Color.black;
+                _buttonFirstEnemyImage.color = Color.gray;
+                _buttonFirstEnemyText.color = Color.black;
 
-                buttonLowestEnemy.GetComponent<Image>().color = Color.gray;
-                buttonLowestEnemy.gameObject.GetComponentInChildren<Text>().color = Color.black;
+                _buttonLowestEnemyImage.color = Color.gray;
+                _buttonLowestEnemyText.color = Color.black;
 
-                buttonHighestEnemy.GetComponent<Image>().color = Color.gray;
-                buttonHighestEnemy.gameObject.GetComponentInChildren<Text>().color = Color.black;
+                _buttonHighestEnemyImage.color = Color.gray;
+                _buttonHighestEnemyText.color = Color.black;
                 break;
             case 1:
-                buttonNearestEnemy.GetComponent<Image>().color = Color.gray;
-                buttonNearestEnemy.gameObject.GetComponentInChildren<Text>().color = Color.black;
+                _buttonNearestEnemyImage.color = Color.gray;
+                _buttonNearestEnemyText.color = Color.black;
 
-                buttonFirstEnemy.GetComponent<Image>().color = Color.blue;
-                buttonFirstEnemy.gameObject.GetComponentInChildren<Text>().color = Color.white;
+                _buttonFirstEnemyImage.color = Color.blue;
+                _buttonFirstEnemyText.color = Color.white;
 
-                buttonLowestEnemy.GetComponent<Image>().color = Color.gray;
-                buttonLowestEnemy.gameObject.GetComponentInChildren<Text>().color = Color.black;
+                _buttonLowestEnemyImage.color = Color.gray;
+                _buttonLowestEnemyText.color = Color.black;
 
-                buttonHighestEnemy.GetComponent<Image>().color = Color.gray;
-                buttonHighestEnemy.gameObject.GetComponentInChildren<Text>().color = Color.black;
+                _buttonHighestEnemyImage.color = Color.gray;
+                _buttonHighestEnemyText.color = Color.black;
                 break;
             case 2:
-                buttonNearestEnemy.GetComponent<Image>().color = Color.gray;
-                buttonNearestEnemy.gameObject.GetComponentInChildren<Text>().color = Color.black;
+                _buttonNearestEnemyImage.color = Color.gray;
+                _buttonNearestEnemyText.color = Color.black;
 
-                buttonFirstEnemy.GetComponent<Image>().color = Color.gray;
-                buttonFirstEnemy.gameObject.GetComponentInChildren<Text>().color = Color.black;
+                _buttonFirstEnemyImage.color = Color.gray;
+                _buttonFirstEnemyText.color = Color.black;
 
-                buttonLowestEnemy.GetComponent<Image>().color = Color.blue;
-                buttonLowestEnemy.gameObject.GetComponentInChildren<Text>().color = Color.white;
+                _buttonLowestEnemyImage.color = Color.blue;
+                _buttonLowestEnemyText.color = Color.white;
 
-                buttonHighestEnemy.GetComponent<Image>().color = Color.gray;
-                buttonHighestEnemy.gameObject.GetComponentInChildren<Text>().color = Color.black;
+                _buttonHighestEnemyImage.color = Color.gray;
+                _buttonHighestEnemyText.color = Color.black;
                 break;
             case 3:
-                buttonNearestEnemy.GetComponent<Image>().color = Color.gray;
-                buttonNearestEnemy.gameObject.GetComponentInChildren<Text>().color = Color.black;
+                _buttonNearestEnemyImage.color = Color.gray;
+                _buttonNearestEnemyText.color = Color.black;
 
-                buttonFirstEnemy.GetComponent<Image>().color = Color.gray;
-                buttonFirstEnemy.gameObject.GetComponentInChildren<Text>().color = Color.black;
+                _buttonFirstEnemyImage.color = Color.gray;
+                _buttonFirstEnemyText.color = Color.black;
 
-                buttonLowestEnemy.GetComponent<Image>().color = Color.gray;
-                buttonLowestEnemy.gameObject.GetComponentInChildren<Text>().color = Color.black;
+                _buttonLowestEnemyImage.color = Color.blue;
+                _buttonLowestEnemyText.color = Color.white;
 
-                buttonHighestEnemy.GetComponent<Image>().color = Color.blue;
-                buttonHighestEnemy.gameObject.GetComponentInChildren<Text>().color = Color.white;
+                _buttonHighestEnemyImage.color = Color.gray;
+                _buttonHighestEnemyText.color = Color.black;
                 break;
         }
     }

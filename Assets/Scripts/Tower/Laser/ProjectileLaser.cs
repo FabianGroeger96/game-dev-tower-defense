@@ -8,16 +8,14 @@ public class ProjectileLaser : Projectile
     private LineRenderer _lr;
     private Enemy _enemy;
     private bool _launched;
-    
+
     void LateUpdate()
     {
         if (_launched && target != null)
         {
             _lr.SetPosition(1, target.position);
         }
-       
     }
-
     
     public override void Launch()
     {
@@ -28,7 +26,7 @@ public class ProjectileLaser : Projectile
         _launched = true;
         StartCoroutine(Wait());
     }
-    
+
     IEnumerator Wait()
     {
         yield return new WaitForSeconds(0.5f);
@@ -36,9 +34,8 @@ public class ProjectileLaser : Projectile
         {
             _enemy.DealDamage(damage);
         }
+
         _launched = false;
         Destroy(gameObject);
     }
-    
-    
 }

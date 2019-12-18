@@ -22,7 +22,6 @@ public abstract class Projectile : MonoBehaviour
     {
         this.damage = damage;
     }
-
     
     abstract public void Launch();
     

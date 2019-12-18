@@ -8,35 +8,34 @@ using Vector4 = UnityEngine.Vector4;
 
 public class ProjectileParabolic : Projectile
 {
-
     private float _angleInRad;
     private Rigidbody _rigidbody;
     [SerializeField] Splash _splash;
-    
+
     private float DegreeToRad(float degree)
     {
-        return (float) (degree * (Math.PI / 180)); 
+        return (float) (degree * (Math.PI / 180));
     }
-    
+
     public static Matrix4x4 RotateZ(float aAngleRad)
     {
-        Matrix4x4 m = Matrix4x4.identity;     // cos -sin 0   0
+        Matrix4x4 m = Matrix4x4.identity; // cos -sin 0   0
         m.m00 = m.m11 = Mathf.Cos(aAngleRad); // sin  cos 0   0
-        m.m10 = Mathf.Sin(aAngleRad);         //  0   0   1   0
-        m.m01 = -m.m10;                       //  0   0   0   1
+        m.m10 = Mathf.Sin(aAngleRad); //  0   0   1   0
+        m.m01 = -m.m10; //  0   0   0   1
         return m;
     }
-    
+
     public static Matrix4x4 RotateY(float aAngleRad)
     {
-        Matrix4x4 m = Matrix4x4.identity;     // cos  0  sin  0
+        Matrix4x4 m = Matrix4x4.identity; // cos  0  sin  0
         m.m00 = m.m22 = Mathf.Cos(aAngleRad); //  0   1   0   0
-        m.m02 = Mathf.Sin(aAngleRad);         //-sin  0  cos  0
-        m.m20 = -m.m02;                       //  0   0   0   1
+        m.m02 = Mathf.Sin(aAngleRad); //-sin  0  cos  0
+        m.m20 = -m.m02; //  0   0   0   1
         return m;
     }
-    
-    public override void Launch() 
+
+    public override void Launch()
     {
         _rigidbody = GetComponent<Rigidbody>();
         Vector3 direction = CalculateLaunchDirection();
@@ -58,15 +57,12 @@ public class ProjectileParabolic : Projectile
         return (float) v;
     }
 
-
-
     private Vector3 CalculateLaunchDirection()
     {
         Vector3 direction = target.position - transform.position;
         return direction;
     }
 
-    
     private void OnCollisionEnter(Collision other)
     {
         Instantiate(_splash, transform.position, Quaternion.Euler(270f, 0f, 0f));
@@ -75,7 +71,7 @@ public class ProjectileParabolic : Projectile
             StartCoroutine(Wait());
         }
     }
-    
+
     IEnumerator Wait()
     {
         yield return new WaitForSeconds(1f);

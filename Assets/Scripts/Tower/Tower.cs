@@ -16,55 +16,55 @@ public class Tower : AttackableObject
     [SerializeField] private Material _placeableMaterial;
     [SerializeField] private Material _unplaceableMaterial;
     [SerializeField] private Material _placedMaterial;
-    
+
     [SerializeField] private float _shootPace;
-    
+
     private float _shootPaceMultiplier;
     private float _damageMultiplier;
-    
+
     [SerializeField] public int costs;
     [SerializeField] public string name;
     [NonSerialized] public float upgradeCost;
     [NonSerialized] public int level;
     [NonSerialized] public float sellValue;
-    
+
     private ProjectileSpawner _spawner;
     private TargetFinder _targetFinder;
     private ObjectMaterialController _omc;
     private Transform _rotation;
     public GameObject upgradeEffect;
-    
+
     private Transform[] _transforms;
-    
+
     private float _timer;
-    
+
     private bool _placed;
     private bool _placeable;
     private bool _collids;
-    
+
     void Awake()
     {
         _timer = 0f;
         _placed = false;
-        
+
         _spawner = GetComponentInChildren<ProjectileSpawner>();
         _targetFinder = GetComponentInChildren<TargetFinder>();
         _omc = GetComponent<ObjectMaterialController>();
         _rotation = GetComponentInChildren<Transform>();
         _transforms = GetComponentsInChildren<Transform>();
-        
+
         _damageMultiplier = 1f;
         _shootPaceMultiplier = 1f;
         _collids = false;
-        
+
         level = 1;
         sellValue = costs / 2;
         upgradeCost = costs / 2;
 
         health = initialHealth;
-        
+
         _omc.SetBaseMaterial(_placedMaterial);
-        
+
         _spawner.SetProjectileDamage(_damage);
         _spawner.SetProjectile(_projectile);
         _spawner.SetProjectileProperties(CreateProjectilePropertiesDictionary());
@@ -80,7 +80,8 @@ public class Tower : AttackableObject
             dict.Add(_projectilePropertiesKeys[i], value);
             i++;
         }
-        return dict; 
+
+        return dict;
     }
 
     void Update()
@@ -103,27 +104,32 @@ public class Tower : AttackableObject
     {
         _collids = true;
     }
+
     private void OnCollisionEnter(Collision other)
     {
         _collids = true;
     }
+
     private void OnCollisionExit(Collision other)
     {
         _collids = false;
     }
+
     private void Act()
     {
         if (_targetFinder.target != null)
         {
             RotateToTarget();
             _timer += Time.deltaTime;
-            if(_timer > (_shootPace * _shootPaceMultiplier)){
+            if (_timer > (_shootPace * _shootPaceMultiplier))
+            {
                 _spawner.SetProjectileProperties(CreateProjectilePropertiesDictionary());
                 _spawner.Fire(_targetFinder.target.transform);
                 _timer = 0f;
             }
         }
     }
+
     private void SetLayerToPlaceMode()
     {
         transform.gameObject.layer = LayerMask.NameToLayer("PlaceMode");
@@ -132,6 +138,7 @@ public class Tower : AttackableObject
             child.gameObject.layer = LayerMask.NameToLayer("PlaceMode");
         }
     }
+
     private void SetLayerToTower()
     {
         transform.gameObject.layer = LayerMask.NameToLayer("Tower");
@@ -148,6 +155,7 @@ public class Tower : AttackableObject
         Vector3 rotation = Quaternion.Lerp(_rotation.rotation, lookRotation, Time.deltaTime * 10).eulerAngles;
         _rotation.rotation = Quaternion.Euler(0f, rotation.y, 0f);
     }
+
     public void IsPlaceable()
     {
         if (!_placeable)
@@ -156,6 +164,7 @@ public class Tower : AttackableObject
             _omc.ChangeMaterial(_placeableMaterial);
         }
     }
+
     public void IsUnplaceable()
     {
         if (_placeable)
@@ -164,29 +173,34 @@ public class Tower : AttackableObject
             _omc.ChangeMaterial(_unplaceableMaterial);
         }
     }
-    
+
     public void Place()
     {
         SetLayerToTower();
         _omc.ChangeMaterial(_placedMaterial);
         _placed = true;
     }
+
     public bool GetPlaceableState()
     {
         return _placeable;
     }
+
     public bool GetPlacedState()
     {
         return _placed;
     }
+
     public void ChangeTargetFinderMode(TargetFinder.TargetFinderMode mode)
     {
         _targetFinder.ChangeMode(mode);
     }
+
     public TargetFinder.TargetFinderMode getTargetFinderMode()
     {
         return _targetFinder.GetMode();
     }
+
     public void UpgradeTower()
     {
         initialHealth += initialHealth / 2;
@@ -198,11 +212,12 @@ public class Tower : AttackableObject
         _shootPaceMultiplier -= 0.15f;
         _spawner.SetProjectileDamage(_damage * _damageMultiplier);
     }
+
     protected override void Die()
     {
         GameObject effect = Instantiate(deathEffect, transform.position, Quaternion.identity);
         Destroy(effect, 5f);
-        
+
         Destroy(gameObject);
     }
 }

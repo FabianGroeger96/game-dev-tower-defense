@@ -23,7 +23,7 @@ public class ProjectileSpawner : MonoBehaviour
 
     public void Fire(Transform target)
     {
-        Projectile projectile = Instantiate(_projectile, transform.position, Quaternion.identity);
+        var projectile = Instantiate(_projectile, transform.position, Quaternion.identity);
         projectile.SetTarget(target);
         projectile.SetProjectileDamage(_damage);
         projectile.SetProjectileProperties(_projectileProperties);

@@ -4,23 +4,21 @@ using UnityEngine;
 public class WaveSpawner : MonoBehaviour
 {
     public Transform spawnPoint;
-    private Wave _currentWave;
-    
+
     public IEnumerator SpawnWave(Wave wave)
     {
-        _currentWave = wave;
         for (int i = 0; i < wave.count; i++)
         {
-            SpawnEnemy();
+            SpawnEnemy(wave);
             yield return new WaitForSeconds(1f / wave.rate);
         }
     }
 
-    void SpawnEnemy()
+    private void SpawnEnemy(Wave wave)
     {
-        GameController.enemiesAlive++;
-        GameObject enemy = Instantiate(_currentWave.enemy, spawnPoint.position, spawnPoint.rotation);
+        GameManager.enemiesAlive++;
+        GameObject enemy = Instantiate(wave.enemy, spawnPoint.position, spawnPoint.rotation);
         Enemy enemyObject = enemy.GetComponent<Enemy>();
-        enemyObject.SetLevel(_currentWave.level);
+        enemyObject.SetLevel(wave.level);
     }
 }

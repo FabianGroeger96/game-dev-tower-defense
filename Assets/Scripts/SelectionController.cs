@@ -6,28 +6,28 @@ using Vector3 = UnityEngine.Vector3;
 
 public class SelectionController : MonoBehaviour
 {
-    private GameController _gc;
+    private GameManager _gc;
 
     private bool _isActive;
     private Transform _currentObjectCandiate;
-    
+
     void Start()
     {
-        _gc = GetComponent<GameController>();
+        _gc = GetComponent<GameManager>();
         _currentObjectCandiate = null;
         _isActive = true;
     }
 
     public void SetSelectionModeActive()
     {
-        _isActive = true; 
+        _isActive = true;
     }
-    
+
     public void SetSelectionModeInactive()
     {
         _isActive = false;
     }
-    
+
     // Update is called once per frame
     void Update()
     {
@@ -37,7 +37,7 @@ public class SelectionController : MonoBehaviour
             SelectWhenClicked();
         }
     }
-    
+
     private void SelectWhenClicked()
     {
         if (Input.GetMouseButtonDown(0) && _currentObjectCandiate != null)
@@ -49,16 +49,14 @@ public class SelectionController : MonoBehaviour
             _gc.SetSelectedObject(null);
         }
     }
-    
+
     private void CurrentObjectUnderMouse()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hitInfo;
-        
+
         var layerMask = LayerMask.GetMask("Tower", "Enemy");
         Physics.Raycast(ray, out hitInfo, Mathf.Infinity, layerMask);
         _currentObjectCandiate = hitInfo.transform;
-        
     }
-    
 }

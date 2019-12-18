@@ -8,7 +8,7 @@ public class PlacementController : MonoBehaviour
 {
     [SerializeField] private String _placementLayer;
 
-    private GameController _gc;
+    private GameManager _gc;
 
     private bool _isActive;
     private Tower _currentPlacedTower;
@@ -16,7 +16,7 @@ public class PlacementController : MonoBehaviour
     
     void Start()
     {
-        _gc = GetComponent<GameController>();
+        _gc = GetComponent<GameManager>();
         _isActive = false;
         _validPlace = false;
     }

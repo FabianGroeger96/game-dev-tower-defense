@@ -6,27 +6,37 @@ using UnityEngine.UI;
 public class TowerPlacementButtonController : BaseController
 {
     public Button placementButton;
+    private Image _placementButtonImage;
+    private Text _placementButtonText;
+
     public GameObject tower;
+    private Tower _tower;
 
     // Start is called before the first frame update
-    void Start()
+    private void Awake()
+    {
+        _placementButtonImage = placementButton.GetComponent<Image>();
+        _placementButtonText = placementButton.gameObject.GetComponentInChildren<Text>();
+        _tower = tower.GetComponent<Tower>();
+    }
+
+    private void Start()
     {
         Init();
-        Tower tower = this.tower.GetComponent<Tower>();
-        placementButton.gameObject.GetComponentInChildren<Text>().text = tower.name + "\n" + "($" + tower.costs + ")";
+        _placementButtonText.text = _tower.name + "\n" + "($" + _tower.costs + ")";
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if (_gc.moneyCount >= tower.GetComponent<Tower>().costs)
+        if (_gc.moneyCount >= _tower.costs)
         {
             placementButton.interactable = true;
         }
         else
         {
             placementButton.interactable = false;
-            placementButton.GetComponent<Image>().color = Color.gray;
+            _placementButtonImage.color = Color.gray;
         }
     }
 

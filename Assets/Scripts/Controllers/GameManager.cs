@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class GameController : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
     public enum GameState
     {
@@ -88,7 +88,7 @@ public class GameController : MonoBehaviour
                 _uiController.HideTowerPanel();
                 _uiController.HideGameOverUi();
                 _uiController.HideTowerPanel();
-                UpdateUi();
+                UpdateUI();
 
                 if (enemiesAlive <= 0)
                 {
@@ -137,7 +137,7 @@ public class GameController : MonoBehaviour
         }
     }
 
-    private void UpdateUi()
+    private void UpdateUI()
     {
         if (_currentlySelectedObject != null)
         {
@@ -170,8 +170,13 @@ public class GameController : MonoBehaviour
 
     public void Play()
     {
-        Time.timeScale = 1f;
         SceneManager.LoadScene("MainLevel");
+        Time.timeScale = 1;
+        _waveIndex = 0;
+        _waveRunning = false;
+        enemiesAlive = 0;
+        enemiesKilled = 0;
+        gameState = GameState.Running;
     }
 
     public void Quit()
@@ -196,7 +201,7 @@ public class GameController : MonoBehaviour
     {
         if (Time.timeScale < 5)
         {
-            Time.timeScale += 0.5f;
+            Time.timeScale += 0.25f;
         }
     }
 

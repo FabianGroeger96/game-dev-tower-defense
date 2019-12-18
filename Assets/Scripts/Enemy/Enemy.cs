@@ -13,20 +13,20 @@ public class Enemy : AttackableObject
     public int level;
     public string name;
     public int startingWaypoint = 1;
-    
+
     private int _waypointIndex;
     private Transform _target;
-    private GameController _gc;
+    private GameManager _gc;
     private ObjectMaterialController _omc;
     public Material enemyMaterial;
-    
+
     private bool _killed = false;
 
     // Start is called before the first frame update
     protected void Awake()
     {
         _omc = gameObject.GetComponent<ObjectMaterialController>();
-        _gc = GameObject.Find("GameController").GetComponent<GameController>();
+        _gc = GameObject.Find("GameManager").GetComponent<GameManager>();
         CalculateMultipliesAccordingToLevel();
         _omc.SetBaseMaterial(enemyMaterial);
         health = initialHealth;
@@ -46,12 +46,17 @@ public class Enemy : AttackableObject
     protected new void Update()
     {
         base.Update();
-        if (_gc.gameState == GameController.GameState.Running)
+        if (_gc.gameState == GameManager.GameState.Running)
         {
             var dir = Vector3.Scale(new Vector3(1, 0, 1), _target.position - transform.position);
-            transform.Translate(dir.normalized * speed * Time.deltaTime, Space.World);
-            var position2d = new Vector2(transform.position.x, transform.position.z);
-            var target2d = new Vector2(_target.transform.position.x, _target.transform.position.z);
+            transform.Translate(dir.normalized * (speed * Time.deltaTime), Space.World);
+
+            var position = transform.position;
+            var position2d = new Vector2(position.x, position.z);
+
+            var targetPosition = _target.transform.position;
+            var target2d = new Vector2(targetPosition.x, targetPosition.z);
+
             if (Vector2.Distance(position2d, target2d) <= 0.1f)
             {
                 if (_waypointIndex >= Waypoints.waypoints.Length)
@@ -73,8 +78,8 @@ public class Enemy : AttackableObject
 
         if (!_killed)
         {
-            GameController.enemiesAlive--;
-            GameController.enemiesKilled++;
+            GameManager.enemiesAlive--;
+            GameManager.enemiesKilled++;
             _gc.RegisterKill(earning);
             Destroy(gameObject);
             _killed = true;
@@ -83,7 +88,7 @@ public class Enemy : AttackableObject
 
     private void EndPointReached()
     {
-        GameController.enemiesAlive--;
+        GameManager.enemiesAlive--;
         _gc.ownBase.DealDamage(damage);
         Destroy(gameObject);
     }

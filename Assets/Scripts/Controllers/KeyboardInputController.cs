@@ -6,22 +6,22 @@ public class KeyboardInputController : MonoBehaviour
 {
 
     private int _currentMode = 0; // 0: Non-placement, 1: Placement
-    private GameController _gc;
+    private GameManager _gc;
     
     
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        _gc = GetComponent<GameController>();
+        _gc = GetComponent<GameManager>();
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        checkKeyboardInput();
+        CheckKeyboardInput();
     }
 
-    private void checkKeyboardInput()
+    private void CheckKeyboardInput()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
@@ -43,8 +43,4 @@ public class KeyboardInputController : MonoBehaviour
             _gc.TogglePauseMenu();
         }
     }
-
-    
-    
-    
 }

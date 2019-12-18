@@ -67,7 +67,5 @@ public class ShootingEnemy : Enemy
         {
             _lr.SetPosition(0, transform.position);
         }
-        
-        
     }
 }
