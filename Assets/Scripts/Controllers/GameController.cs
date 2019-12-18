@@ -154,6 +154,7 @@ public class GameController : MonoBehaviour
     {
         _uiController.TogglePauseMenu();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Time.timeScale = 1;
         _waveIndex = 0;
         _waveRunning = false;
         enemiesAlive = 0;
