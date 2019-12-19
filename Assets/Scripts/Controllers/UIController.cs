@@ -280,8 +280,14 @@ public class UIController : MonoBehaviour
         moneyCountText.text = "$" + text;
     }
 
-    public void ChangeHealthBarOption()
+    public void ToogleHealthBarOption()
     {
         showHealthBars = !showHealthBars;
     }
+
+    public void ToogleSoundOption()
+    {
+        SoundController.ToogleMute();
+    }
+    
 }

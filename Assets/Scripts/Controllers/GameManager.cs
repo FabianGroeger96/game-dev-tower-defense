@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -101,7 +97,7 @@ public class GameManager : MonoBehaviour
                         _waveIndex++;
                         _countdownWave = timeBetweenWaves;
                     }
-                    else if (_waveIndex > waves.Length)
+                    else if (_waveIndex >= waves.Length)
                     {
                         gameState = GameState.Finished;
                         break;
@@ -120,7 +116,7 @@ public class GameManager : MonoBehaviour
                 _uiController.ShowGameOverUi(_waveIndex);
 
                 enabled = false;
-                Time.timeScale = 0;
+                Time.timeScale = 0.5f;
                 break;
             case GameState.Finished:
                 _uiController.ShowGameOverUi(_waveIndex);
@@ -130,7 +126,7 @@ public class GameManager : MonoBehaviour
                 _uiController.lifeCountText.enabled = false;
 
                 enabled = false;
-                Time.timeScale = 0;
+                Time.timeScale = 0.5f;
                 break;
             default:
                 throw new ArgumentOutOfRangeException();

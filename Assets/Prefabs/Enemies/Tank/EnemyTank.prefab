@@ -406,6 +406,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialHealth: 15
   health: 0
+  deathEffect: {fileID: 1000010680075956, guid: ea366354e3b4042b7a185ed11e891460,
+    type: 3}
+  healthCanvas: {fileID: 4112409240683095865}
+  healthBar: {fileID: 1358466019872254874}
   earning: 100
   speed: 0.5
   damage: 2
@@ -413,13 +417,11 @@ MonoBehaviour:
   name: Tank
   startingWaypoint: 1
   enemyMaterial: {fileID: 2100000, guid: c30a3cf3470c64283980c04d5cd00616, type: 2}
-  deathEffect: {fileID: 1000010680075956, guid: ea366354e3b4042b7a185ed11e891460,
-    type: 3}
-  healthCanvas: {fileID: 4112409240683095865}
-  healthBar: {fileID: 1358466019872254874}
-  _damage: 2
-  _shootPace: 2
+  _damage: 0.5
+  _shootPace: 5
   _shootPaceMultiplier: 1
+  damageEffect: {fileID: 5770199838806611599, guid: b5421919769ec4f35a2df2cd2067b10f,
+    type: 3}
 --- !u!120 &5059450776007911083
 LineRenderer:
   m_ObjectHideFlags: 0

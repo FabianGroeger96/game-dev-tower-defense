@@ -49,17 +49,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialHealth: 5
   health: 0
+  deathEffect: {fileID: 1000010680075956, guid: 4e0264971908545189cd15e61bf5c38b,
+    type: 3}
+  healthCanvas: {fileID: 8474694177611196130}
+  healthBar: {fileID: 5951851597843653315}
   earning: 150
   speed: 0.8
   damage: 15
   level: 1
   name: Flying
-  startingWaypoint: 1
+  startingWaypoint: 7
   enemyMaterial: {fileID: 2100000, guid: be3d2a85d4af36a43a506704dd196630, type: 2}
-  deathEffect: {fileID: 1000010680075956, guid: 4e0264971908545189cd15e61bf5c38b,
-    type: 3}
-  healthCanvas: {fileID: 8474694177611196130}
-  healthBar: {fileID: 5951851597843653315}
 --- !u!114 &137002427157136290
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,7 +186,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2557838680609206489}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_Children: []
   m_Father: {fileID: 3905697225207903327}

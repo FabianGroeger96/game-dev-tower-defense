@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 010df9ffff681c44fa416171344192e9
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - deathEffect: {instanceID: 0}
+  - healthCanvas: {instanceID: 0}
+  - healthBar: {instanceID: 0}
+  - _projectile: {instanceID: 0}
+  - _placeableMaterial: {fileID: 2100000, guid: f9b0f2b0252d05e42b29a39291ff5bb8,
+      type: 2}
+  - _unplaceableMaterial: {fileID: 2100000, guid: 9cabaff90a7dd8e49a001278f8251c26,
+      type: 2}
+  - _placedMaterial: {fileID: 2100000, guid: 057c047e25f376b4b82a543332b80fbe, type: 2}
+  - upgradeEffect: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
