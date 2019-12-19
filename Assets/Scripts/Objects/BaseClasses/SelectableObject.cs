@@ -33,6 +33,6 @@ public class SelectableObject : MonoBehaviour
     /// </summary>
     public void IsUnselected()
     {
-        _omc.ReverToBaseMaterial();
+        _omc.RevertToBaseMaterial();
     }
 }

@@ -1,16 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 /// <summary>
-/// U
+/// Represents the gizmo of an object.
 /// </summary>
 public class Gizmo : MonoBehaviour
 {
-
+    // defines the gizmo size
     public float gizomoSize = .75f;
+
+    // defines the color of the gizmo
     public Color gizmoColor = Color.yellow;
-    // Start is called before the first frame update
+
+    /// <summary>
+    /// Draws the gizmo in the shape of a sphere.
+    /// </summary>
     void OnDrawGizmos()
     {
         Gizmos.color = gizmoColor;

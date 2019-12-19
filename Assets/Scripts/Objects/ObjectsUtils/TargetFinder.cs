@@ -4,8 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+/// <summary>
+/// Represents the target finder, for finding a target in sight to a object.
+/// </summary>
 public class TargetFinder : MonoBehaviour
 {
+    /// <summary>
+    /// Represents the mode which the target finder can have.
+    /// </summary>
     public enum TargetFinderMode
     {
         NearestEnemy,
@@ -13,24 +19,35 @@ public class TargetFinder : MonoBehaviour
         LowestHealth,
         HighestHealth
     };
-
+    
+    // Reference to the current target found
     public GameObject target;
-
+    // Specifies the range of the target searching
     public float range = 15f;
+    // Specifies the squared range of the target searching
     private float _rangeSquared;
+    // the current target finder mode
     private TargetFinderMode _mode;
-
+    
+    // reference to all eligable target tags
     public string[] eligableTargetTags;
 
-    // Start is called before the first frame update
+    // color of the gizmo
     public Color gizmoColor = Color.yellow;
-
+    
+    /// <summary>
+    /// Draws the gizmo in the shape of a sphere.
+    /// </summary>
     void OnDrawGizmos()
     {
         Gizmos.color = gizmoColor;
         Gizmos.DrawWireSphere(transform.position, range);
     }
-
+    
+    /// <summary>
+    /// Searches for attackable targets within the range.
+    /// </summary>
+    /// <returns>found targets</returns>
     private GameObject[] FindEligableTargets()
     {
         ArrayList eligableTargets = new ArrayList();
@@ -46,14 +63,21 @@ public class TargetFinder : MonoBehaviour
 
         return (GameObject[]) eligableTargets.ToArray(typeof(GameObject));
     }
-
+    
+    /// <summary>
+    /// Awake is being used to initialize all the reference the class needs,
+    /// and to bring it to an initial state.
+    /// </summary>
     private void Awake()
     {
         _mode = TargetFinderMode.NearestEnemy;
         _rangeSquared = range * range;
-        InvokeRepeating("UpdateTarget", 0f, 0.25f);
+        InvokeRepeating(nameof(UpdateTarget), 0f, 0.25f);
     }
-
+    
+    /// <summary>
+    /// Updates the target of the class according to the global target finder mode.
+    /// </summary>
     void UpdateTarget()
     {
         _rangeSquared = range * range;
@@ -83,7 +107,11 @@ public class TargetFinder : MonoBehaviour
             target = null;
         }
     }
-
+    
+    /// <summary>
+    /// Checks if the current target is still within range.
+    /// </summary>
+    /// <returns>target within range</returns>
     private bool CurrentTargetStillInRange()
     {
         if (target != null)
@@ -102,7 +130,11 @@ public class TargetFinder : MonoBehaviour
 
         return false;
     }
-
+    
+    /// <summary>
+    /// Finds Targets with the highest Health.
+    /// </summary>
+    /// <param name="enemies">list of enemies in sight</param>
     private void FindEnemyWithHighestHealth(GameObject[] enemies)
     {
         target = null;
@@ -117,7 +149,11 @@ public class TargetFinder : MonoBehaviour
             }
         }
     }
-
+    
+    /// <summary>
+    /// Finds Targets with the lowest Health.
+    /// </summary>
+    /// <param name="enemies">list of enemies in sight</param>
     private void FindEnemyWithLowestHealth(GameObject[] enemies)
     {
         target = null;
@@ -132,7 +168,11 @@ public class TargetFinder : MonoBehaviour
             }
         }
     }
-
+    
+    /// <summary>
+    /// Follow first Target.
+    /// </summary>
+    /// <param name="enemies">list of enemies in sight</param>
     private void FollowFirstEnemy(GameObject[] enemies)
     {
         if (CurrentTargetStillInRange())
@@ -144,7 +184,12 @@ public class TargetFinder : MonoBehaviour
         GameObject nearestEnemy = FindNearestEnemyInRange(enemies);
         SetTarget(nearestEnemy);
     }
-
+    
+    /// <summary>
+    /// Checks which given target is the nearest one.
+    /// </summary>
+    /// <param name="enemies">list of enemies in sight</param>
+    /// <returns>nearest enemy</returns>
     private GameObject FindNearestEnemyInRange(GameObject[] enemies)
     {
         float _shortestDistance = Mathf.Infinity;
@@ -168,17 +213,29 @@ public class TargetFinder : MonoBehaviour
 
         return nearestEnemy;
     }
-
+    
+    /// <summary>
+    /// Changes the mode of the target finder.
+    /// </summary>
+    /// <param name="mode">new mode of target finder</param>
     public void ChangeMode(TargetFinderMode mode)
     {
         _mode = mode;
     }
-
+    
+    /// <summary>
+    /// Returns the mode of the target finder.
+    /// </summary>
+    /// <returns>mode of the target finder</returns>
     public TargetFinderMode GetMode()
     {
         return _mode;
     }
-
+    
+    /// <summary>
+    /// Sets the target of the target finder.
+    /// </summary>
+    /// <param name="setTarget">target to set</param>
     private void SetTarget(GameObject setTarget)
     {
         if (setTarget != null)

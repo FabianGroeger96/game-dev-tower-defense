@@ -1,26 +1,40 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+/// <summary>
+/// Class used to get the inputs of the keyboard and delegate to the GameManager.
+/// </summary>
 public class KeyboardInputController : MonoBehaviour
 {
-
+    // current mode of the game
     private int _currentMode = 0; // 0: Non-placement, 1: Placement
+
+    // reference to the GameManager to delegate
     private GameManager _gc;
-    
-    
-    // Start is called before the first frame update
+
+    /// <summary>
+    /// Awake is being used to initialize all the reference the class needs,
+    /// and to bring it to an initial state.
+    /// </summary>
     private void Awake()
     {
         _gc = GetComponent<GameManager>();
     }
 
-    // Update is called once per frame
+    /// <summary>
+    /// Within every frame it checks if there is an input from the keyboard.
+    /// </summary>
     private void Update()
     {
         CheckKeyboardInput();
     }
 
+    /// <summary>
+    /// Checks if there is an input from the keyboard.
+    /// 1 - place tower "roller"
+    /// 2 - place tower "parabolic"
+    /// 3 - place tower "laser"
+    /// ESC or P - toggles pause menu
+    /// </summary>
     private void CheckKeyboardInput()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -32,12 +46,12 @@ public class KeyboardInputController : MonoBehaviour
         {
             _gc.SetToPlacementMode(2);
         }
-        
+
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             _gc.SetToPlacementMode(3);
         }
-        
+
         if (Input.GetKeyUp(KeyCode.Escape) || Input.GetKeyUp(KeyCode.P))
         {
             _gc.TogglePauseMenu();
