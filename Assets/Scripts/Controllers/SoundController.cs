@@ -47,9 +47,9 @@ public class SoundController : MonoBehaviour
     /// <summary>
     /// Speeds up the pace of the music
     /// </summary>
-    public static void SpeedUpPaceOfMusic()
+    public static void SpeedUpPaceOfMusic(float fraction)
     {
-        //_musicOutput.pitch += 0.001f;
+        _musicOutput.pitch += (0.25f / fraction);
     }
 
     /// <summary>

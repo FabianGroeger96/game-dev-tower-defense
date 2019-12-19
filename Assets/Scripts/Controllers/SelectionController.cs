@@ -65,10 +65,7 @@ public class SelectionController : MonoBehaviour
         {
             _gc.SetSelectedObject(_currentObjectCandiate);
         }
-        else if (Input.GetMouseButtonDown(1))
-        {
-            _gc.SetSelectedObject(null);
-        }
+
     }
 
     /// <summary>

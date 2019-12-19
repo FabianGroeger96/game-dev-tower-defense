@@ -56,5 +56,12 @@ public class KeyboardInputController : MonoBehaviour
         {
             _gc.TogglePauseMenu();
         }
+        
+        if (Input.GetKeyUp(KeyCode.E))
+        {
+            _gc.SetSelectedObject(null);
+        }
+        
+        
     }
 }

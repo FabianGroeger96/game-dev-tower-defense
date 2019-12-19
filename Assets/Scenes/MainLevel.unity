@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641234, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3891,7 +3891,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 4, y: -10, z: 3.1875, w: 1.5e-44}
+  m_BoundingSphereOverride: {x: 1e-45, y: 0, z: 0.00000066903885, w: 0.004956741}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -5135,6 +5135,12 @@ MonoBehaviour:
   freeLookSensitivity: 3
   zoomSensitivity: 10
   fastZoomSensitivity: 50
+  XLimitPositive: 10
+  XLimitNegative: -10
+  YLimitPositive: 50
+  YLimitNegative: 1
+  ZLimitPositive: 10
+  ZLimitNegative: -10
 --- !u!1 &963646030
 GameObject:
   m_ObjectHideFlags: 0
@@ -7926,7 +7932,7 @@ PrefabInstance:
     - target: {fileID: 264419236152057916, guid: 046c5c49b642e4238b54540849f0f18e,
         type: 3}
       propertyPath: initialHealth
-      value: 100
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 046c5c49b642e4238b54540849f0f18e, type: 3}

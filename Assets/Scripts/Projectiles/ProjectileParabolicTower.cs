@@ -12,19 +12,30 @@ public class ProjectileParabolicTower : Projectile
 {
     // the splash effect to play when a projectile hits the ground
     [SerializeField] Splash _splash;
+    
+    // angle of the shoot
+    [SerializeField] private float _angle;
 
     // reference to the projectiles rigid body
     private Rigidbody _rigidbody;
-
+    
     /// <summary>
     /// Launches the parabolic projectile.
     /// </summary>
     public override void Launch()
     {
         _rigidbody = GetComponent<Rigidbody>();
-        Vector3 direction = CalculateLaunchDirection();
-        direction.y = CalculateYComponent(direction.x, direction.z);
-        float speed = CalculateSpeed(direction);
+        Vector3 direction = new Vector3(0f, 1f, 0f);
+        if (_angle > 45f)
+        {
+            speed = 5f;
+        }
+        else
+        {
+            direction = CalculateLaunchDirection();
+            direction.y = CalculateYComponent(direction.x, direction.z);
+            speed = CalculateSpeed(direction);
+        }
         _rigidbody.AddForce(direction.normalized * speed, ForceMode.Impulse);
     }
 
@@ -36,7 +47,7 @@ public class ProjectileParabolicTower : Projectile
     /// <returns></returns>
     private float CalculateYComponent(float x, float z)
     {
-        return (float) Math.Sqrt((x * x) + (z * z) - (2 * x * z * Math.Cos(0.785398)));
+        return (float) Math.Sqrt((x * x) + (z * z) - (2 * x * z * Math.Cos(_angle * Mathf.Deg2Rad)));
     }
 
     /// <summary>
@@ -47,7 +58,7 @@ public class ProjectileParabolicTower : Projectile
     private float CalculateSpeed(Vector3 direction)
     {
         direction.y = 0;
-        double v = Math.Sqrt((direction.magnitude * 9.81f) / Math.Sin(1.5708));
+        double v = Math.Sqrt((direction.magnitude * 9.81f) / Math.Sin(2 * _angle * Mathf.Deg2Rad));
         return (float) v;
     }
 

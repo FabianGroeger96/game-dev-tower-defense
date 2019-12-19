@@ -35,7 +35,7 @@ public class Base : AttackableObject
         Destroy(effect, 6f);
         // call base deal damage method
         SoundController.PlayBaseHit();
-        SoundController.SpeedUpPaceOfMusic();
+        SoundController.SpeedUpPaceOfMusic(initialHealth);
         base.DealDamage(damage);
     }
 

@@ -11,19 +11,10 @@ public class ProjectileSpawner : MonoBehaviour
 
     // how much damage the projectile to spawn does
     private float _damage;
-
-    // the properties of the projectile
-    private Dictionary<string, float> _projectileProperties;
-
-    /// <summary>
-    /// Sets the projectile properties to the given ones.
-    /// </summary>
-    /// <param name="properties">projectile properties</param>
-    public void SetProjectileProperties(Dictionary<string, float> properties)
-    {
-        _projectileProperties = properties;
-    }
-
+    
+    // how fast is the projectile when spawned
+    private float _speed;
+    
     /// <summary>
     /// Sets the projectile to spawn to the given one.
     /// </summary>
@@ -41,8 +32,8 @@ public class ProjectileSpawner : MonoBehaviour
     {
         var projectile = Instantiate(_projectile, transform.position, Quaternion.identity);
         projectile.SetTarget(target);
+        projectile.SetProjectileSpeed(_speed);
         projectile.SetProjectileDamage(_damage);
-        projectile.SetProjectileProperties(_projectileProperties);
         projectile.Launch();
     }
 
@@ -53,5 +44,14 @@ public class ProjectileSpawner : MonoBehaviour
     public void SetProjectileDamage(float damage)
     {
         _damage = damage;
+    }
+
+    /// <summary>
+    /// Sets the speed of the projectile.
+    /// </summary>
+    /// <param name="speed">speed of the projectile</param>
+    public void SetProjectileSpeed(float projectileSpeed)
+    {
+        _speed = projectileSpeed;
     }
 }

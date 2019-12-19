@@ -1,17 +1,7 @@
 ﻿using UnityEngine;
 
 /// <summary>
-/// A simple free camera to be added to a Unity game object.
-/// r
-/// Keys:
-///	wasd / arrows	- movement
-///	q/e 			- up/down (local space)
-///	r/f 			- up/down (world space)
-///	pageup/pagedown	- up/down (world space)
-///	hold shift		- enable fast movement mode
-///	right mouse  	- enable free look
-///	mouse			- free look / rotation
-///     
+/// Camera controller for camera movement and look around.
 /// </summary>
 public class CameraController : MonoBehaviour
 {
@@ -45,53 +35,52 @@ public class CameraController : MonoBehaviour
     /// </summary>
     private bool looking = false;
 
+    public float XLimitPositive = 10f;
+    public float XLimitNegative = -10f;
+    public float YLimitPositive = 50f;
+    public float YLimitNegative = 1f;
+    public float ZLimitPositive = 10f;
+    public float ZLimitNegative = -10f;
+
+    private Vector3 initialPosition;
+
+    private void Awake()
+    {
+        initialPosition = transform.position;
+    }
+    
     void Update()
     {
         var fastMode = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
         var movementSpeed = fastMode ? this.fastMovementSpeed : this.movementSpeed;
-
+        Vector3 newPosition = transform.position;
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
-            transform.position = transform.position + (-transform.right * movementSpeed * Time.deltaTime);
+            newPosition = newPosition + (-transform.right * movementSpeed * Time.deltaTime);
+            SetPositionWhenEligable(newPosition);
         }
 
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
-            transform.position = transform.position + (transform.right * movementSpeed * Time.deltaTime);
-        }
-
-        if (Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.UpArrow))
-        {
-            transform.position = transform.position + (transform.forward * movementSpeed * Time.deltaTime);
-        }
-
-        if (Input.GetKey(KeyCode.E) || Input.GetKey(KeyCode.DownArrow))
-        {
-            transform.position = transform.position + (-transform.forward * movementSpeed * Time.deltaTime);
+            newPosition = newPosition + (transform.right * movementSpeed * Time.deltaTime);
+            SetPositionWhenEligable(newPosition);
         }
 
         if (Input.GetKey(KeyCode.W))
         {
-            transform.position = transform.position + (transform.up * movementSpeed * Time.deltaTime);
-            transform.position = transform.position + (transform.forward * movementSpeed * Time.deltaTime);
+            newPosition = newPosition + (transform.up * movementSpeed * Time.deltaTime);
+            newPosition = newPosition + (transform.forward * movementSpeed * Time.deltaTime);
+            SetPositionWhenEligable(newPosition);
         }
 
         if (Input.GetKey(KeyCode.S))
         {
-            transform.position = transform.position + (-transform.up * movementSpeed * Time.deltaTime);
-            transform.position = transform.position + (-transform.forward * movementSpeed * Time.deltaTime);
+            newPosition = newPosition + (-transform.up * movementSpeed * Time.deltaTime);
+            newPosition = newPosition + (-transform.forward * movementSpeed * Time.deltaTime);
+            SetPositionWhenEligable(newPosition);
         }
-
-        if (Input.GetKey(KeyCode.R) || Input.GetKey(KeyCode.PageUp))
-        {
-            transform.position = transform.position + (Vector3.up * movementSpeed * Time.deltaTime);
-        }
-
-        if (Input.GetKey(KeyCode.F) || Input.GetKey(KeyCode.PageDown))
-        {
-            transform.position = transform.position + (-Vector3.up * movementSpeed * Time.deltaTime);
-        }
-
+        
+        
         if (looking)
         {
             float newRotationX = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * freeLookSensitivity;
@@ -103,7 +92,8 @@ public class CameraController : MonoBehaviour
         if (axis != 0)
         {
             var zoomSensitivity = fastMode ? this.fastZoomSensitivity : this.zoomSensitivity;
-            transform.position = transform.position + transform.forward * axis * zoomSensitivity;
+            newPosition = newPosition + transform.forward * axis * zoomSensitivity;
+            SetPositionWhenEligable(newPosition);
         }
 
         if (Input.GetKeyDown(KeyCode.Mouse1))
@@ -114,6 +104,40 @@ public class CameraController : MonoBehaviour
         {
             StopLooking();
         }
+    }
+
+    private void SetPositionWhenEligable(Vector3 newPosition)
+    {
+        if (CheckEligablePositon(newPosition))
+        {
+            transform.position = newPosition;
+        }
+    }
+
+    private bool CheckEligablePositon(Vector3 newPosition)
+    {
+        if (newPosition.x < XLimitNegative || newPosition.x > XLimitPositive)
+        {
+            return false;
+        }
+        
+        if (newPosition.y < YLimitNegative || newPosition.y > YLimitPositive)
+        {
+            return false;
+        }
+        
+        if (newPosition.z < ZLimitNegative || newPosition.z > ZLimitPositive)
+        {
+            return false;
+        }
+
+        return true;
+
+    }
+
+    public void ResetToInitialPosition()
+    {
+        transform.position = initialPosition;
     }
 
     void OnDisable()

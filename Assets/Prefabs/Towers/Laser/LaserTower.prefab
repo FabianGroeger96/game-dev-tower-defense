@@ -198,16 +198,17 @@ MonoBehaviour:
     type: 3}
   healthCanvas: {fileID: 2606376397100097272}
   healthBar: {fileID: 1064687625820784442}
-  _projectile: {fileID: -1127460024815407357, guid: 832d74b3473a3c747a0f20560a57525d,
-    type: 3}
-  _projectilePropertiesKeys: []
-  _projectilePropertiesValues: []
-  _damage: 1
   _placeableMaterial: {fileID: 2100000, guid: f9b0f2b0252d05e42b29a39291ff5bb8, type: 2}
   _unplaceableMaterial: {fileID: 2100000, guid: 9cabaff90a7dd8e49a001278f8251c26,
     type: 2}
   _placedMaterial: {fileID: 2100000, guid: 057c047e25f376b4b82a543332b80fbe, type: 2}
-  _shootPace: 1.5
+  _projectileDamages:
+  - 2
+  _projectiles:
+  - {fileID: -1127460024815407357, guid: 832d74b3473a3c747a0f20560a57525d, type: 3}
+  _projectilesShootPaces:
+  - 2
+  _projectileSpeed: 0
   costs: 600
   name: Laser
   upgradeEffect: {fileID: 1000010680075956, guid: 936f4d229a9214eb39def0a4bb9bf5d9,

@@ -351,16 +351,20 @@ MonoBehaviour:
     type: 3}
   healthCanvas: {fileID: 6855229857588822380}
   healthBar: {fileID: 8293944278840917514}
-  _projectile: {fileID: 1512461173078031657, guid: b402d11139d4e944a822d660b1959d99,
-    type: 3}
-  _projectilePropertiesKeys: []
-  _projectilePropertiesValues: []
-  _damage: 0
   _placeableMaterial: {fileID: 2100000, guid: f9b0f2b0252d05e42b29a39291ff5bb8, type: 2}
   _unplaceableMaterial: {fileID: 2100000, guid: 9cabaff90a7dd8e49a001278f8251c26,
     type: 2}
   _placedMaterial: {fileID: 2100000, guid: 057c047e25f376b4b82a543332b80fbe, type: 2}
-  _shootPace: 1.5
+  _projectileDamages:
+  - 0
+  - 0
+  _projectiles:
+  - {fileID: 1512461173078031657, guid: b402d11139d4e944a822d660b1959d99, type: 3}
+  - {fileID: 810617596816241025, guid: 5f1c14898e1f64b2fadd09243887cb71, type: 3}
+  _projectilesShootPaces:
+  - 1.5
+  - 5
+  _projectileSpeed: 0
   costs: 300
   name: Parabolic
   upgradeEffect: {fileID: 1000010680075956, guid: 936f4d229a9214eb39def0a4bb9bf5d9,

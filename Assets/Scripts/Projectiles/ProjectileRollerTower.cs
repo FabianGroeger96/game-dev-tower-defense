@@ -20,7 +20,7 @@ public class ProjectileRollerTower : Projectile
     {
         _rigidbody = GetComponent<Rigidbody>();
         var direction = CalculateLaunchDirection();
-        _rigidbody.AddForce(direction * properties["speed"], ForceMode.VelocityChange);
+        _rigidbody.AddForce(direction * speed, ForceMode.Impulse);
     }
 
     /// <summary>

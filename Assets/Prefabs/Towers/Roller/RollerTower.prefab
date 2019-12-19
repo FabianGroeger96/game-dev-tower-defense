@@ -57,18 +57,20 @@ MonoBehaviour:
     type: 3}
   healthCanvas: {fileID: 8690134696032793808}
   healthBar: {fileID: 6369260553121906098}
-  _projectile: {fileID: 7885087585714350708, guid: ff3fab6d9be94f140b08db0680ac98dc,
-    type: 3}
-  _projectilePropertiesKeys:
-  - speed
-  _projectilePropertiesValues:
-  - 5
-  _damage: 0.5
   _placeableMaterial: {fileID: 2100000, guid: f9b0f2b0252d05e42b29a39291ff5bb8, type: 2}
   _unplaceableMaterial: {fileID: 2100000, guid: 9cabaff90a7dd8e49a001278f8251c26,
     type: 2}
   _placedMaterial: {fileID: 2100000, guid: 057c047e25f376b4b82a543332b80fbe, type: 2}
-  _shootPace: 0.5
+  _projectileDamages:
+  - 1
+  - 100
+  _projectiles:
+  - {fileID: 7885087585714350708, guid: ff3fab6d9be94f140b08db0680ac98dc, type: 3}
+  - {fileID: 4473764852087428128, guid: f45aedbc134264b88bcda9ae2a460e92, type: 3}
+  _projectilesShootPaces:
+  - 0.5
+  - 5
+  _projectileSpeed: 1
   costs: 200
   name: Roller
   upgradeEffect: {fileID: 1000010680075956, guid: 936f4d229a9214eb39def0a4bb9bf5d9,

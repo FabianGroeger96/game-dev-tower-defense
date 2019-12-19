@@ -63,6 +63,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _splash: {fileID: 8797760698044668585, guid: a4e389a1ffc84304590fc729a5539eb1, type: 3}
+  _angle: 45
 --- !u!114 &-2295625890693006631
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,7 +163,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7850479826622790203}
-  m_Material: {fileID: 13400000, guid: 8865d9bd82b014c48ba64d42e093d7a4, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2

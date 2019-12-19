@@ -12,29 +12,35 @@ using Vector3 = UnityEngine.Vector3;
 /// </summary>
 public class Tower : AttackableObject
 {
-    // the projectile the tower shoots
-    [SerializeField] private Projectile _projectile;
-    // the projectile properties keys for the projectile
-    [SerializeField] private string[] _projectilePropertiesKeys;
-    // the projectile properties values for the projectile
-    [SerializeField] private float[] _projectilePropertiesValues;
-    // the damage the tower does to the enemies
-    [SerializeField] private float _damage;
-    // reference to the placable material
     [SerializeField] private Material _placeableMaterial;
     // reference to the unplaceable material
     [SerializeField] private Material _unplaceableMaterial;
     // reference to the placed material
     [SerializeField] private Material _placedMaterial;
-    // in which rate the tower shoots
-    [SerializeField] private float _shootPace;
-
-    // multiplier of the shoot pace, used to power up the tower
+    
+    // array to set projectile damage corresponding to projectile
+    [SerializeField] private float[] _projectileDamages;
+    // array of possible projectiles
+    [SerializeField] private Projectile[] _projectiles;
+    // array of projetile shootpace corresponding to projectile
+    [SerializeField] private float[] _projectilesShootPaces;
+    // projectile base speed - only one value as physics is used to shoot
+    [SerializeField] private float _projectileSpeed;
+    
+    // multiplier of the shootpace, used to power up the tower
     private float _shootPaceMultiplier;
     // multiplier of the damage, used to power up the tower
     private float _damageMultiplier;
     
-    // cost of the tower
+    // if tower is in original projectile mode
+    private bool _orginalProjectileMode;
+    // current projectile
+    private Projectile _currentProjectile;
+    // current projectile damage
+    private float _currentProjectileDamage;
+    // current shoot pace
+    private float _currentShootPace;
+
     [SerializeField] public int costs;
     // name of the tower
     [SerializeField] public string name;
@@ -77,7 +83,10 @@ public class Tower : AttackableObject
     {
         _timer = 0f;
         _placed = false;
-
+        _orginalProjectileMode = true;
+        _currentProjectile = _projectiles[1];
+        _currentProjectileDamage = _projectileDamages[1];
+        _currentShootPace = _projectilesShootPaces[1];
         _spawner = GetComponentInChildren<ProjectileSpawner>();
         _targetFinder = GetComponentInChildren<TargetFinder>();
         _omc = GetComponent<ObjectMaterialController>();
@@ -95,28 +104,10 @@ public class Tower : AttackableObject
         health = initialHealth;
 
         _omc.SetBaseMaterial(_placedMaterial);
-
-        _spawner.SetProjectileDamage(_damage);
-        _spawner.SetProjectile(_projectile);
-        _spawner.SetProjectileProperties(CreateProjectilePropertiesDictionary());
+        _spawner.SetProjectileSpeed(_projectileSpeed);
+        _spawner.SetProjectileDamage(_currentProjectileDamage);
+        _spawner.SetProjectile(_currentProjectile);
         SetLayerToPlaceMode();
-    }
-    
-    /// <summary>
-    /// Creates the projectile properties dictionary for the projectile spawner.
-    /// </summary>
-    /// <returns>projectile proberties dictionary</returns>
-    private Dictionary<string, float> CreateProjectilePropertiesDictionary()
-    {
-        Dictionary<string, float> dict = new Dictionary<string, float>();
-        int i = 0;
-        foreach (float value in _projectilePropertiesValues)
-        {
-            dict.Add(_projectilePropertiesKeys[i], value);
-            i++;
-        }
-
-        return dict;
     }
     
     /// <summary>
@@ -179,9 +170,8 @@ public class Tower : AttackableObject
         {
             RotateToTarget();
             _timer += Time.deltaTime;
-            if (_timer > (_shootPace * _shootPaceMultiplier))
+            if (_timer > (_currentShootPace * _shootPaceMultiplier))
             {
-                _spawner.SetProjectileProperties(CreateProjectilePropertiesDictionary());
                 _spawner.Fire(_targetFinder.target.transform);
                 _timer = 0f;
             }
@@ -305,7 +295,33 @@ public class Tower : AttackableObject
         upgradeCost += upgradeCost;
         _damageMultiplier += 0.25f;
         _shootPaceMultiplier -= 0.15f;
-        _spawner.SetProjectileDamage(_damage * _damageMultiplier);
+        _spawner.SetProjectileDamage(_currentProjectileDamage * _damageMultiplier);
+    }
+
+    /// <summary>
+    /// Changes the projectile of the tower
+    /// </summary>
+    public void ChangeProjectileMode()
+    {
+        if (_projectiles.Length == 1)
+        {
+            return;
+        }
+        
+        if (_orginalProjectileMode)
+        {
+            _currentProjectile = _projectiles[1];
+            _currentProjectileDamage = _projectileDamages[1];
+        }
+        else
+        {
+            _currentProjectile = _projectiles[0];
+            _currentProjectileDamage = _projectileDamages[0];
+        }
+        _spawner.SetProjectile(_currentProjectile);
+        _spawner.SetProjectileDamage(_currentProjectileDamage);
+        _orginalProjectileMode = !_orginalProjectileMode;
+        
     }
     
     /// <summary>

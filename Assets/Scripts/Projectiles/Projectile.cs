@@ -8,6 +8,9 @@ public abstract class Projectile : MonoBehaviour
 {
     // damage of the projectile when it hits
     protected float damage;
+    
+    // speed of the projectile
+    protected float speed;
 
     // target the projectile tries to hit
     protected Transform target;
@@ -23,15 +26,16 @@ public abstract class Projectile : MonoBehaviour
     {
         this.target = target;
     }
-
+    
     /// <summary>
-    /// Sets the properties of the projectile.
+    /// Sets the speed of the projectile.
     /// </summary>
-    /// <param name="properties">the properties of the projectile</param>
-    public void SetProjectileProperties(Dictionary<string, float> properties)
+    /// <param name="speed">the properties of the projectile</param>
+    public void SetProjectileSpeed(float speed)
     {
-        this.properties = properties;
+        this.speed = speed;
     }
+    
 
     /// <summary>
     /// Sets the damage of the projectile.
