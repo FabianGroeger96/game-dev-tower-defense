@@ -54,7 +54,7 @@ MonoBehaviour:
   healthCanvas: {fileID: 8474694177611196130}
   healthBar: {fileID: 5951851597843653315}
   earning: 100
-  speed: 0.8
+  speed: 0.6
   damage: 5
   level: 1
   name: Flying

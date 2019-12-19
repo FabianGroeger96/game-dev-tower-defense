@@ -345,7 +345,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 010df9ffff681c44fa416171344192e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialHealth: 15
+  initialHealth: 50
   health: 0
   deathEffect: {fileID: 1000010680075956, guid: bb66780c8baa74bb8a8e23eeda27ce7e,
     type: 3}
@@ -363,7 +363,7 @@ MonoBehaviour:
   - {fileID: 810617596816241025, guid: 5f1c14898e1f64b2fadd09243887cb71, type: 3}
   _projectilesShootPaces:
   - 1.5
-  - 3
+  - 1.5
   _projectileSpeed: 0
   costs: 300
   name: Parabolic

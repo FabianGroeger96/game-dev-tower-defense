@@ -404,7 +404,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4d5bf2da6851754d8c9b56447757886, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialHealth: 20
+  initialHealth: 10
   health: 0
   deathEffect: {fileID: 1000010680075956, guid: ea366354e3b4042b7a185ed11e891460,
     type: 3}
@@ -412,13 +412,13 @@ MonoBehaviour:
   healthBar: {fileID: 1358466019872254874}
   earning: 200
   speed: 0.5
-  damage: 1
+  damage: 10
   level: 1
   name: Tank
   startingWaypoint: 1
   enemyMaterial: {fileID: 2100000, guid: c30a3cf3470c64283980c04d5cd00616, type: 2}
-  _damage: 7
-  _shootPace: 5
+  _damage: 3
+  _shootPace: 3
   _shootPaceMultiplier: 1
   damageEffect: {fileID: 5770199838806611599, guid: b5421919769ec4f35a2df2cd2067b10f,
     type: 3}

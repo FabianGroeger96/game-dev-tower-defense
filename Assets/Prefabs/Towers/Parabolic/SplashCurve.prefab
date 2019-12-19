@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8797760698044668585}
   - component: {fileID: 8303852178881959377}
   m_Layer: 8
-  m_Name: Splash
+  m_Name: SplashCurve
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4825,7 +4825,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5484f598ff6e9b24aa4125e89007e6a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damagePerParticle: 0.2
+  damagePerParticle: 0.25
   hits: 0
 --- !u!114 &8303852178881959377
 MonoBehaviour:

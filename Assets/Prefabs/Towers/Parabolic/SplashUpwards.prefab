@@ -10,7 +10,12 @@ PrefabInstance:
     - target: {fileID: 6319400460926888650, guid: a4e389a1ffc84304590fc729a5539eb1,
         type: 3}
       propertyPath: m_Name
-      value: SplashCurve
+      value: SplashUpwards
+      objectReference: {fileID: 0}
+    - target: {fileID: 8797760698044668585, guid: a4e389a1ffc84304590fc729a5539eb1,
+        type: 3}
+      propertyPath: damagePerParticle
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7700124533417459910, guid: a4e389a1ffc84304590fc729a5539eb1,
         type: 3}

@@ -2773,6 +2773,7 @@ MonoBehaviour:
   - {fileID: 58050485693951288, guid: 6900bf677fe3ad94ebcb821d4b0d36e2, type: 3}
   - {fileID: 6697772683473343297, guid: 32e080bc4fc48ae44978f950b33fe20c, type: 3}
   gameState: 0
+  gameMode: 0
   initialMoneyCount: 500
   moneyCount: 0
   ownBase: {fileID: 1615011820}
@@ -2782,83 +2783,85 @@ MonoBehaviour:
     count: 4
     rate: 0.5
     level: 1
+  - enemy: {fileID: 7435060024368221121, guid: 2e61a0cb8ca12834a8c87b5bb36b10a0, type: 3}
+    count: 6
+    rate: 0.5
+    level: 1
+  - enemy: {fileID: 7435060024368221121, guid: ded08a0057bd547ac84d6dcad37b01ff, type: 3}
+    count: 6
+    rate: 0.5
+    level: 1
   - enemy: {fileID: 8497885154155726464, guid: 4826147f3e98b4017a9a0d4b1fc8ac19, type: 3}
     count: 1
     rate: 1
     level: 1
   - enemy: {fileID: 7435060024368221121, guid: ded08a0057bd547ac84d6dcad37b01ff, type: 3}
-    count: 8
-    rate: 2
+    count: 6
+    rate: 1
     level: 1
   - enemy: {fileID: 1008028774708164976, guid: 810181d5e8fb70c4eadbd8c42ca9ac61, type: 3}
-    count: 3
+    count: 2
+    rate: 0.5
+    level: 1
+  - enemy: {fileID: 8497885154155726464, guid: 4826147f3e98b4017a9a0d4b1fc8ac19, type: 3}
+    count: 2
     rate: 0.5
     level: 1
   - enemy: {fileID: 7435060024368221121, guid: 2e61a0cb8ca12834a8c87b5bb36b10a0, type: 3}
-    count: 8
+    count: 10
+    rate: 1
+    level: 1
+  - enemy: {fileID: 1008028774708164976, guid: 810181d5e8fb70c4eadbd8c42ca9ac61, type: 3}
+    count: 4
     rate: 0.5
     level: 1
-  - enemy: {fileID: 7435060024368221121, guid: 2e61a0cb8ca12834a8c87b5bb36b10a0, type: 3}
+  - enemy: {fileID: 7435060024368221121, guid: ded08a0057bd547ac84d6dcad37b01ff, type: 3}
     count: 12
     rate: 1
     level: 1
   - enemy: {fileID: 7435060024368221121, guid: ded08a0057bd547ac84d6dcad37b01ff, type: 3}
     count: 16
-    rate: 2
+    rate: 1
     level: 1
   - enemy: {fileID: 8497885154155726464, guid: 4826147f3e98b4017a9a0d4b1fc8ac19, type: 3}
     count: 3
     rate: 0.5
     level: 1
   - enemy: {fileID: 7435060024368221121, guid: 2e61a0cb8ca12834a8c87b5bb36b10a0, type: 3}
-    count: 8
-    rate: 2
-    level: 2
+    count: 14
+    rate: 1
+    level: 1
   - enemy: {fileID: 7435060024368221121, guid: 2e61a0cb8ca12834a8c87b5bb36b10a0, type: 3}
-    count: 12
-    rate: 2
-    level: 2
-  - enemy: {fileID: 8497885154155726464, guid: 4826147f3e98b4017a9a0d4b1fc8ac19, type: 3}
-    count: 6
-    rate: 2
+    count: 16
+    rate: 1.5
+    level: 1
+  - enemy: {fileID: 1008028774708164976, guid: 810181d5e8fb70c4eadbd8c42ca9ac61, type: 3}
+    count: 4
+    rate: 1
     level: 1
   - enemy: {fileID: 7435060024368221121, guid: ded08a0057bd547ac84d6dcad37b01ff, type: 3}
     count: 20
-    rate: 2
+    rate: 1
+    level: 1
+  - enemy: {fileID: 8497885154155726464, guid: 4826147f3e98b4017a9a0d4b1fc8ac19, type: 3}
+    count: 4
+    rate: 0.5
     level: 2
-  - enemy: {fileID: 8497885154155726464, guid: 4826147f3e98b4017a9a0d4b1fc8ac19, type: 3}
-    count: 4
-    rate: 2
-    level: 1
-  - enemy: {fileID: 8497885154155726464, guid: 4826147f3e98b4017a9a0d4b1fc8ac19, type: 3}
-    count: 4
-    rate: 2
-    level: 1
-  - enemy: {fileID: 8497885154155726464, guid: 4826147f3e98b4017a9a0d4b1fc8ac19, type: 3}
-    count: 4
-    rate: 2
-    level: 1
-  - enemy: {fileID: 8497885154155726464, guid: 4826147f3e98b4017a9a0d4b1fc8ac19, type: 3}
+  - enemy: {fileID: 7435060024368221121, guid: 2e61a0cb8ca12834a8c87b5bb36b10a0, type: 3}
+    count: 14
+    rate: 1
+    level: 2
+  - enemy: {fileID: 1008028774708164976, guid: 810181d5e8fb70c4eadbd8c42ca9ac61, type: 3}
     count: 4
     rate: 1
-    level: 1
-  - enemy: {fileID: 8497885154155726464, guid: 4826147f3e98b4017a9a0d4b1fc8ac19, type: 3}
-    count: 4
+    level: 2
+  - enemy: {fileID: 7435060024368221121, guid: ded08a0057bd547ac84d6dcad37b01ff, type: 3}
+    count: 20
     rate: 1
-    level: 1
-  - enemy: {fileID: 8497885154155726464, guid: 4826147f3e98b4017a9a0d4b1fc8ac19, type: 3}
-    count: 4
-    rate: 1
-    level: 1
-  - enemy: {fileID: 8497885154155726464, guid: 4826147f3e98b4017a9a0d4b1fc8ac19, type: 3}
-    count: 4
-    rate: 1
-    level: 1
-  - enemy: {fileID: 8497885154155726464, guid: 4826147f3e98b4017a9a0d4b1fc8ac19, type: 3}
-    count: 4
-    rate: 1
-    level: 1
+    level: 2
   timeBetweenWaves: 5
+  startCanvas: {fileID: 0}
+  selectCanvas: {fileID: 0}
 --- !u!114 &505207296
 MonoBehaviour:
   m_ObjectHideFlags: 0
