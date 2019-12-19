@@ -312,11 +312,13 @@ public class Tower : AttackableObject
         {
             _currentProjectile = _projectiles[1];
             _currentProjectileDamage = _projectileDamages[1];
+            _currentShootPace = _projectilesShootPaces[1];
         }
         else
         {
             _currentProjectile = _projectiles[0];
             _currentProjectileDamage = _projectileDamages[0];
+            _currentShootPace = _projectilesShootPaces[0];
         }
         _spawner.SetProjectile(_currentProjectile);
         _spawner.SetProjectileDamage(_currentProjectileDamage);

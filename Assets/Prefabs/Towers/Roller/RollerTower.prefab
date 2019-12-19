@@ -63,10 +63,10 @@ MonoBehaviour:
   _placedMaterial: {fileID: 2100000, guid: 057c047e25f376b4b82a543332b80fbe, type: 2}
   _projectileDamages:
   - 0.5
-  - 100
+  - 8
   _projectiles:
   - {fileID: 7885087585714350708, guid: ff3fab6d9be94f140b08db0680ac98dc, type: 3}
-  - {fileID: 4473764852087428128, guid: f45aedbc134264b88bcda9ae2a460e92, type: 3}
+  - {fileID: 6015529338413531003, guid: f45aedbc134264b88bcda9ae2a460e92, type: 3}
   _projectilesShootPaces:
   - 0.5
   - 3
@@ -426,7 +426,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8790549950804458610}
-  - {fileID: 6009981959028942391}
+  - {fileID: 1043266721494113991}
   m_Father: {fileID: 420576984647197531}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -859,7 +859,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff3fab6d9be94f140b08db0680ac98dc, type: 3}
---- !u!4 &6009981959028942391 stripped
+--- !u!4 &1043266721494113991 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6709751229855676548, guid: ff3fab6d9be94f140b08db0680ac98dc,
     type: 3}
