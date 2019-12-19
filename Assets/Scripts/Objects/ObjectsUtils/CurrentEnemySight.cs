@@ -1,8 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using TMPro;
-using UnityEngine;
+﻿using UnityEngine;
 
+/// <summary>
+/// Represents the current enemies sight.
+/// </summary>
 public class CurrentEnemySight : MonoBehaviour
 {
     private LineRenderer _line;

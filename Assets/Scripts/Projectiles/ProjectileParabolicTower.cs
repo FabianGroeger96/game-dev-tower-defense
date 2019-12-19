@@ -1,40 +1,24 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
-using Matrix4x4 = UnityEngine.Matrix4x4;
 using Quaternion = UnityEngine.Quaternion;
 using Vector3 = UnityEngine.Vector3;
-using Vector4 = UnityEngine.Vector4;
 
+/// <summary>
+/// Represents the projectile of the parabolic tower.
+/// It inherits from the projectile.
+/// </summary>
 public class ProjectileParabolicTower : Projectile
 {
-    private float _angleInRad;
-    private Rigidbody _rigidbody;
+    // the splash effect to play when a projectile hits the ground
     [SerializeField] Splash _splash;
 
-    private float DegreeToRad(float degree)
-    {
-        return (float) (degree * (Math.PI / 180));
-    }
+    // reference to the projectiles rigid body
+    private Rigidbody _rigidbody;
 
-    public static Matrix4x4 RotateZ(float aAngleRad)
-    {
-        Matrix4x4 m = Matrix4x4.identity; // cos -sin 0   0
-        m.m00 = m.m11 = Mathf.Cos(aAngleRad); // sin  cos 0   0
-        m.m10 = Mathf.Sin(aAngleRad); //  0   0   1   0
-        m.m01 = -m.m10; //  0   0   0   1
-        return m;
-    }
-
-    public static Matrix4x4 RotateY(float aAngleRad)
-    {
-        Matrix4x4 m = Matrix4x4.identity; // cos  0  sin  0
-        m.m00 = m.m22 = Mathf.Cos(aAngleRad); //  0   1   0   0
-        m.m02 = Mathf.Sin(aAngleRad); //-sin  0  cos  0
-        m.m20 = -m.m02; //  0   0   0   1
-        return m;
-    }
-
+    /// <summary>
+    /// Launches the parabolic projectile.
+    /// </summary>
     public override void Launch()
     {
         _rigidbody = GetComponent<Rigidbody>();
@@ -44,11 +28,22 @@ public class ProjectileParabolicTower : Projectile
         _rigidbody.AddForce(direction.normalized * speed, ForceMode.Impulse);
     }
 
+    /// <summary>
+    /// Calculates the Y component based on the X and Y one to fly in a curve.
+    /// </summary>
+    /// <param name="x">X component</param>
+    /// <param name="z">Y component</param>
+    /// <returns></returns>
     private float CalculateYComponent(float x, float z)
     {
         return (float) Math.Sqrt((x * x) + (z * z) - (2 * x * z * Math.Cos(0.785398)));
     }
 
+    /// <summary>
+    /// Calculates the speed of the projectile in a given direction.
+    /// </summary>
+    /// <param name="direction">in which direction the projectile has to move</param>
+    /// <returns></returns>
     private float CalculateSpeed(Vector3 direction)
     {
         direction.y = 0;
@@ -56,12 +51,20 @@ public class ProjectileParabolicTower : Projectile
         return (float) v;
     }
 
+    /// <summary>
+    /// Calculates the launch direction.
+    /// </summary>
+    /// <returns>Launch direction</returns>
     private Vector3 CalculateLaunchDirection()
     {
         Vector3 direction = target.position - transform.position;
         return direction;
     }
 
+    /// <summary>
+    /// Event when the projectile collides with the ground.
+    /// </summary>
+    /// <param name="other">object the projectile collides with</param>
     private void OnCollisionEnter(Collision other)
     {
         Instantiate(_splash, transform.position, Quaternion.Euler(270f, 0f, 0f));
@@ -71,6 +74,10 @@ public class ProjectileParabolicTower : Projectile
         }
     }
 
+    /// <summary>
+    /// Waits for 1f second and then destroys the projectile.
+    /// </summary>
+    /// <returns>NONE</returns>
     IEnumerator Wait()
     {
         yield return new WaitForSeconds(1f);

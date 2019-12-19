@@ -2,20 +2,35 @@
 using UnityEngine;
 using UnityEngine.Experimental.PlayerLoop;
 
+/// <summary>
+/// Represents a shooting enemy in the game, which can damage the towers.
+/// It inherits from enemy.
+/// </summary>
 public class ShootingEnemy : Enemy
 {
+    // game variables to balance the shooting enemy and specifies how much damage it makes
     [SerializeField] private float _damage;
     [SerializeField] private float _shootPace;
     [SerializeField] private float _shootPaceMultiplier;
     
-    private TargetFinder _targetFinder;
-    private LineRenderer _lr;
-    private Tower _tower;
-    private bool _launched;
+    // the effect to play when it damages a tower
     public GameObject damageEffect;
     
+    // to find the next target to attack
+    private TargetFinder _targetFinder;
+    // to render the line (laser)
+    private LineRenderer _lr;
+    // represents the tower to attack
+    private Tower _tower;
+    // specifies if the laser has been fired yet
+    private bool _launched;
+    // specifies if the laser can shoot again
     private float _timer;
     
+    /// <summary>
+    /// Awake is being used to initialize all the reference the class needs,
+    /// and to bring it to an initial state.
+    /// </summary>
     void Awake()
     {
         base.Awake();
@@ -26,6 +41,22 @@ public class ShootingEnemy : Enemy
         _lr = GetComponentInChildren<LineRenderer>();
     }
     
+    /// <summary>
+    /// Within every frame, it checks if the enemy can attack a target.
+    /// </summary>
+    protected void Update()
+    {
+        base.Update();
+        act();
+        if (_launched)
+        {
+            _lr.SetPosition(0, transform.position);
+        }
+    }
+    
+    /// <summary>
+    /// Checks if a target to damage is available.
+    /// </summary>
     private void act()
     {
         if (_targetFinder.target != null)
@@ -39,7 +70,10 @@ public class ShootingEnemy : Enemy
             }
         }
     }
-
+    
+    /// <summary>
+    /// Shoots at a target.
+    /// </summary>
     private void Shoot()
     {
         _lr = GetComponent<LineRenderer>();
@@ -52,6 +86,10 @@ public class ShootingEnemy : Enemy
         StartCoroutine(Wait());
     }
     
+    /// <summary>
+    /// Waits for 0.5f seconds and then deals damage to the tower.
+    /// </summary>
+    /// <returns>NONE</returns>
     IEnumerator Wait()
     {
         yield return new WaitForSeconds(0.5f);
@@ -61,15 +99,5 @@ public class ShootingEnemy : Enemy
         }
         _launched = false;
         _lr.SetPosition(1, transform.position);
-    }
-    
-    protected void Update()
-    {
-        base.Update();
-        act();
-        if (_launched)
-        {
-            _lr.SetPosition(0, transform.position);
-        }
     }
 }

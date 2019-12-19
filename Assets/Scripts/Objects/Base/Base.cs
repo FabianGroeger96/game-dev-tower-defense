@@ -1,21 +1,33 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+/// <summary>
+/// Represents the "home" base of the game, which the enemies try to destroy.
+/// </summary>
 public class Base : AttackableObject
 {
-    private GameManager _gc;
-    private bool _killed = false;
-
+    // the effect it plays when the base is destroyed
     public GameObject damageEffect;
 
+    // reference to the GameManager, to change the state of the game
+    private GameManager _gc;
+
+    // if the base has been killed yet
+    private bool _killed = false;
+
+    /// <summary>
+    /// Awake is being used to initialize all the reference the class needs,
+    /// and to bring it to an initial state.
+    /// </summary>
     private void Awake()
     {
         health = initialHealth;
         _gc = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
+    /// <summary>
+    /// Deals damage to the base, and kills it if the health is zero.
+    /// </summary>
+    /// <param name="damage">Damage to subtract from the base</param>
     public new void DealDamage(float damage)
     {
         // play damage effect
@@ -27,6 +39,9 @@ public class Base : AttackableObject
         base.DealDamage(damage);
     }
 
+    /// <summary>
+    /// Will be called when the health of the base reaches zero, it specifies what to do when the base is killed.
+    /// </summary>
     protected override void Die()
     {
         // check if base isn't killed yet
