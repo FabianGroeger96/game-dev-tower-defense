@@ -299,7 +299,7 @@ public class Tower : AttackableObject
     }
 
     /// <summary>
-    /// Changes the projectile of the tower
+    /// Changes the projectile of the tower.
     /// </summary>
     public void ChangeProjectileMode()
     {

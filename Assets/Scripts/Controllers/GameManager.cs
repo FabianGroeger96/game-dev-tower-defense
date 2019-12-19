@@ -17,7 +17,20 @@ public class GameManager : MonoBehaviour
         Running,
         GameOver,
         Finished
-    };
+    }
+    
+    /// <summary>
+    /// Represents the game mode.
+    /// Possible - easy
+    /// Expert - medium
+    /// Insane - very hard
+    /// </summary>
+    public enum GameMode
+    {
+        Possible,
+        Expert,
+        Insane
+    }
 
     /// <summary>
     /// Represents the Input mode of the game.
@@ -33,6 +46,8 @@ public class GameManager : MonoBehaviour
     
     // controls the game state
     public GameState gameState = GameState.Init;
+    // controls the game mode
+    public GameMode gameMode = GameMode.Possible;
     
     // initial money count of the game
     public int initialMoneyCount = 1000;
@@ -79,6 +94,11 @@ public class GameManager : MonoBehaviour
     // how many enemies are killed
     public static int enemiesKilled = 0;
     
+    // start canvas
+    public GameObject startCanvas;
+    // select menu canvas
+    public GameObject selectCanvas;
+    
     /// <summary>
     /// Awake is being used to initialize all the reference the class needs,
     /// and to bring it to an initial state.
@@ -93,6 +113,7 @@ public class GameManager : MonoBehaviour
 
         // initial game state
         gameState = GameState.Running;
+        gameMode = (GameMode) PlayerPrefs.GetInt("GameMode");
         _inputMode = InputMode.Play;
         _currentPlacingTower = -1;
         _currentlySelectedObject = null;
@@ -129,7 +150,7 @@ public class GameManager : MonoBehaviour
                     {
                         // Call subprocess
                         Wave wave = waves[_waveIndex];
-                        StartCoroutine(_waveSpawner.SpawnWave(wave));
+                        StartCoroutine(_waveSpawner.SpawnWave(wave, gameMode));
 
                         _waveIndex++;
                         _countdownWave = timeBetweenWaves;
@@ -191,7 +212,6 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void Retry()
     {
-        _uiController.TogglePauseMenu();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         Time.timeScale = 1;
         _waveIndex = 0;
@@ -213,7 +233,7 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// Loads the "Main Level" and starts the game.
     /// </summary>
-    public void Play()
+    public void Play(int mode)
     {
         SceneManager.LoadScene("MainLevel");
         Time.timeScale = 1;
@@ -221,6 +241,7 @@ public class GameManager : MonoBehaviour
         _waveRunning = false;
         enemiesAlive = 0;
         enemiesKilled = 0;
+        PlayerPrefs.SetInt("GameMode", mode);
         gameState = GameState.Running;
     }
     
@@ -401,7 +422,7 @@ public class GameManager : MonoBehaviour
     }
     
     /// <summary>
-    /// Updates the currently selected tower and updates the money count.
+    /// Upgrades the currently selected tower and updates the money count.
     /// </summary>
     public void UpgradeCurrentSelectedTower()
     {
@@ -417,6 +438,16 @@ public class GameManager : MonoBehaviour
             Destroy(effect, 1f);
         }
     }
+
+    /// <summary>
+    /// Updates the projectiles of the currently selected tower.
+    /// </summary>
+    public void ChangesProjectileTower()
+    {
+        var selectedObject = _currentlySelectedObject.gameObject;
+        var tower = selectedObject.GetComponent<Tower>();
+        tower.ChangeProjectileMode();
+    }
     
     /// <summary>
     /// Changes the target finder action of the selected tower to the given one.
@@ -431,4 +462,12 @@ public class GameManager : MonoBehaviour
         tower.ChangeTargetFinderMode(targetFinderMode);
     }
     
+    /// <summary>
+    /// Shows the level select canvas.
+    /// </summary>
+    public void ShowLevelSelect()
+    {
+        startCanvas.SetActive(false);
+        selectCanvas.SetActive(true);
+    }
 }
