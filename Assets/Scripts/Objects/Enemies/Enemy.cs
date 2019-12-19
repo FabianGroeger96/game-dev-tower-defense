@@ -44,8 +44,8 @@ public class Enemy : AttackableObject
         _omc = gameObject.GetComponent<ObjectMaterialController>();
         _gc = GameObject.Find("GameManager").GetComponent<GameManager>();
         CalculateMultipliesAccordingToLevel();
+        ResetEnemy();
         _omc.SetBaseMaterial(enemyMaterial);
-        health = initialHealth;
         _waypointIndex = startingWaypoint - 1;
         _target = Waypoints.waypoints[_waypointIndex];
         _waypointIndex++;
@@ -149,5 +149,11 @@ public class Enemy : AttackableObject
     {
         level = newLevel;
         CalculateMultipliesAccordingToLevel();
+        ResetEnemy();
+    }
+
+    public void ResetEnemy()
+    {
+        health = initialHealth;
     }
 }
