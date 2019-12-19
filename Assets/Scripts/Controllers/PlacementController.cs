@@ -14,7 +14,7 @@ public class PlacementController : MonoBehaviour
     private Tower _currentPlacedTower;
     private bool _validPlace;
     
-    void Start()
+    void Awake()
     {
         _gc = GetComponent<GameManager>();
         _isActive = false;

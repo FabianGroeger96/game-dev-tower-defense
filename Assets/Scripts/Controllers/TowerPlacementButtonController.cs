@@ -15,14 +15,12 @@ public class TowerPlacementButtonController : BaseController
     // Start is called before the first frame update
     private void Awake()
     {
+        Init();
+
+        _tower = tower.GetComponent<Tower>();
+
         _placementButtonImage = placementButton.GetComponent<Image>();
         _placementButtonText = placementButton.gameObject.GetComponentInChildren<Text>();
-        _tower = tower.GetComponent<Tower>();
-    }
-
-    private void Start()
-    {
-        Init();
         _placementButtonText.text = _tower.name + "\n" + "($" + _tower.costs + ")";
     }
 

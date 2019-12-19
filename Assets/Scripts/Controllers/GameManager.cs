@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour
     public static int enemiesAlive = 0;
     public static int enemiesKilled = 0;
 
-    private void Start()
+    private void Awake()
     {
         //Get controllers
         _placementController = GetComponent<PlacementController>();
@@ -116,7 +116,7 @@ public class GameManager : MonoBehaviour
                 _uiController.ShowGameOverUi(_waveIndex);
 
                 enabled = false;
-                Time.timeScale = 0.5f;
+                Time.timeScale = 0.25f;
                 break;
             case GameState.Finished:
                 _uiController.ShowGameOverUi(_waveIndex);
@@ -126,7 +126,7 @@ public class GameManager : MonoBehaviour
                 _uiController.lifeCountText.enabled = false;
 
                 enabled = false;
-                Time.timeScale = 0.5f;
+                Time.timeScale = 0.25f;
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
@@ -141,7 +141,7 @@ public class GameManager : MonoBehaviour
         }
 
         var lifeCount = (int) ownBase.health;
-        timePlayed = _uiController.UpdateUi(_countdownWave, _waveIndex, waves.Length, _waveRunning, lifeCount,
+        timePlayed = _uiController.UpdateUI(_countdownWave, _waveIndex, waves.Length, _waveRunning, lifeCount,
             enemiesKilled, moneyCount,
             timePlayed);
     }
@@ -310,7 +310,7 @@ public class GameManager : MonoBehaviour
     {
         var selectedObject = _currentlySelectedObject.gameObject;
         var tower = selectedObject.GetComponent<Tower>();
-        if (0 < moneyCount - tower.upgradeCost)
+        if (0 <= moneyCount - tower.upgradeCost)
         {
             moneyCount -= (int) tower.upgradeCost;
             tower.UpgradeTower();

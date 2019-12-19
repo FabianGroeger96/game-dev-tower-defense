@@ -87,7 +87,7 @@ public class UIController : MonoBehaviour
         }
     }
 
-    public float UpdateUi(float countdownWave, int waveCount, int waveMaxCount, bool waveRunning, int lifeCount,
+    public float UpdateUI(float countdownWave, int waveCount, int waveMaxCount, bool waveRunning, int lifeCount,
         int killedCount,
         int moneyCount, float timePlayed)
     {
@@ -156,12 +156,12 @@ public class UIController : MonoBehaviour
             Tower tower = gameObject.GetComponent<Tower>();
             towerNameText.text = tower.name;
             towerLevelText.text = "lvl: " + tower.level;
-            healthBar.fillAmount = tower.health;
+            healthBar.fillAmount = tower.health / tower.initialHealth;
             
             _buttonUpgradeText.text = "Upgrade \n" + "($" + tower.upgradeCost + ")";
             _buttonSellText.text = "Sell \n" + "($" + tower.sellValue + ")";
 
-            buttonUpgrade.interactable = !(money <= tower.upgradeCost);
+            buttonUpgrade.interactable = !(money < tower.upgradeCost);
             
             ShowTowerActionPanel((int) tower.getTargetFinderMode());
         }
@@ -170,7 +170,7 @@ public class UIController : MonoBehaviour
             Enemy enemy = gameObject.GetComponent<Enemy>();
             towerNameText.text = enemy.name;
             towerLevelText.text = "lvl: " + enemy.level;
-            healthBar.fillAmount = enemy.health;
+            healthBar.fillAmount = enemy.health / enemy.initialHealth;
         }
     }
 
@@ -249,11 +249,11 @@ public class UIController : MonoBehaviour
                 _buttonFirstEnemyImage.color = Color.gray;
                 _buttonFirstEnemyText.color = Color.black;
 
-                _buttonLowestEnemyImage.color = Color.blue;
-                _buttonLowestEnemyText.color = Color.white;
+                _buttonLowestEnemyImage.color = Color.gray;
+                _buttonLowestEnemyText.color = Color.black;
 
-                _buttonHighestEnemyImage.color = Color.gray;
-                _buttonHighestEnemyText.color = Color.black;
+                _buttonHighestEnemyImage.color = Color.blue;
+                _buttonHighestEnemyText.color = Color.white;
                 break;
         }
     }

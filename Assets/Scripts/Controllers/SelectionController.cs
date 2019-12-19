@@ -11,7 +11,7 @@ public class SelectionController : MonoBehaviour
     private bool _isActive;
     private Transform _currentObjectCandiate;
 
-    void Start()
+    void Awake()
     {
         _gc = GetComponent<GameManager>();
         _currentObjectCandiate = null;

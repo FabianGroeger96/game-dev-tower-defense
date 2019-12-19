@@ -10,7 +10,7 @@ public class KeyboardInputController : MonoBehaviour
     
     
     // Start is called before the first frame update
-    private void Start()
+    private void Awake()
     {
         _gc = GetComponent<GameManager>();
     }
