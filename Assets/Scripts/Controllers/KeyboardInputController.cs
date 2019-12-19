@@ -62,6 +62,11 @@ public class KeyboardInputController : MonoBehaviour
             _gc.SetSelectedObject(null);
         }
         
+        if (Input.GetKeyUp(KeyCode.R))
+        {
+            _gc.ResetCameraPosition();
+        }
+        
         
     }
 }

@@ -72,6 +72,8 @@ public class GameManager : MonoBehaviour
     private UIController _uiController;
     // reference to the selection controller
     private SelectionController _selectionController;
+    // reference to the camera controller
+    [SerializeField] private CameraController _cameraController;
     
     // keeps track of how long the game is being playd
     public float timePlayed = 0f;
@@ -110,7 +112,7 @@ public class GameManager : MonoBehaviour
         _selectionController = GetComponent<SelectionController>();
         _waveSpawner = GetComponent<WaveSpawner>();
         _uiController = GetComponent<UIController>();
-
+        
         // initial game state
         gameState = GameState.Running;
         gameMode = (GameMode) PlayerPrefs.GetInt("GameMode");
@@ -470,4 +472,10 @@ public class GameManager : MonoBehaviour
         startCanvas.SetActive(false);
         selectCanvas.SetActive(true);
     }
+    
+    public void ResetCameraPosition()
+    {
+        _cameraController.ResetToInitialPosition();
+    }
+    
 }
