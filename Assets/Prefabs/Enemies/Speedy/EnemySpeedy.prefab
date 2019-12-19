@@ -293,19 +293,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2adc2300f018ccd4cbea14c7a5729253, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialHealth: 1
+  initialHealth: 4
   health: 0
-  earning: 10
-  speed: 2
-  damage: 5
-  level: 1
-  name: Speedy
-  startingWaypoint: 1
-  enemyMaterial: {fileID: 2100000, guid: d8ac690d249f0411c9ec7c9e03bb3b73, type: 2}
   deathEffect: {fileID: 1000010680075956, guid: a3d12c6dd48a344b7b9ad530f0fbc288,
     type: 3}
   healthCanvas: {fileID: 4798636537785340205}
   healthBar: {fileID: 7223389581949999291}
+  earning: 50
+  speed: 2
+  damage: 1
+  level: 1
+  name: Speedy
+  startingWaypoint: 1
+  enemyMaterial: {fileID: 2100000, guid: d8ac690d249f0411c9ec7c9e03bb3b73, type: 2}
 --- !u!114 &7686433194881067954
 MonoBehaviour:
   m_ObjectHideFlags: 0

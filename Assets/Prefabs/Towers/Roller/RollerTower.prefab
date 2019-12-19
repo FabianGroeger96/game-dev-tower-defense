@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 010df9ffff681c44fa416171344192e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialHealth: 20
+  initialHealth: 10
   health: 0
   deathEffect: {fileID: 1000010680075956, guid: bb66780c8baa74bb8a8e23eeda27ce7e,
     type: 3}
@@ -62,14 +62,14 @@ MonoBehaviour:
   _projectilePropertiesKeys:
   - speed
   _projectilePropertiesValues:
-  - 3
-  _damage: 0.1
+  - 5
+  _damage: 0.5
   _placeableMaterial: {fileID: 2100000, guid: f9b0f2b0252d05e42b29a39291ff5bb8, type: 2}
   _unplaceableMaterial: {fileID: 2100000, guid: 9cabaff90a7dd8e49a001278f8251c26,
     type: 2}
   _placedMaterial: {fileID: 2100000, guid: 057c047e25f376b4b82a543332b80fbe, type: 2}
-  _shootPace: 0.2
-  costs: 250
+  _shootPace: 0.5
+  costs: 200
   name: Roller
   upgradeEffect: {fileID: 1000010680075956, guid: 936f4d229a9214eb39def0a4bb9bf5d9,
     type: 3}
@@ -849,6 +849,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7625752465474389602, guid: ff3fab6d9be94f140b08db0680ac98dc,
+        type: 3}
+      propertyPath: m_Material
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff3fab6d9be94f140b08db0680ac98dc, type: 3}
