@@ -69,8 +69,8 @@ MonoBehaviour:
   - {fileID: 4473764852087428128, guid: f45aedbc134264b88bcda9ae2a460e92, type: 3}
   _projectilesShootPaces:
   - 0.5
-  - 5
-  _projectileSpeed: 1
+  - 3
+  _projectileSpeed: 2
   costs: 200
   name: Roller
   upgradeEffect: {fileID: 1000010680075956, guid: 936f4d229a9214eb39def0a4bb9bf5d9,

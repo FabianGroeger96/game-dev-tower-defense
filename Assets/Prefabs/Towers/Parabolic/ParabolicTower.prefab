@@ -363,7 +363,7 @@ MonoBehaviour:
   - {fileID: 810617596816241025, guid: 5f1c14898e1f64b2fadd09243887cb71, type: 3}
   _projectilesShootPaces:
   - 1.5
-  - 5
+  - 3
   _projectileSpeed: 0
   costs: 300
   name: Parabolic

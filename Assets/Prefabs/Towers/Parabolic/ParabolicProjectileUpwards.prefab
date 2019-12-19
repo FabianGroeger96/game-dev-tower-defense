@@ -17,6 +17,12 @@ PrefabInstance:
       propertyPath: _angle
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 1512461173078031657, guid: b402d11139d4e944a822d660b1959d99,
+        type: 3}
+      propertyPath: _splash
+      value: 
+      objectReference: {fileID: 8726209085426808895, guid: b6a7dbae4f7194aeb851b1b38621b539,
+        type: 3}
     - target: {fileID: 401055671543694720, guid: b402d11139d4e944a822d660b1959d99,
         type: 3}
       propertyPath: m_LocalPosition.x

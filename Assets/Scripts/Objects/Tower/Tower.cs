@@ -84,9 +84,9 @@ public class Tower : AttackableObject
         _timer = 0f;
         _placed = false;
         _orginalProjectileMode = true;
-        _currentProjectile = _projectiles[1];
-        _currentProjectileDamage = _projectileDamages[1];
-        _currentShootPace = _projectilesShootPaces[1];
+        _currentProjectile = _projectiles[0];
+        _currentProjectileDamage = _projectileDamages[0];
+        _currentShootPace = _projectilesShootPaces[0];
         _spawner = GetComponentInChildren<ProjectileSpawner>();
         _targetFinder = GetComponentInChildren<TargetFinder>();
         _omc = GetComponent<ObjectMaterialController>();

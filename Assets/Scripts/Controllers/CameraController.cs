@@ -135,6 +135,9 @@ public class CameraController : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Reset Camera initial position.
+    /// </summary>
     public void ResetToInitialPosition()
     {
         transform.position = initialPosition;

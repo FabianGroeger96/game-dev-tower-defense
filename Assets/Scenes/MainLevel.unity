@@ -1124,8 +1124,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 505207296}
-        m_MethodName: TogglePauseMenu
+      - m_Target: {fileID: 963194229}
+        m_MethodName: ResetToInitialPosition
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
